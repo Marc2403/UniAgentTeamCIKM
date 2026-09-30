@@ -1,0 +1,2 @@
+extends: ../dph.yaml
+query: {query_weight: 2, description_weight: 1, narrative_weight: 1, strip_narrative_boilerplate: false}

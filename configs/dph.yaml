@@ -1,0 +1,4 @@
+extends: bm25.yaml
+retrieval:
+  rankers:
+    - {index: body, wmodel: DPH}

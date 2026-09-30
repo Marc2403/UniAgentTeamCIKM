@@ -1,0 +1,2 @@
+extends: law-all.yaml
+law: {doctype_prior_weight: 0.0}

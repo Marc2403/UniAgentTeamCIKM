@@ -1,0 +1,7 @@
+# Fusion of weighting models on the body index.
+extends: q2-desc.yaml
+retrieval:
+  rankers:
+    - {index: body, wmodel: DPH}
+    - {index: body, wmodel: BM25}
+    - {index: body, wmodel: DPH, prf: Bo1}

@@ -1,0 +1,4 @@
+extends: q2-desc.yaml
+retrieval:
+  rankers:
+    - {index: body, wmodel: BM25, controls: {bm25.k_1: 1.5, c: 0.6}}

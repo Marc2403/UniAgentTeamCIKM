@@ -1,0 +1,2 @@
+extends: ../lexical-best.yaml
+law: {abbreviations: true, paragraph_injection: true, versions: true, doctype_prior_weight: 1.0}

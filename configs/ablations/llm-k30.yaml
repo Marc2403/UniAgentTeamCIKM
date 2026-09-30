@@ -1,0 +1,2 @@
+extends: ../lexical-plus.yaml
+llm_rerank: {enabled: true, depth: 30}
