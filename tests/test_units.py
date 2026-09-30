@@ -214,7 +214,14 @@ class TestLLM:
 
     @pytest.mark.parametrize(
         "response, grade",
-        [('{"M": 2, "T": 1, "O": 3}', 3), ('```json\n{"final_score": 1}\n```', 1), ("Final score: 2", 2), ("keine Ahnung", None)],
+        [
+            ('{"M": 2, "T": 1, "O": 3}', 3),
+            ('{"score":3}', 3),
+            ('{"M":1,"T":2,"O":0}', 0),
+            ('```json\n{"final_score": 1}\n```', 1),
+            ("Final score: 2", 2),
+            ("keine Ahnung", None),
+        ],
     )
     def test_parse_grade(self, response, grade):
         assert parse_grade(response) == grade

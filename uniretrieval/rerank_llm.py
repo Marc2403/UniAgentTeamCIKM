@@ -38,15 +38,16 @@ Produce a JSON dictionary of scores without providing any reasoning."""
 GRADE_PATTERNS = [
     re.compile(pattern, re.IGNORECASE | re.DOTALL)
     for pattern in (
-        r'"o": (0|1|2|3)',
-        r'"overall_score": (0|1|2|3)',
-        r'"overall": (0|1|2|3)',
-        r'"overall score": (0|1|2|3)',
-        r'"final score": (0|1|2|3)',
-        r'"final_score": (0|1|2|3)',
-        r'"score": (0|1|2|3)',
-        r'"o_score": (0|1|2|3)',
-        r'"o"\s*[:=]\s*"?(0|1|2|3)',
+        # UMBRELA's keys in its order, but with optional whitespace: gpt-oss-20b
+        # emits compact JSON ('{"score":3}') that UMBRELA's '": ' patterns miss.
+        r'"o"\s*:\s*"?(0|1|2|3)',
+        r'"overall_score"\s*:\s*"?(0|1|2|3)',
+        r'"overall"\s*:\s*"?(0|1|2|3)',
+        r'"overall score"\s*:\s*"?(0|1|2|3)',
+        r'"final score"\s*:\s*"?(0|1|2|3)',
+        r'"final_score"\s*:\s*"?(0|1|2|3)',
+        r'"score"\s*:\s*"?(0|1|2|3)',
+        r'"o_score"\s*:\s*"?(0|1|2|3)',
         r"final\s*score\W{0,5}(0|1|2|3)",
         r"\bo\W{1,4}(0|1|2|3)\b",
     )
