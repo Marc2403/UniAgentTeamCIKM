@@ -54,6 +54,31 @@ GRADE_PATTERNS = [
 ]
 
 
+UMBRELA_0_0_7_PATTERNS = [
+    re.compile(pattern, re.IGNORECASE | re.MULTILINE | re.DOTALL)
+    for pattern in (
+        r'"o": (0|1|2|3)',
+        r'"overall_score": (0|1|2|3)',
+        r'"overall": (0|1|2|3)',
+        r'"overall score": (0|1|2|3)',
+        r'"final score": (0|1|2|3)',
+        r'"final_score": (0|1|2|3)',
+        r'"score": (0|1|2|3)',
+        r'"o_score": (0|1|2|3)',
+    )
+]
+
+
+def parse_grade_umbrela(response: str) -> tuple[int, bool]:
+    """UMBRELA 0.0.7's `parse_fewshot_response`: (grade, parsed); unparsed answers become 0."""
+    text = response.strip().lower()
+    for pattern in UMBRELA_0_0_7_PATTERNS:
+        match = pattern.search(text)
+        if match:
+            return int(match.group(1)), True
+    return 0, False
+
+
 def parse_grade(response: str) -> int | None:
     text = response.strip().lower()
     for pattern in GRADE_PATTERNS:

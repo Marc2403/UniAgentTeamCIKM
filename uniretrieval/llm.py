@@ -137,6 +137,25 @@ class OpenAIChatModel:
         return completion
 
 
+def raw_chat(client, model: str, messages: list[dict], **parameters) -> dict:
+    """One chat completion with everything needed to audit it: content,
+    reasoning (if the endpoint returns it), finish reason and token usage."""
+    response = client.chat.completions.create(model=model, messages=messages, **parameters)
+    choice = response.choices[0]
+    message = choice.message
+    reasoning = getattr(message, "reasoning", None) or getattr(message, "reasoning_content", None)
+    usage = response.usage
+    return {
+        "content": message.content or "",
+        "reasoning": reasoning or "",
+        "finish_reason": choice.finish_reason,
+        "usage": {
+            "prompt_tokens": getattr(usage, "prompt_tokens", 0) or 0,
+            "completion_tokens": getattr(usage, "completion_tokens", 0) or 0,
+        },
+    }
+
+
 class ScriptedChatModel:
     """Offline stand-in for tests: answers with `respond(prompt)`."""
 

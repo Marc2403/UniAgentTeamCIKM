@@ -16,7 +16,8 @@ from uniretrieval.law import LawCollection, norm_key
 from uniretrieval.llm import ScriptedChatModel
 from uniretrieval.metrics import ndcg, per_query, randomization_test
 from uniretrieval.query_expansion import parse_expansion
-from uniretrieval.rerank_llm import LLMReranker, UMBRELA_PROMPT, order_by_grades, parse_grade
+from uniretrieval.devsets import included_query_lines, qrels_path
+from uniretrieval.rerank_llm import LLMReranker, UMBRELA_PROMPT, order_by_grades, parse_grade, parse_grade_umbrela
 from uniretrieval.run_io import read_run, validated, write_run
 from uniretrieval.text import Decompounder, best_passage, formulate_query, strip_narrative_boilerplate, url_tokens
 from uniretrieval.web import NearDuplicateFilter
@@ -68,6 +69,14 @@ class TestData:
     def test_collection_detected_from_legal_metadata(self):
         assert detect_collection(law_documents()) == "law"
         assert detect_collection({"d": Document("d", "t", "u", "c")}) == "web"
+
+
+class TestDevsets:
+    def test_excluded_queries_are_skipped_and_qrels_sit_next_to_the_set(self, tmp_path):
+        (tmp_path / "dev-extra-de.jsonl").write_text('{"qid": 1}\n{"qid": 2}\n\n{"qid": 3}\n', encoding="utf-8")
+        (tmp_path / "excluded.txt").write_text("# duplicates\n2\n", encoding="utf-8")
+        assert included_query_lines(tmp_path / "dev-extra-de.jsonl") == ['{"qid": 1}', '{"qid": 3}']
+        assert qrels_path(tmp_path / "dev-extra-de.jsonl") == tmp_path / "dev-extra-de.qrels.txt"
 
 
 class TestText:
@@ -236,6 +245,13 @@ class TestLLM:
         ordered = order_by_grades([(doc_id, 1.0) for doc_id in "abcd"], judgments)
         assert [doc_id for doc_id, _ in ordered] == ["b", "d", "c", "a"]
         assert model.usage.calls == 4
+
+    @pytest.mark.parametrize(
+        "response, expected",
+        [('{"score": 3}', (3, True)), ('{"score":3}', (0, False)), ('{"M": 1, "O": 2}', (2, True)), ("", (0, False))],
+    )
+    def test_umbrela_0_0_7_parser_needs_a_space_after_the_colon(self, response, expected):
+        assert parse_grade_umbrela(response) == expected
 
     def test_parse_expansion_tolerates_chatter(self):
         parsed = parse_expansion('Here you go:\n```json\n{"terms": ["Reisekosten", 3], "passage": "Die Erstattung ..."}\n```')

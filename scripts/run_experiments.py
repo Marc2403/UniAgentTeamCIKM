@@ -3,8 +3,9 @@
 run-trace.jsonl.log.gz, stats.json, metrics.json, config.yaml}.
 
 A dataset argument is a directory with queries.jsonl, documents.jsonl.gz and
-qrels.txt (spot-checks), or `name=docs_dir:devset_dir` to evaluate a dev set
-(queries.jsonl + qrels.txt in devset_dir) on another dataset's documents."""
+qrels.txt (spot-checks), or `name=docs_dir:queries_file` to run a dev set on
+another dataset's documents: the queries not listed in excluded.txt next to
+queries_file, evaluated against <queries_file stem>.qrels.txt once it exists."""
 
 import shutil
 import subprocess
@@ -15,6 +16,9 @@ from pathlib import Path
 import click
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+
+from uniretrieval.devsets import included_query_lines, qrels_path  # noqa: E402
 
 
 def resolve(dataset: str) -> tuple[str, Path, Path, Path | None]:
@@ -23,12 +27,12 @@ def resolve(dataset: str) -> tuple[str, Path, Path, Path | None]:
         path = Path(dataset)
         return path.name, path, path / "qrels.txt", None
     name, spec = dataset.split("=", 1)
-    documents_directory, devset_directory = (Path(part) for part in spec.split(":", 1))
+    documents_directory, queries_file = (Path(part) for part in spec.split(":", 1))
     temporary = Path(tempfile.mkdtemp(prefix=f"devset-{name}-"))
     documents = next(documents_directory.glob("documents.jsonl*"))
     (temporary / documents.name).symlink_to(documents.resolve())
-    shutil.copy(devset_directory / "queries.jsonl", temporary / "queries.jsonl")
-    return name, temporary, devset_directory / "qrels.txt", temporary
+    (temporary / "queries.jsonl").write_text("\n".join(included_query_lines(queries_file)) + "\n", encoding="utf-8")
+    return name, temporary, qrels_path(queries_file), temporary
 
 
 @click.command()
