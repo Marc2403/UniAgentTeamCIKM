@@ -7,6 +7,8 @@ qrels.txt (spot-checks), or `name=docs_dir:queries_file` to run a dev set on
 another dataset's documents: the queries not listed in excluded.txt next to
 queries_file, evaluated against <queries_file stem>.qrels.txt once it exists."""
 
+import gzip
+import json
 import shutil
 import subprocess
 import sys
@@ -33,6 +35,12 @@ def resolve(dataset: str) -> tuple[str, Path, Path, Path | None]:
     (temporary / documents.name).symlink_to(documents.resolve())
     (temporary / "queries.jsonl").write_text("\n".join(included_query_lines(queries_file)) + "\n", encoding="utf-8")
     return name, temporary, qrels_path(queries_file), temporary
+
+
+def trace_errors(path: Path) -> int:
+    """Error events in a run trace: a run that silently fell back to an earlier stage must not count."""
+    with gzip.open(path, "rt", encoding="utf-8") as handle:
+        return sum(1 for line in handle if json.loads(line)["status"] == "error")
 
 
 @click.command()
@@ -63,8 +71,13 @@ def main(configs, datasets, runs: Path, index_cache: Path, llm_cache: Path, skip
                 if subprocess.run(command).returncode != 0:
                     failures.append(f"{name}/{config.stem}")
                     continue
+                errors = trace_errors(output / "run-trace.jsonl.log.gz")
+                if errors:
+                    click.echo(f"{errors} error events in the trace (e.g. failed LLM calls); not evaluated, rerun later")
+                    failures.append(f"{name}/{config.stem}")
+                    continue
                 if not qrels.is_file():
-                    click.echo(f"no qrels for {name} yet; run kept for pooling (scripts/judge_devset.sh)")
+                    click.echo(f"no qrels for {name} yet; run kept for pooling (scripts/judge_devset.py)")
                     continue
                 subprocess.run(
                     [sys.executable, str(ROOT / "eval" / "evaluate.py"), "--run", str(output / "run.txt.gz"),

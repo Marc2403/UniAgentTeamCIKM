@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Judge a dev set the way the organisers build qrels, but parse robustly.
 
-Pools the top-k documents of every run under --runs for the non-excluded
-queries of --queries, and asks OPENAI_MODEL the UMBRELA 0.0.7 prompt
+Pools the top-k documents of every run under --runs (or of the --config
+runs, plus the documents of --include-qrels) for the non-excluded queries
+of --queries, and asks OPENAI_MODEL the UMBRELA 0.0.7 prompt
 (unchanged: system prompt "You are a helpful assistant.", keyword query,
 full document text). Every raw answer goes to <stem>.judgments.jsonl
 (resumable), so qrels can be recomputed with either parser:
@@ -10,6 +11,8 @@ full document text). Every raw answer goes to <stem>.judgments.jsonl
   <stem>.qrels.txt                 robust parser (uniretrieval.rerank_llm.parse_grade)
   <stem>.qrels-umbrela-parser.txt  UMBRELA 0.0.7's parser (unparsed -> 0)
 
+The qrels hold every judged pair of the included queries, also pairs that no
+current run ranks in its top-k any more, so the judged pool only grows.
 Queries without any document of grade >= 2 (robust parser) are left out of
 both qrels files and listed in <stem>.dropped.txt."""
 
@@ -46,15 +49,24 @@ def document_texts(documents_directory: Path, wanted: set[str]) -> dict[str, str
     return texts
 
 
-def pool(runs_directory: Path, qids: set[str], depth: int) -> dict[str, list[str]]:
+def pool(runs_directory: Path, qids: set[str], depth: int, configs: tuple[str, ...], include_qrels: Path | None) -> dict[str, list[str]]:
+    """Top-`depth` of every run (or of the named configs) plus, if given, the documents of `include_qrels`."""
     pooled: dict[str, set[str]] = {qid: set() for qid in qids}
-    run_files = sorted(Path(runs_directory).glob("*/run.txt.gz"))
+    run_files = [Path(runs_directory) / config / "run.txt.gz" for config in configs] or sorted(Path(runs_directory).glob("*/run.txt.gz"))
+    missing = [str(run_file) for run_file in run_files if not run_file.is_file()]
+    if missing:
+        raise click.ClickException("Missing runs: " + ", ".join(missing))
     if not run_files:
         raise click.ClickException(f"No runs below {runs_directory}.")
     for run_file in run_files:
         for qid, ranking in read_run(run_file).items():
             if qid in pooled:
                 pooled[qid].update(doc_id for doc_id, _ in ranking[:depth])
+    if include_qrels is not None:
+        for line in include_qrels.read_text(encoding="utf-8").splitlines():
+            parts = line.split()
+            if len(parts) >= 4 and parts[0] in pooled:
+                pooled[parts[0]].add(parts[2])
     return {qid: sorted(doc_ids) for qid, doc_ids in pooled.items()}
 
 
@@ -70,14 +82,16 @@ def write_qrels(path: Path, grades: dict[tuple[str, str], int], qids: list[str])
 @click.option("--k", "depth", default=10, show_default=True)
 @click.option("--max-tokens", default=4096, show_default=True, help="UMBRELA sends 100; gpt-oss spends most of that on reasoning.")
 @click.option("--concurrency", default=8, show_default=True)
-def main(documents: Path, queries_file: Path, runs: Path, depth: int, max_tokens: int, concurrency: int) -> None:
+@click.option("--config", "configs", multiple=True, help="Pool only these configs (default: every run under --runs).")
+@click.option("--include-qrels", default=None, type=click.Path(path_type=Path, exists=True, dir_okay=False), help="Always pool the documents of these qrels.")
+def main(documents: Path, queries_file: Path, runs: Path, depth: int, max_tokens: int, concurrency: int, configs: tuple[str, ...], include_qrels: Path | None) -> None:
     from openai import OpenAI
 
     base_url, api_key, model = required_environment()
     client = OpenAI(base_url=base_url, api_key=api_key, timeout=120, max_retries=3)
 
     queries = {str(record["qid"]): record for record in map(json.loads, included_query_lines(queries_file))}
-    pooled = pool(runs, set(queries), depth)
+    pooled = pool(runs, set(queries), depth, configs, include_qrels)
     texts = document_texts(documents, {doc_id for doc_ids in pooled.values() for doc_id in doc_ids})
 
     judgments_path = queries_file.with_suffix(".judgments.jsonl")
@@ -113,7 +127,7 @@ def main(documents: Path, queries_file: Path, runs: Path, depth: int, max_tokens
     for line in judgments_path.read_text(encoding="utf-8").splitlines():
         entry = json.loads(line)
         key = (entry["qid"], entry["doc_id"])
-        if entry.get("error") is not None or entry["qid"] not in queries or entry["doc_id"] not in pooled[entry["qid"]]:
+        if entry.get("error") is not None or entry["qid"] not in queries:
             continue
         grade = parse_grade(entry["content"])
         if grade is None:
@@ -124,7 +138,7 @@ def main(documents: Path, queries_file: Path, runs: Path, depth: int, max_tokens
         umbrela[key] = umbrela_grade
 
     missing = [pair for pair in ((qid, doc_id) for qid, doc_ids in pooled.items() for doc_id in doc_ids) if pair not in robust]
-    kept = sorted(qid for qid in queries if any(robust.get((qid, doc_id), 0) >= 2 for doc_id in pooled[qid]))
+    kept = sorted(qid for qid in queries if any(grade >= 2 for (judged_qid, _), grade in robust.items() if judged_qid == qid))
     dropped = sorted(set(queries) - set(kept))
     write_qrels(qrels_path(queries_file), robust, kept)
     write_qrels(queries_file.with_suffix(".qrels-umbrela-parser.txt"), umbrela, kept)
