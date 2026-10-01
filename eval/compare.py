@@ -36,6 +36,8 @@ def render(table: dict[str, dict[str, dict]], datasets: list[str], measure: str,
     header = ["config", *datasets, "mean", "seconds", "LLM tokens"]
     lines = ["| " + " | ".join(header) + " |", "|" + "---|" * len(header)]
     for config, per_dataset in sorted(table.items(), key=lambda item: item[0]):
+        if not any(dataset in per_dataset for dataset in datasets):
+            continue
         cells, values, seconds, tokens = [config], [], 0.0, 0
         for dataset in datasets:
             metrics = per_dataset.get(dataset)
