@@ -229,6 +229,13 @@ class TestLLM:
             ('{"M":1,"T":2,"O":0}', 0),
             ('```json\n{"final_score": 1}\n```', 1),
             ("Final score: 2", 2),
+            ('{"Softwarelizenzen beschaffen": 3}', 3),
+            ('{"relevance": 1}', 1),
+            ('{"intent":1,"match":0,"trustworthiness":3,"final":0}', 0),
+            ("2", 2),
+            ('{"a": 1, "b": 2}', None),
+            ('{"Office keys": 7}', None),
+            ("", None),
             ("keine Ahnung", None),
         ],
     )

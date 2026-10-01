@@ -4,6 +4,7 @@ The qrels are built by UMBRELA 0.0.7 (`qrel_fewshot_bing.txt`, zero examples)
 with gpt-oss-20b (see uniagent-code/cikm26/dataset-construction/create_qrels.py),
 so the reranker asks the same question and parses the answer the same way."""
 
+import json
 import re
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
@@ -48,6 +49,7 @@ GRADE_PATTERNS = [
         r'"final_score"\s*:\s*"?(0|1|2|3)',
         r'"score"\s*:\s*"?(0|1|2|3)',
         r'"o_score"\s*:\s*"?(0|1|2|3)',
+        r'"(?:final|relevance|relevance_score)"\s*:\s*"?(0|1|2|3)',
         r"final\s*score\W{0,5}(0|1|2|3)",
         r"\bo\W{1,4}(0|1|2|3)\b",
     )
@@ -79,13 +81,32 @@ def parse_grade_umbrela(response: str) -> tuple[int, bool]:
     return 0, False
 
 
+def _single_value_grade(text: str) -> int | None:
+    """The grade of a one-entry JSON object under any key, e.g. the query
+    itself ('{"office keys": 2}'), or of a bare digit."""
+    if text in {"0", "1", "2", "3"}:
+        return int(text)
+    match = re.search(r"\{.*\}", text, re.DOTALL)
+    if not match:
+        return None
+    try:
+        parsed = json.loads(match.group(0))
+    except json.JSONDecodeError:
+        return None
+    if isinstance(parsed, dict) and len(parsed) == 1:
+        value = next(iter(parsed.values()))
+        if isinstance(value, int) and not isinstance(value, bool) and 0 <= value <= 3:
+            return value
+    return None
+
+
 def parse_grade(response: str) -> int | None:
     text = response.strip().lower()
     for pattern in GRADE_PATTERNS:
         match = pattern.search(text)
         if match:
             return int(match.group(1))
-    return None
+    return _single_value_grade(text)
 
 
 def query_text(query: Query, mode: str) -> str:
