@@ -1,0 +1,7 @@
+# Excluded from evaluation and judging: near-duplicates of spot-check queries.
+1001
+1010
+1020
+1021
+1022
+1027

@@ -1,0 +1,5 @@
+# Excluded from evaluation and judging: near-duplicates of spot-check queries.
+3006
+3007
+3020
+3021
