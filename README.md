@@ -6,6 +6,7 @@ Jeder Ordner ist eigenständig (eigene README, Abhängigkeiten, `.gitignore`).
 | Ordner | Autor | Ansatz |
 |---|---|---|
 | [`marc-uniagent-solver/`](marc-uniagent-solver/) | Marc M (@Marc2403) | Task 2 (Solving): LLM extrahiert, Python prüft Regeln, LLM entscheidet; BM25-Retrieval. Ergebnisse: [`RESULTS.md`](marc-uniagent-solver/RESULTS.md) |
+| [`omar-uniagent-mvp/`](omar-uniagent-mvp/) | Omar (@omar005) | BM25 retrieval + LLM structured JSON |
 
 ## Eigenes MVP hinzufügen
 
