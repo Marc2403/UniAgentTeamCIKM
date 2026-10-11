@@ -1,0 +1,13 @@
+Bootstrap: docker
+From: python:3.11-slim
+%post
+    pip install --no-cache-dir pypdf==5.1.0 rank-bm25==0.2.2 openai==1.55.3 httpx==0.27.2 json-repair==0.30.0
+%files
+    event_logging.py /app/event_logging.py
+    pdf_utils.py /app/pdf_utils.py
+    retrieval.py /app/retrieval.py
+    llm.py /app/llm.py
+    config.py /app/config.py
+    predict.py /app/predict.py
+%runscript
+    exec python3 /app/predict.py "$@"
