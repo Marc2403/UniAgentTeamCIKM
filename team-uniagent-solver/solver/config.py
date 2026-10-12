@@ -18,8 +18,10 @@ class Settings:
     llm_max_retries: int = 1
     temperature: float = 0.0
     max_output_tokens: int = 8192
-    reasoning_effort: str | None = None
-    # Copying fields out of a document needs little reasoning; the decision keeps the run's setting.
+    # Decision call; OPENAI_REASONING_EFFORT overrides. Low gave the same spot-check accuracy as the provider
+    # default with gpt-oss-20b, with the slowest case at 23 s instead of 65-100 s (ABLATIONS.md).
+    reasoning_effort: str | None = "low"
+    # Copying fields out of a document needs little reasoning.
     extraction_reasoning_effort: str | None = "low"
     extraction_workers: int = 4
     max_document_characters: int = 12000
