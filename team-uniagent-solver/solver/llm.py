@@ -9,6 +9,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Protocol
 
+from json_repair import repair_json
+
 
 @dataclass
 class Completion:
@@ -225,6 +227,9 @@ def extract_json_object(answer: str) -> dict[str, Any]:
                 break
             except json.JSONDecodeError:
                 continue
-    if not isinstance(parsed, dict):
+    if parsed is None and "{" in text:
+        # Last resort for malformed or cut-off JSON (missing quotes, commas, closing braces).
+        parsed = repair_json(text[text.find("{"):], return_objects=True)
+    if not isinstance(parsed, dict) or not parsed:
         raise ValueError(f"Model did not return a JSON object: {answer[:200]!r}")
     return parsed

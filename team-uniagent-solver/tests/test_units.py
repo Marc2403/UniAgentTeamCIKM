@@ -70,6 +70,9 @@ def test_case_type_and_scope():
 def test_extract_json_object_tolerates_fences_and_prose():
     assert extract_json_object('```json\n{"a": 1}\n```') == {"a": 1}
     assert extract_json_object('Hier: {"result": "abgelehnt"} fertig') == {"result": "abgelehnt"}
+    # Cut off at the token limit or missing quotes: repaired instead of discarded.
+    assert extract_json_object('{"result": "abgelehnt", "begruendung": "Summe weicht ab') == {"result": "abgelehnt", "begruendung": "Summe weicht ab"}
+    assert extract_json_object("{result: 'angenommen'}") == {"result": "angenommen"}
     with pytest.raises(ValueError):
         extract_json_object("keine Antwort")
 
