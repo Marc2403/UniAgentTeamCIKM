@@ -14,6 +14,8 @@ from solver.schemas import CaseFacts
 
 RESULTS = ("angenommen", "abgelehnt")
 SAMPLING_TEMPERATURE = 0.7
+# With less case budget left, a second decision attempt is not started.
+MIN_RETRY_SECONDS = 20
 
 SYSTEM_PROMPT = (
     "Du arbeitest als erfahrene Fachkraft in der Hochschulverwaltung und entscheidest über einen {label}: "
@@ -126,8 +128,11 @@ def _ask(llm: ChatModel, messages: list[dict], deadline: float, call_timeout: fl
         try:
             completion = llm.complete(messages, timeout=min(call_timeout, remaining), temperature=temperature, reasoning_effort=reasoning_effort)
         except Exception as error:
-            log_event("model_call", input={"purpose": "decide", "prompt": prompt}, status="error", error=str(error))
-            return None
+            log_event("model_call", input={"purpose": "decide", "attempt": attempt, "prompt": prompt}, status="error", error=str(error))
+            # A timed-out or failed call is tried once more with what is left of the case budget.
+            if deadline - time.monotonic() < MIN_RETRY_SECONDS:
+                return None
+            continue
         log_event(
             "model_call",
             input={"purpose": "decide", "attempt": attempt, "temperature": temperature, "prompt": prompt},
