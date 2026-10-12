@@ -113,8 +113,10 @@ def check_third_party_funding(facts: CaseFacts) -> list[Finding]:
         Finding(
             "TRIP_THIRD_PARTY_FUNDING",
             FAIL,
-            f"{described}, der Antrag beantragt die Kosten dennoch voll ({format_amount(application.total_requested)}) und erwähnt die Förderung nicht (Finanzierung: {application.financing or 'k. A.'}): Doppelfinanzierung.",
+            f"{described}, der Antrag beantragt die Kosten dennoch voll ({format_amount(application.total_requested)}) und erwähnt die Förderung nicht (Finanzierung: {application.financing or 'k. A.'}): mögliche Doppelfinanzierung.",
             sources + [name],
+            # Whether a third party bindingly covers costs is the model's reading of a letter, not a checked fact.
+            False,
         )
     ]
 
