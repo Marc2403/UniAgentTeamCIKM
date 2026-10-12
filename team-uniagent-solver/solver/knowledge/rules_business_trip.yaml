@@ -32,9 +32,23 @@
   sources:
     - {corpus: university-kassel-public-de, doc_id: 8f78f05e-61f4-4f5f-ba79-35b18e2c4a0f, title: "Dienstreisemanagement - INTERN - Uni Kassel"}
 - id: TRIP_FOREIGN_TRAVEL
-  text: "Bei Auslandsreisen muss das Feld 'Reise ins Ausland' ausgefüllt sein; für Reisen in EU/EWR/Schweiz ist rechtzeitig eine A1-Bescheinigung zu beantragen."
+  text: "Bei Auslandsreisen muss das Feld 'Reise ins Ausland' ausgefüllt sein. Wer in EU/EWR-Staaten oder die Schweiz entsandt wird, braucht eine A1-Bescheinigung; empfohlen ist, die Reise spätestens acht Wochen vor Beginn zu beantragen."
   applies_to: [kassel]
-  sources: []
+  query: "A1-Bescheinigung Entsendebescheinigung acht Wochen vor Beginn Auslandsdienstreise"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: 8f78f05e-61f4-4f5f-ba79-35b18e2c4a0f, title: "Dienstreisemanagement - INTERN - Uni Kassel"}
+- id: TRIP_MEALS
+  text: "Verpflegungskosten sind über das Tagegeld abgegolten; gesondert erstattet wird nur eine nachweislich notwendige Pauschale (z. B. Tagungspauschale). Ein freiwilliges Abendessen oder Rahmenprogramm ist keine solche Pauschale."
+  applies_to: [kassel]
+  query: "Verpflegungskosten über das Tagegeld abgegolten notwendige Pauschale Tagungspauschale"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: 8f78f05e-61f4-4f5f-ba79-35b18e2c4a0f, title: "Dienstreisemanagement - INTERN - Uni Kassel"}
+- id: TRIP_EXCLUSION_PERIOD
+  text: "Reisekostenerstattungen sind innerhalb von sechs Monaten nach Beendigung der Dienstreise zu beantragen (Ausschlussfrist nach § 4 Abs. 5 HRKG); später eingereichte Abrechnungen werden nicht erstattet."
+  applies_to: [kassel]
+  query: "Reisekostenerstattungen Frist von sechs Monaten nach Beendigung der Dienstreise Ausschlussfrist"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: 8f78f05e-61f4-4f5f-ba79-35b18e2c4a0f, title: "Dienstreisemanagement - INTERN - Uni Kassel"}
 - id: TRIP_DATES_CONSISTENT
   text: "Reiseverlauf und Dienstgeschäft müssen widerspruchsfrei sein: Reisebeginn vor Beginn, Ende des Dienstgeschäfts nach dessen Beginn und vor der Rückkehr."
   applies_to: [kassel, other]
