@@ -39,7 +39,7 @@ def parse_settings() -> tuple[argparse.Namespace, Settings]:
         hard_fail_override=not args.no_hard_fail_override,
         self_consistency_n=args.self_consistency,
         case_timeout_seconds=args.case_timeout,
-        reasoning_effort=os.environ.get("OPENAI_REASONING_EFFORT", "").strip() or None,
+        reasoning_effort=os.environ.get("OPENAI_REASONING_EFFORT", "").strip() or Settings.reasoning_effort,
         cache_dir=os.environ.get("SOLVER_CACHE_DIR", "").strip() or None,
     )
     return args, settings
