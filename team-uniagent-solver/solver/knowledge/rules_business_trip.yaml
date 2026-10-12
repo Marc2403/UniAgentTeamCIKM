@@ -38,7 +38,7 @@
   sources:
     - {corpus: university-kassel-public-de, doc_id: 8f78f05e-61f4-4f5f-ba79-35b18e2c4a0f, title: "Dienstreisemanagement - INTERN - Uni Kassel"}
 - id: TRIP_MEALS
-  text: "Verpflegungskosten sind über das Tagegeld abgegolten; gesondert erstattet wird nur eine nachweislich notwendige Pauschale (z. B. Tagungspauschale). Ein freiwilliges Abendessen oder Rahmenprogramm ist keine solche Pauschale."
+  text: "Verpflegung wird über das Tagegeld (Verpflegungsmehraufwand) erstattet; es zu beantragen ist regulär. Zusätzlich gesondert erstattet wird nur eine nachweislich notwendige Pauschale (z. B. Tagungspauschale), ein freiwilliges Abendessen oder Rahmenprogramm nicht."
   applies_to: [kassel]
   query: "Verpflegungskosten über das Tagegeld abgegolten notwendige Pauschale Tagungspauschale"
   sources:
