@@ -1,6 +1,6 @@
 # Curated rules for reimbursement of privately advanced costs (format: see rules_procurement.yaml).
 - id: EXP_SERVICE_REFERENCE
-  text: "Größere Beschaffungen laufen über das Beschaffungsprogramm. Kleinere Anschaffungen, die Beschäftigte für die Universität privat verauslagt haben, werden mit Erstattungsformular und Originalbeleg erstattet; das ist der vorgesehene Weg und kein Mangel. Entscheidend ist, dass der dienstliche Bezug erkennbar ist: Rechnung an die Universität bzw. eine Einrichtung oder ein vermerkter dienstlicher Zweck. Käufe ohne jeden Bezug zur Universität (z. B. an Privatanschrift, privater Gebrauchsgegenstand) werden nicht erstattet."
+  text: "Beschaffungen werden grundsätzlich über das SAP-Beschaffungsprogramm bestellt. Ausnahmsweise erstattet werden Anschaffungen, die Beschäftigte für ihre dienstliche Tätigkeit selbst besorgt und privat verauslagt haben (Beispiel der Universität: Schleifpapier für das Labor), mit Erstattungsformular und Originalquittung. Der dienstliche Zweck muss aus dem Beleg hervorgehen; weist er keinen Artikel aus, ist ein Stichwort zum Verwendungszweck dazuzuschreiben."
   applies_to: [kassel]
   query: "Kostenerstattung kleinere zeitlich dringende Anschaffungen privat verauslagt Erstattungsformular"
   sources:

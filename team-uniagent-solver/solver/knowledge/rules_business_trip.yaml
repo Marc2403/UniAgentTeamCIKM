@@ -6,7 +6,7 @@
   sources:
     - {corpus: university-kassel-public-de, doc_id: 8f78f05e-61f4-4f5f-ba79-35b18e2c4a0f, title: "Dienstreisemanagement - INTERN - Uni Kassel"}
 - id: TRIP_PRIVATE_STAY
-  text: "Dienstreisen können mit privaten Reisen verbunden werden. Bei mehr als 5 Arbeitstagen Privataufenthalt werden nur die zur Ausübung des Dienstgeschäfts notwendigen Kosten erstattet; der Universität dürfen keine Mehrkosten entstehen."
+  text: "Dienstreisen können mit privaten Reisen verbunden werden. Dauert der Privataufenthalt höchstens 5 Arbeitstage, wird die Reisekostenvergütung so festgesetzt, als habe nur die Dienstreise stattgefunden. Dauert er länger, gilt die Reise als überwiegend privat: erstattet werden nur die zusätzlichen, für das Dienstgeschäft notwendigen Fahrtauslagen, Tage- und Übernachtungsgeld nur für Dienstgeschäft und Reisetage."
   applies_to: [kassel]
   query: "Dienstreise private Reise verbunden Privataufenthalt mehr als 5 Arbeitstage Kostenerstattung"
   sources:
