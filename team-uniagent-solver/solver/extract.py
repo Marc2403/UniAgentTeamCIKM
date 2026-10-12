@@ -11,7 +11,7 @@ from solver.checks.common import parse_amount, parse_date
 from solver.discovery import CASE_TYPE_LABELS
 from solver.event_log import log_event
 from solver.llm import ChatModel, extract_json_object
-from solver.schemas import AwardNote, Extraction, FrameworkCart, InvoiceDocument, LineItem, Offer, ProcurementApplication
+from solver.schemas import AwardNote, CaseFacts, Extraction, FrameworkCart, InvoiceDocument, LineItem, Offer, ProcurementApplication, TripApplication
 
 SYSTEM_PROMPT = (
     "Du liest ein einzelnes Dokument aus einem Verwaltungsvorgang einer Hochschule und überträgst Angaben in JSON.\n"
@@ -165,3 +165,32 @@ def extract_document(
         log_event("observation", tool=None, input={"document": name}, output={"facts": data.model_dump(mode="json", exclude_none=True), "unverified_amounts_removed": removed})
         return data
     return None
+
+
+# Labelled date fields of the business-trip form (as read by Rajesh's MVP); filled only where extraction left a gap.
+FORM_DATE_LABELS = {
+    "submission_date": r"Datum der Antragstellung",
+    "departure": r"Start|Reisebeginn",
+    "return_date": r"Ende|Reiseende",
+    "business_start": r"Beginn Dienstgesch\w*",
+    "business_end": r"Ende Dienstgesch\w*",
+}
+
+
+def fill_form_dates(facts: CaseFacts) -> None:
+    """Complete the trip application's dates from 'Label: date' lines, also when the model extracted nothing."""
+    for document in facts.of_type("application") if facts.case_type == "business_trip" else []:
+        found = {}
+        for field, label in FORM_DATE_LABELS.items():
+            match = re.search(rf"^\s*(?:{label})\s*:\s*(.+)$", document.text, re.MULTILINE)
+            day = parse_date(match.group(1)) if match else None
+            if day is not None:
+                found[field] = day
+        data = document.data if isinstance(document.data, TripApplication) else TripApplication()
+        filled = {field: day for field, day in found.items() if getattr(data, field) is None}
+        if not filled:
+            continue
+        for field, day in filled.items():
+            setattr(data, field, day)
+        document.data = data
+        log_event("observation", input={"step": "form_dates", "document": document.name}, output={"filled": {field: day.isoformat() for field, day in filled.items()}})

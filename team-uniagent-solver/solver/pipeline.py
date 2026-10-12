@@ -12,7 +12,7 @@ from solver.config import Settings
 from solver.decide import Decision, decide, fallback_decision
 from solver.discovery import case_type_for, rules_scope
 from solver.event_log import log_event
-from solver.extract import extract_document
+from solver.extract import extract_document, fill_form_dates
 from solver.knowledge import rule_by_id, rules_for
 from solver.llm import ChatModel
 from solver.pdf import read_pdf
@@ -115,6 +115,7 @@ def solve_case(case_directory: Path, llm: ChatModel | None, retriever: Retriever
         if settings.use_checks:
             if llm is not None:
                 extract_facts(llm, facts, settings, deadline)
+            fill_form_dates(facts)
             findings = run_checks(facts)
             log_event("observation", input={"step": "checks"}, output={"findings": [finding.as_dict() for finding in findings]})
         rules = rules_for(facts.case_type, facts.scope)

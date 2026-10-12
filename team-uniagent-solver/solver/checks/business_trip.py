@@ -66,6 +66,9 @@ def check_costs_complete(facts: CaseFacts) -> list[Finding]:
     name, application = _application(facts)
     if application is None:
         return []
+    if not application.cost_items and application.total_requested is None:
+        # Nothing about costs was extracted (e.g. dates only from the form fields): not evidence of a gap.
+        return [Finding("TRIP_COSTS_COMPLETE", UNCLEAR, "Keine Kostenangaben ausgewertet.", [name], False)]
     open_items = [item.description or "?" for item in application.cost_items if item.amount is None]
     if open_items or application.total_requested is None:
         detail = "Kostenaufstellung unvollständig"
