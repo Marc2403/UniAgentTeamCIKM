@@ -176,3 +176,21 @@ def test_llm_call_is_abandoned_at_its_deadline(monkeypatch):
     assert time.monotonic() - started < 3
     # An abandoned request must not keep the interpreter alive after predict.py has written its output.
     assert request_threads and request_threads[0].daemon
+
+
+def test_failed_decision_call_is_retried_within_the_case_budget(procurement_case, tmp_path):
+    calls = []
+
+    def respond(messages):
+        prompt = messages[-1]["content"]
+        if "Vorlage" in prompt:
+            return json.dumps(EXTRACTIONS["ProcurementApplication"])
+        calls.append(prompt)
+        if len(calls) == 1:
+            raise TimeoutError("LLM call exceeded 120 s")
+        return json.dumps({"result": "angenommen", "begruendung": "Begründung des Modells.", "belege": []})
+
+    settings = Settings(use_retrieval=False, hard_fail_override=False)
+    decision, _, events = run_case(procurement_case, ScriptedChatModel(respond), tmp_path, settings)
+    assert len(calls) == 2 and decision.method == "llm" and decision.result == "angenommen"
+    assert [event["status"] for event in events if event["event_type"] == "model_call" and event["input"].get("purpose") == "decide"] == ["error", "ok"]
