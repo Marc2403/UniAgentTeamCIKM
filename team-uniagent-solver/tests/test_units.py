@@ -228,6 +228,7 @@ def test_foreign_trip_needs_abroad_field():
 def test_unmentioned_grant_is_double_funding():
     grant = ("email.pdf", "funding_commitment", "", TripDocument(third_party_funding=ThirdPartyFunding(provider="Verein", max_amount=1200, currency="USD", covers=["Flug", "Unterkunft"])))
     assert business_trip.check_third_party_funding(facts("business_trip", trip(mentions_third_party_funding=False, total_requested=1910), grant))[0].status == FAIL
+    assert not business_trip.check_third_party_funding(facts("business_trip", trip(mentions_third_party_funding=False, total_requested=1910), grant))[0].hard
     assert business_trip.check_third_party_funding(facts("business_trip", trip(mentions_third_party_funding=True), grant))[0].status == PASS
 
 
