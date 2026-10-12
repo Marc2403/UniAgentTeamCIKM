@@ -14,6 +14,7 @@ from solver.discovery import case_type_for, rules_scope
 from solver.event_log import log_event
 from solver.extract import extract_document
 from solver.knowledge import rule_by_id, rules_for
+from solver.labels import label_items
 from solver.llm import ChatModel
 from solver.pdf import read_pdf
 from solver.retrieval import Retriever, best_passage
@@ -115,6 +116,7 @@ def solve_case(case_directory: Path, llm: ChatModel | None, retriever: Retriever
         if settings.use_checks:
             if llm is not None:
                 extract_facts(llm, facts, settings, deadline)
+                label_items(llm, facts, deadline, settings.llm_call_timeout_seconds)
             findings = run_checks(facts)
             log_event("observation", input={"step": "checks"}, output={"findings": [finding.as_dict() for finding in findings]})
         rules = rules_for(facts.case_type, facts.scope)

@@ -101,7 +101,7 @@ def check_hospitality(facts: CaseFacts) -> list[Finding]:
     hits = []
     for name, invoice in _invoices(facts):
         for item in invoice.items:
-            if item.description and HOSPITALITY.search(item.description):
+            if item.description and (HOSPITALITY.search(item.description) or facts.item_labels.get(item.description, {}).get("catering")):
                 hits.append((name, item.description))
     if not hits:
         return [Finding("EXP_HOSPITALITY", PASS, "Keine Bewirtungs- oder Küchenartikel.", [])]

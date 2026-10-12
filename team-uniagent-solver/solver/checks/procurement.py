@@ -205,7 +205,11 @@ def _ordered_items(facts: CaseFacts) -> list[str]:
 def check_framework_contract(facts: CaseFacts) -> list[Finding]:
     if facts.scope != "kassel":
         return [Finding("PROC_FRAMEWORK_CONTRACT", NOT_APPLICABLE, "Rahmenverträge der Universität Kassel gelten für diese Einrichtung nicht.", [], False)]
-    covered = sorted({description for description in _ordered_items(facts) if FRAMEWORK_PRODUCTS.search(description)})
+    covered = sorted({
+        description
+        for description in _ordered_items(facts)
+        if FRAMEWORK_PRODUCTS.search(description) or facts.item_labels.get(description, {}).get("framework_group")
+    })
     if not covered:
         return [Finding("PROC_FRAMEWORK_CONTRACT", PASS, "Keine Position aus einem Rahmenvertragssortiment.", [])]
     if is_framework_order(facts):

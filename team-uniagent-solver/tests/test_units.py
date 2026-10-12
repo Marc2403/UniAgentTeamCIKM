@@ -229,3 +229,14 @@ def test_unmentioned_grant_is_double_funding():
 def test_private_stay_with_costs_excluded_passes():
     assert business_trip.check_private_stay(facts("business_trip", trip(private_stay_days=6, private_costs_excluded=True)))[0].status == PASS
     assert business_trip.check_private_stay(facts("business_trip", trip(private_stay_days=6)))[0].status == UNCLEAR
+
+
+def test_item_labels_extend_the_keyword_patterns():
+    from solver.checks.procurement import check_framework_contract
+    from solver.schemas import CaseFacts, DocumentFacts, ProcurementApplication
+
+    application = ProcurementApplication(items=[{"description": "Dell UltraSharp U2723QE", "quantity": 2}])
+    facts = CaseFacts("beschaffungsantrag-01", "procurement", "kassel", [DocumentFacts("antrag.pdf", "application", "", application)])
+    assert check_framework_contract(facts)[0].status == "pass"
+    facts.item_labels["Dell UltraSharp U2723QE"] = {"framework_group": "Monitore", "catering": False}
+    assert check_framework_contract(facts)[0].status == "fail"

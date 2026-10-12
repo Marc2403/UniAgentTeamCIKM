@@ -206,6 +206,8 @@ class CaseFacts:
     case_type: str
     scope: str
     documents: list[DocumentFacts] = field(default_factory=list)
+    # Per position description: labels from solver.labels (framework_group, catering).
+    item_labels: dict[str, dict] = field(default_factory=dict)
 
     def of_type(self, *document_types: str) -> list[DocumentFacts]:
         return [document for document in self.documents if document.document_type in document_types]
