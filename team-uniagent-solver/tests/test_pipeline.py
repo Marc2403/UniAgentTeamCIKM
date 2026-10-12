@@ -176,3 +176,26 @@ def test_llm_call_is_abandoned_at_its_deadline(monkeypatch):
     assert time.monotonic() - started < 3
     # An abandoned request must not keep the interpreter alive after predict.py has written its output.
     assert request_threads and request_threads[0].daemon
+
+
+def test_rejected_json_mode_is_dropped_once(monkeypatch):
+    from types import SimpleNamespace
+
+    from solver.llm import OpenAIChatModel
+
+    for name, value in (("OPENAI_BASE_URL", "http://localhost:1/v1"), ("OPENAI_API_KEY", "x"), ("OPENAI_MODEL", "m")):
+        monkeypatch.setenv(name, value)
+    model = OpenAIChatModel(max_tokens=10, temperature=0, max_retries=0)
+    sent = []
+
+    def create(**parameters):
+        sent.append(sorted(parameters))
+        if "response_format" in parameters:
+            raise ValueError("400: response_format json_object is not supported by this model")
+        message = SimpleNamespace(content='{"ok": true}')
+        return SimpleNamespace(choices=[SimpleNamespace(message=message, finish_reason="stop")], usage=None)
+
+    monkeypatch.setattr(model._client.chat.completions, "create", create)
+    assert model.complete([{"role": "user", "content": "hi"}], timeout=5).text == '{"ok": true}'
+    model.complete([{"role": "user", "content": "hi again"}], timeout=5)
+    assert ["response_format" in parameters for parameters in sent] == [True, False, False]

@@ -105,7 +105,7 @@ class OpenAIChatModel:
         self.temperature = temperature
         self.max_retries = max_retries
         self.reasoning_effort = reasoning_effort
-        self.reasoning_supported = True
+        self.unsupported: set[str] = set()
         self.cache = ResponseCache(Path(cache_dir)) if cache_dir else None
         self.usage = TokenUsage()
         self._sleep = sleep
@@ -143,17 +143,22 @@ class OpenAIChatModel:
             "temperature": temperature,
             "timeout": timeout,
         }
-        if reasoning_effort and self.reasoning_supported:
+        if reasoning_effort and "reasoning_effort" not in self.unsupported:
             parameters["reasoning_effort"] = reasoning_effort
-        try:
-            response = self._client.chat.completions.create(**parameters)
-        except Exception as error:
-            # Models without reasoning controls (e.g. Qwen behind vLLM) may reject the parameter.
-            if "reasoning_effort" not in parameters or "reasoning" not in str(error).lower():
-                raise
-            self.reasoning_supported = False
-            del parameters["reasoning_effort"]
-            response = self._client.chat.completions.create(**parameters)
+        if "response_format" not in self.unsupported:
+            # Every prompt of this solver asks for one JSON object; JSON mode makes the server enforce it.
+            parameters["response_format"] = {"type": "json_object"}
+        while True:
+            try:
+                response = self._client.chat.completions.create(**parameters)
+                break
+            except Exception as error:
+                # Endpoints without reasoning controls or JSON mode (e.g. Qwen behind some vLLM setups) reject them.
+                rejected = next((name for name in ("reasoning_effort", "response_format") if name in parameters and name.split("_")[0] in str(error).lower()), None)
+                if rejected is None:
+                    raise
+                self.unsupported.add(rejected)
+                del parameters[rejected]
         choice = response.choices[0]
         usage = response.usage
         return Completion(
