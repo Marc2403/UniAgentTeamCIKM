@@ -1,17 +1,18 @@
-# UniAgent Team CIKM – MVP-Vergleich
+# UniAgent Team CIKM – MVP Comparison
 
-Jedes Teammitglied legt sein MVP in einen eigenen Ordner `<name>-<projekt>/` im Repo-Root.
-Jeder Ordner ist eigenständig (eigene README, Abhängigkeiten, `.gitignore`).
+Each team member puts their MVP in a separate folder `<name>-<project>/` at the repo root.
+Each folder is self-contained (own README, dependencies, `.gitignore`).
 
-| Ordner | Autor | Ansatz |
+| Folder | Author | Approach |
 |---|---|---|
-| [`marc-uniagent-solver/`](marc-uniagent-solver/) | Marc M (@Marc2403) | Task 2 (Solving): LLM extrahiert, Python prüft Regeln, LLM entscheidet; BM25-Retrieval. Ergebnisse: [`RESULTS.md`](marc-uniagent-solver/RESULTS.md) |
+| [`marc-uniagent-solver/`](marc-uniagent-solver/) | Marc M (@Marc2403) | Task 2 (Solving): LLM extracts, Python checks rules, LLM decides; BM25 retrieval. Results: [`RESULTS.md`](marc-uniagent-solver/RESULTS.md) |
 | [`omar-uniagent-solver/`](omar-uniagent-solver/) | Omar (@omar005) | BM25 retrieval + LLM structured JSON |
-| [`rajesh-uniagent-solver/`](rajesh-uniagent-solver/) | Rajesh | hull-v4: deterministische Regeln (T1, T2, E1, E3, P1) + sechs LLM-Ja/Nein-Labeler (L1–L6) |
+| [`rajesh-uniagent-solver/`](rajesh-uniagent-solver/) | Rajesh | hull-v4: deterministic rules (T1, T2, E1, E3, P1) + six LLM yes/no labelers (L1–L6) |
+| [`gareth-uniagent-solver/`](gareth-uniagent-solver/) | Gareth | Deterministic PDF extraction, retrieval and numeric checks + LLM decision with review and repair attempt. Start with [`READ-ME-FIRST.md`](gareth-uniagent-solver/READ-ME-FIRST.md) |
 
-## Eigenes MVP hinzufügen
+## Adding your MVP
 
-1. Repo klonen und Branch anlegen: `git checkout -b <name>-mvp`
-2. MVP nach `<name>-<projekt>/` kopieren, ohne Secrets (`.env`, API-Keys) und Laufartefakte
-3. Zeile in der Tabelle oben ergänzen
-4. Pushen und Pull Request gegen `main` öffnen
+1. Clone the repo and create a branch: `git checkout -b <name>-mvp`
+2. Copy your MVP into `<name>-<project>/`, without secrets (`.env`, API keys) or run artifacts
+3. Add a row to the table above
+4. Push and open a pull request against `main`
