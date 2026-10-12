@@ -1,0 +1,5 @@
+env.sh
+out-*/
+timing-test/
+__pycache__/
+*.pyc
