@@ -7,7 +7,7 @@ cherry-picked onto `team-mvp` and the combination re-run.
 
 ## Setup
 
-- Base: Marc's MVP made compliant, tag `team-m1` (`7aebfa9`) + daemon-thread LLM requests (`6d55ec7`).
+- Base: Marc's MVP made compliant, tag `team-m1` (`3f6968d`) + daemon-thread LLM requests (`e502e09`).
 - Data: the 21 spot-check cases (business trip 5, procurement 8, expense 8).
 - Models via OpenRouter: `openai/gpt-oss-20b` (main) and `qwen/qwen-2.5-7b-instruct`.
 - Runs: `evaluation/run-mvp.sh`, Docker with 4 CPUs / 40 GB, three containers in parallel, on the internal network
@@ -53,7 +53,7 @@ Considered and not run, with the reason:
 | Single decision call without extraction | Omar | equals Marc's `--no-checks` ablation (R4: 20/21); Omar's own model decisions 6/7 |
 | Self-consistency (3 samples) | Marc | Marc's ablation R1: no gain, +27% tokens |
 
-## Release (`team-mvp` at `03cc230`: components 2, 6, 8, 10, 11, 12, 13)
+## Release (`team-mvp` at `ae4f6f5`: components 2, 6, 8, 10, 11, 12, 13)
 
 | Run | Model / decision effort | trip / proc / exp | total | wall s | max s | calls | tokens | errors | fallbacks |
 |---|---|---|---|---|---|---|---|---|---|
@@ -70,7 +70,7 @@ release2-medium-r1 with gpt-oss-20b score 1.0 on all three datasets with 0 inval
 scores 0.8 / 0.75 / 1.0 with 0 invalid log lines. All release2 traces pass `scripts/validate_trace.py`.
 No standby during these runs.
 
-The commit before the last (`b43b2c1`, same as release2 except `TRIP_MEALS` wording) scored 21/21 twice with
+The commit before the last (`90d634e`, same as release2 except `TRIP_MEALS` wording) scored 21/21 twice with
 gpt-oss-20b at the default effort and 18/21 twice with Qwen; with `medium` it scored 20/21 and 21/21. The 20/21
 was `dienstreiseantrag-02`, rejected because the model read "Verpflegungskosten sind über das Tagegeld
 abgegolten" as forbidding the requested daily allowance, a misreading of the new rule #10. Fix #13 states that
@@ -100,7 +100,7 @@ team release is equally accurate on the spot-checks, 2.3× faster in wall time, 
 reading, covers three more documented rules, and survives every robustness case below. Rajesh's MVP remains
 cheaper in tokens (2.9×) and has the fastest slowest case (24 s); its accuracy relies on form-specific regexes and it has no time limits.
 
-## Robustness (`evaluation/robustness/run.sh`, image of `b43b2c1`; release2 adds only one rule text and the `--reasoning-effort` flag)
+## Robustness (`evaluation/robustness/run.sh`, image of `90d634e`; release2 adds only one rule text and the `--reasoning-effort` flag)
 
 Inputs: a real procurement case, an unparseable PDF with a `.txt` note, an empty case folder, a 400-page PDF.
 Mock LLM modes: garbage prose, JSON cut off mid-string, HTTP 500, never answering.
@@ -126,7 +126,7 @@ used; the TIRA ids are not verified).
 |---|---|---|---|---|
 | 1 | Team release2, gpt-oss-20b | (none; decision effort `low`) | 21/21 ×2, slowest case 29 s, 6,494 tokens/case | best accuracy and well inside the time limits |
 | 2 | Team release2, gpt-oss-20b, more deliberate decisions | `--reasoning-effort medium` | 21/21 ×2, slowest case 71 s, 6,946 tokens/case | hedge for hidden cases that need more judgment than the spot-checks |
-| 3 | Team release2, Qwen2.5-7B-Instruct | (none) | 18/21 in all five Qwen runs of `b43b2c1` and release2 | the second allowed model; clearly weaker here, so only if a Qwen run is wanted |
+| 3 | Team release2, Qwen2.5-7B-Instruct | (none) | 18/21 in all five Qwen runs of `90d634e` and release2 | the second allowed model; clearly weaker here, so only if a Qwen run is wanted |
 | 4 | Tag `team-m1` (Marc's MVP made compliant), gpt-oss-20b | (none) | 21/21 ×2 | hedge against the post-M1 changes; keeps the hard third-party-funding check and the provider's default effort |
 
 No fifth submission: no other variant was both strong and meaningfully different. Rajesh's MVP (20/21, 3× fewer
