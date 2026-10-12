@@ -9,6 +9,7 @@ Each folder is self-contained (own README, dependencies, `.gitignore`).
 | [`omar-uniagent-solver/`](omar-uniagent-solver/) | Omar (@omar005) | BM25 retrieval + LLM structured JSON |
 | [`rajesh-uniagent-solver/`](rajesh-uniagent-solver/) | Rajesh | hull-v4: deterministic rules (T1, T2, E1, E3, P1) + six LLM yes/no labelers (L1–L6) |
 | [`gareth-uniagent-solver/`](gareth-uniagent-solver/) | Gareth | Deterministic PDF extraction, retrieval and numeric checks + LLM decision with review and repair attempt. Start with [`READ-ME-FIRST.md`](gareth-uniagent-solver/READ-ME-FIRST.md) |
+| [`team-uniagent-solver/`](team-uniagent-solver/) | Team | Combined system: Marc's pipeline as base plus the components that survived the ablation. Comparison: [`evaluation/EVALUATION.md`](evaluation/EVALUATION.md), ablations: [`ABLATIONS.md`](team-uniagent-solver/ABLATIONS.md) |
 
 ## Adding your MVP
 
