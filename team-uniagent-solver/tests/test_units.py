@@ -229,3 +229,16 @@ def test_unmentioned_grant_is_double_funding():
 def test_private_stay_with_costs_excluded_passes():
     assert business_trip.check_private_stay(facts("business_trip", trip(private_stay_days=6, private_costs_excluded=True)))[0].status == PASS
     assert business_trip.check_private_stay(facts("business_trip", trip(private_stay_days=6)))[0].status == UNCLEAR
+
+
+def test_form_dates_fill_gaps_left_by_extraction():
+    from solver.extract import fill_form_dates
+    from solver.schemas import CaseFacts, DocumentFacts, TripApplication
+
+    text = "Datum der Antragstellung: 20.10.2026\nStart: Mittwoch, 14. Oktober 2026, 07:10 Uhr\nEnde Dienstgeschäft: 15.10.2026, 17:00 Uhr"
+    extracted = DocumentFacts("antrag.pdf", "application", text, TripApplication(submission_date="2026-10-21"))
+    missing = DocumentFacts("antrag.pdf", "application", text)
+    for document in (extracted, missing):
+        fill_form_dates(CaseFacts("dienstreiseantrag-01", "business_trip", "kassel", [document]))
+    assert extracted.data.submission_date == date(2026, 10, 21) and extracted.data.departure == date(2026, 10, 14)
+    assert missing.data.submission_date == date(2026, 10, 20) and missing.data.business_end == date(2026, 10, 15)
