@@ -117,7 +117,9 @@ def solve_case(case_directory: Path, llm: ChatModel | None, retriever: Retriever
                 extract_facts(llm, facts, settings, deadline)
             fill_form_dates(facts)
             findings = run_checks(facts)
-            log_event("observation", input={"step": "checks"}, output={"findings": [finding.as_dict() for finding in findings]})
+            # One event per rule, so each finding stays readable within the log preview limit.
+            for finding in findings:
+                log_event("observation", input={"step": "check", "rule_id": finding.rule_id}, output=finding.as_dict())
         rules = rules_for(facts.case_type, facts.scope)
         passages = rule_passages(retriever, rules)
         hits = look_up(retriever, facts, findings, settings.retrieval_hits)
