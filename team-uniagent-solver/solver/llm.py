@@ -5,8 +5,6 @@ import json
 import os
 import threading
 import time
-from concurrent.futures import ThreadPoolExecutor
-from concurrent.futures import TimeoutError as FutureTimeout
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Protocol
@@ -111,9 +109,31 @@ class OpenAIChatModel:
         self.cache = ResponseCache(Path(cache_dir)) if cache_dir else None
         self.usage = TokenUsage()
         self._sleep = sleep
-        # Requests run here so a call can be abandoned at its deadline: the HTTP read timeout alone
-        # never fires while a proxy keeps the connection alive.
-        self._requests = ThreadPoolExecutor(max_workers=8, thread_name_prefix="llm")
+
+    @staticmethod
+    def _within(timeout: float, request: Callable[[], Completion]) -> Completion:
+        """Run `request` in a daemon thread and abandon it at `timeout`.
+
+        The HTTP read timeout alone never fires while a proxy keeps the connection alive; a daemon thread
+        (unlike a ThreadPoolExecutor worker) also cannot hold the process open at exit.
+        """
+        outcome: dict[str, Any] = {}
+        finished = threading.Event()
+
+        def run() -> None:
+            try:
+                outcome["completion"] = request()
+            except BaseException as error:  # handed to the caller below
+                outcome["error"] = error
+            finally:
+                finished.set()
+
+        threading.Thread(target=run, name="llm", daemon=True).start()
+        if not finished.wait(timeout):
+            raise TimeoutError(f"LLM call exceeded {timeout:.0f} s")
+        if "error" in outcome:
+            raise outcome["error"]
+        return outcome["completion"]
 
     def _request(self, messages: list[dict[str, str]], timeout: float, temperature: float, reasoning_effort: str | None) -> Completion:
         parameters: dict[str, Any] = {
@@ -159,12 +179,7 @@ class OpenAIChatModel:
             try:
                 if remaining < 1:
                     raise TimeoutError("LLM time budget exhausted")
-                future = self._requests.submit(self._request, messages, remaining, temperature, reasoning_effort)
-                try:
-                    completion = future.result(timeout=remaining)
-                except FutureTimeout:
-                    future.cancel()
-                    raise TimeoutError(f"LLM call exceeded {remaining:.0f} s") from None
+                completion = self._within(remaining, lambda: self._request(messages, remaining, temperature, reasoning_effort))
                 break
             except Exception:
                 if attempt == self.max_retries or deadline - time.monotonic() < 3:

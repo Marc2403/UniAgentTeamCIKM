@@ -1,6 +1,7 @@
 import gzip
 import json
 import sys
+import threading
 import time
 from pathlib import Path
 
@@ -137,8 +138,6 @@ def test_predict_writes_one_valid_line_per_case(procurement_case, tmp_path, monk
 
 
 def test_watchdog_falls_back_and_seals_the_trace(procurement_case, tmp_path, monkeypatch):
-    import threading
-
     release = threading.Event()
 
     def hang(case, llm, retriever, settings, time_budget):
@@ -159,15 +158,21 @@ def test_watchdog_falls_back_and_seals_the_trace(procurement_case, tmp_path, mon
 
 
 def test_llm_call_is_abandoned_at_its_deadline(monkeypatch):
-    import time
-
     from solver.llm import OpenAIChatModel
 
     for name, value in (("OPENAI_BASE_URL", "http://localhost:1/v1"), ("OPENAI_API_KEY", "x"), ("OPENAI_MODEL", "m")):
         monkeypatch.setenv(name, value)
     model = OpenAIChatModel(max_tokens=10, temperature=0, max_retries=0)
-    monkeypatch.setattr(model, "_request", lambda *args: time.sleep(5))
+    request_threads = []
+
+    def hang(*args):
+        request_threads.append(threading.current_thread())
+        time.sleep(5)
+
+    monkeypatch.setattr(model, "_request", hang)
     started = time.monotonic()
     with pytest.raises(TimeoutError):
-        model.complete([{"role": "user", "content": "hi"}], timeout=1)
-    assert time.monotonic() - started < 2
+        model.complete([{"role": "user", "content": "hi"}], timeout=2)
+    assert time.monotonic() - started < 3
+    # An abandoned request must not keep the interpreter alive after predict.py has written its output.
+    assert request_threads and request_threads[0].daemon
