@@ -99,7 +99,7 @@ def main() -> None:
                             "evidence": decision.belege,
                             **line,
                             "method": decision.method,
-                            "findings": [finding.as_dict() for finding in findings],
+                            "failed_checks": [finding.rule_id for finding in findings if finding.status == "fail"],
                         },
                         status="error" if decision.method.startswith("fallback") else "ok",
                         error=decision.method if decision.method.startswith("fallback") else None,
