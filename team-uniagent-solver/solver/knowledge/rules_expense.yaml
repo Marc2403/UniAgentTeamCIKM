@@ -1,0 +1,37 @@
+# Curated rules for reimbursement of privately advanced costs (format: see rules_procurement.yaml).
+- id: EXP_SERVICE_REFERENCE
+  text: "Größere Beschaffungen laufen über das Beschaffungsprogramm. Kleinere Anschaffungen, die Beschäftigte für die Universität privat verauslagt haben, werden mit Erstattungsformular und Originalbeleg erstattet; das ist der vorgesehene Weg und kein Mangel. Entscheidend ist, dass der dienstliche Bezug erkennbar ist: Rechnung an die Universität bzw. eine Einrichtung oder ein vermerkter dienstlicher Zweck. Käufe ohne jeden Bezug zur Universität (z. B. an Privatanschrift, privater Gebrauchsgegenstand) werden nicht erstattet."
+  applies_to: [kassel]
+  query: "Kostenerstattung kleinere zeitlich dringende Anschaffungen privat verauslagt Erstattungsformular"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: df8a9f54-11b5-4f4f-b15e-146d3bca69d3, title: "Finanzbuchhaltung und Steuern - INTERN - Uni Kassel"}
+- id: EXP_REAL_INVOICE
+  text: "Für die Erstattung sind das Erstattungsformular und die Originalquittung einzureichen. Weist die Quittung keinen Artikel aus, muss ein Stichwort zum Verwendungszweck dazugeschrieben werden."
+  applies_to: [kassel]
+  query: "Kostenerstattung Originalquittung aufkleben Stichwort Artikel"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: df8a9f54-11b5-4f4f-b15e-146d3bca69d3, title: "Finanzbuchhaltung und Steuern - INTERN - Uni Kassel"}
+- id: EXP_HOSPITALITY
+  text: "Bewirtungsaufwendungen werden grundsätzlich nicht übernommen. Mineralwasser, Kaffee, Tee, Obst und Gebäck sind nur als Geste gegenüber Gästen der Universität Betriebsaufwand; Bewirtungen ohne externe Personen sind nicht erstattungsfähig."
+  applies_to: [kassel]
+  query: "Bewirtungskostenrichtlinie Kaffee Tee Gäste externe Personen nicht erstattungsfähig"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: df8a9f54-11b5-4f4f-b15e-146d3bca69d3, title: "Finanzbuchhaltung und Steuern - INTERN - Uni Kassel"}
+- id: EXP_ONLINE_CONFERENCE
+  text: "Online-Konferenzen sind keine Dienstreisen; ihre Teilnahmegebühren werden als privat verauslagte Kosten bei der Finanzabteilung geltend gemacht."
+  applies_to: [kassel]
+  query: "Online Konferenzen Teilnahmegebühren Privat Verauslagte Kosten Finanzabteilung"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: 8f78f05e-61f4-4f5f-ba79-35b18e2c4a0f, title: "Dienstreisemanagement - INTERN - Uni Kassel"}
+- id: EXP_DUPLICATE
+  text: "Dieselbe Bestellung darf nur einmal erstattet werden, auch wenn sie unter mehreren Rechnungsnummern abgerechnet ist."
+  applies_to: [kassel, other]
+  sources: []
+- id: EXP_CREDIT_NOTES
+  text: "Gutschriften und Stornierungen sind abzuziehen; erstattungsfähig ist nur der tatsächlich getragene Saldo."
+  applies_to: [kassel, other]
+  sources: []
+- id: EXP_FOREIGN_CURRENCY
+  text: "Bei Zahlungen in Fremdwährung belegt die Konto- oder Kartenabrechnung den tatsächlich belasteten Euro-Betrag."
+  applies_to: [kassel, other]
+  sources: []
