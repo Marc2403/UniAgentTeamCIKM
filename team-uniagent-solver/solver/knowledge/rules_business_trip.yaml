@@ -23,6 +23,8 @@
   query: "Nachgewiesene Übernachtungskosten 80,00 € je Nacht erstattungsfähig Notwendigkeit"
   sources:
     - {corpus: university-kassel-public-de, doc_id: 8f78f05e-61f4-4f5f-ba79-35b18e2c4a0f, title: "Dienstreisemanagement - INTERN - Uni Kassel"}
+    # The addressee requirement is only in this crawl version of the same page.
+    - {corpus: university-kassel-public-de, doc_id: 32bc169e-4d0b-4931-9b72-bf425ec7311b, title: "Dienstreisemanagement - INTERN - Uni Kassel"}
 - id: TRIP_THIRD_PARTY_FUNDING
   text: "Leistungen von dritter Seite werden auf die Reisekostenerstattung angerechnet und sind vor Antritt der Reise vollständig mitzuteilen; dieselben Kosten dürfen nicht doppelt finanziert werden."
   applies_to: [kassel]
