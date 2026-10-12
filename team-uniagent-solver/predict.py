@@ -32,6 +32,7 @@ def parse_settings() -> tuple[argparse.Namespace, Settings]:
     parser.add_argument("--no-hard-fail-override", action="store_true", help="let the model overrule hard check failures")
     parser.add_argument("--self-consistency", type=int, default=1, help="decision samples when a check stays unclear")
     parser.add_argument("--case-timeout", type=float, default=Settings.case_timeout_seconds)
+    parser.add_argument("--reasoning-effort", choices=("low", "medium", "high"), help="decision call; overrides OPENAI_REASONING_EFFORT (default low)")
     args = parser.parse_args()
     settings = Settings(
         use_checks=not args.no_checks,
@@ -39,7 +40,7 @@ def parse_settings() -> tuple[argparse.Namespace, Settings]:
         hard_fail_override=not args.no_hard_fail_override,
         self_consistency_n=args.self_consistency,
         case_timeout_seconds=args.case_timeout,
-        reasoning_effort=os.environ.get("OPENAI_REASONING_EFFORT", "").strip() or Settings.reasoning_effort,
+        reasoning_effort=args.reasoning_effort or os.environ.get("OPENAI_REASONING_EFFORT", "").strip() or Settings.reasoning_effort,
         cache_dir=os.environ.get("SOLVER_CACHE_DIR", "").strip() or None,
     )
     return args, settings
