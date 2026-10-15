@@ -1,0 +1,18 @@
+{"antrag": "dienstreiseantrag-r01-late-approval", "category": "REGRESSION", "reason": "T1: Application submitted after trip start"}
+{"antrag": "dienstreiseantrag-r02-date-contradiction", "category": "REGRESSION", "reason": "T2: Business end precedes trip start"}
+{"antrag": "dienstreiseantrag-r03-written-month", "category": "REGRESSION", "reason": "T1 with written German dates (tests resilient parser)"}
+{"antrag": "dienstreiseantrag-r04-weekday-ende", "category": "REGRESSION", "reason": "T2 with weekday prefix on Ende line (tests resilient parser)"}
+{"antrag": "auslagenerstattung-r01-proforma-only", "category": "REGRESSION", "reason": "E1: Pro-forma invoice is not a valid receipt"}
+{"antrag": "auslagenerstattung-r02-no-university", "category": "REGRESSION", "reason": "E3: No reference to the university or its units"}
+{"antrag": "auslagenerstattung-r03-real-duplicate", "category": "REGRESSION", "reason": "L2: Two invoices with identical order number is a real duplicate"}
+{"antrag": "auslagenerstattung-r04-receipt-plus-kontoauszug", "category": "REGRESSION", "reason": "L2 fix: receipt + card statement for same payment is NOT duplicate"}
+{"antrag": "auslagenerstattung-r05-hotel-over-cap", "category": "REGRESSION", "reason": "E4: Hotel >80 EUR without Messe/Grossstadt/approval justification"}
+{"antrag": "beschaffungsantrag-r01-missing-quotes", "category": "REGRESSION", "reason": "P1: >1000 EUR purchase needs 3 quotes, only 1 present"}
+{"antrag": "dienstreiseantrag-s01-clean-trip", "category": "SANITY", "reason": "Clean trip, submitted well before start"}
+{"antrag": "auslagenerstattung-s01-clean-expense", "category": "SANITY", "reason": "Clean expense: real invoice, mentions university"}
+{"antrag": "auslagenerstattung-s02-hotel-messe", "category": "SANITY", "reason": "E4 justification: hotel >80 EUR OK with Messe keyword"}
+{"antrag": "auslagenerstattung-s03-hotel-grossstadt", "category": "SANITY", "reason": "E4 justification: hotel >80 EUR OK with Grossstadt keyword"}
+{"antrag": "beschaffungsantrag-s01-clean-procurement", "category": "SANITY", "reason": "Clean procurement under EUR 1000 threshold"}
+{"antrag": "dienstreiseantrag-k01-private-weekend", "category": "KNOWN_GAP", "reason": "Private weekend extension needs cost separation (not implemented)"}
+{"antrag": "auslagenerstattung-e01-hotel-exactly-80", "category": "EDGE", "reason": "E4 boundary: hotel at exactly 80 EUR must pass (rule is strict >80)"}
+{"antrag": "beschaffungsantrag-e01-exactly-threshold", "category": "EDGE", "reason": "P1 boundary: strict >1000, exactly 1000.00 should pass"}
