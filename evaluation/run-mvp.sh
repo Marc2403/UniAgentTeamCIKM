@@ -3,13 +3,14 @@
 # official evaluator image (cikm26-evaluation, built from uniagent-code/cikm26/evaluation).
 # Usage: evaluation/run-mvp.sh <name> <image> <out-root> [network] -- <command and args before --input>
 # The command gets `--input /input --output /output` appended. OPENAI_*, SOLVER_* and HTTPS_PROXY are forwarded.
+# DATASETS_DIR and DATASETS select other datasets (e.g. evaluation/synthetic/datasets and its three names).
 set -uo pipefail
 name=$1 image=$2 out_root=$3 network=${4:-bridge}
 shift 4; [[ ${1:-} == -- ]] && shift
 host_path() { (cd "$1" && (pwd -W 2>/dev/null || pwd)); }
-datasets="$(host_path "$(dirname "$0")/../../uniagent-code/cikm26/datasets")"
+datasets="$(host_path "${DATASETS_DIR:-$(dirname "$0")/../../uniagent-code/cikm26/datasets}")"
 mkdir -p "$out_root/$name"
-for dataset in business-trip-spot-check task-2-procurement-spot-check task-2-expense-reimbursement-spot-check; do
+for dataset in ${DATASETS:-business-trip-spot-check task-2-procurement-spot-check task-2-expense-reimbursement-spot-check}; do
   out="$out_root/$name/$dataset"; rm -rf "$out"; mkdir -p "$out"
   started=$(date +%s)
   MSYS_NO_PATHCONV=1 timeout 14400 docker run --rm --cpus 4 --memory 40g --network "$network" \

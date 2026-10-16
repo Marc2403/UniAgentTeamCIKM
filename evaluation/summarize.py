@@ -13,8 +13,7 @@ from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
 
-DATASETS = ("business-trip-spot-check", "task-2-procurement-spot-check", "task-2-expense-reimbursement-spot-check")
-SHORT = {"business-trip-spot-check": "trip", "task-2-procurement-spot-check": "proc", "task-2-expense-reimbursement-spot-check": "exp"}
+COLUMNS = ("trip", "procurement", "expense")  # a dataset belongs to the column whose word its name contains
 
 
 def token_counts(value) -> tuple[int, int]:
@@ -68,15 +67,21 @@ def summarise_dataset(run: Path) -> dict:
     }
 
 
+def case_count(run: Path) -> int:
+    predictions = run / "predictions.jsonl"
+    return sum(1 for line in predictions.read_text(encoding="utf-8").splitlines() if line.strip()) if predictions.is_file() else 0
+
+
 def main() -> None:
     print("| System | trip | proc | exp | total | wall s (3 runs) | max s/case | calls/case | tokens/case | error events | fallbacks |")
     print("|---|---|---|---|---|---|---|---|---|---|---|")
     for system in map(Path, sys.argv[1:]):
-        rows = {dataset: summarise_dataset(system / dataset) for dataset in DATASETS if (system / dataset).is_dir()}
-        sizes = {"business-trip-spot-check": 5, "task-2-procurement-spot-check": 8, "task-2-expense-reimbursement-spot-check": 8}
+        datasets = [next((d.name for d in system.iterdir() if d.is_dir() and word in d.name), None) for word in COLUMNS]
+        rows = {dataset: summarise_dataset(system / dataset) for dataset in datasets if dataset}
+        sizes = {name: case_count(system / name) for name in rows}
         correct = sum(round((row["accuracy"] or 0) * sizes[name]) for name, row in rows.items())
         total = sum(sizes[name] for name in rows)
-        cells = [f"{rows[d]['accuracy']:.2f}" if d in rows and rows[d]["accuracy"] is not None else "-" for d in DATASETS]
+        cells = [f"{rows[d]['accuracy']:.2f}" if d in rows and rows[d]["accuracy"] is not None else "-" for d in datasets]
         weighted = lambda key: round(sum(rows[d][key] * sizes[d] for d in rows) / max(total, 1), 1)  # noqa: E731
         print(
             f"| {system.name} | {' | '.join(cells)} | {correct}/{total} | {sum(row['wall_seconds'] or 0 for row in rows.values())} "
