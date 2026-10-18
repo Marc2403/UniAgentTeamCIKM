@@ -1,0 +1,12 @@
+usage: predict_fast.py [-h] --input INPUT --output OUTPUT [--workers WORKERS]
+                       [--max-output-tokens MAX_OUTPUT_TOKENS]
+
+Gareth's single-pass retrieval agent: prepare evidence, then review cases
+concurrently.
+
+options:
+  -h, --help            show this help message and exit
+  --input INPUT
+  --output OUTPUT
+  --workers WORKERS
+  --max-output-tokens MAX_OUTPUT_TOKENS

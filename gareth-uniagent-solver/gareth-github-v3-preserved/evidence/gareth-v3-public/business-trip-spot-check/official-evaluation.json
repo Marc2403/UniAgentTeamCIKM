@@ -1,0 +1,7 @@
+[92m✓[0m The jsonl file has the correct format.
+{
+  "accuracy": 1.0,
+  "model": "openai/gpt-oss-20b",
+  "valid_log_lines": 371,
+  "invalid_log_lines": 0
+}
