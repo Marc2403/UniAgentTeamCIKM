@@ -173,7 +173,7 @@ def orga_trip(c, *, rnr, pnr, fg, ziel, ausland, anlass, grund, verkehr, antrag,
 
 
 def mail(c, name, *, subject, sender, sent, body, cc=None, to=None, doc_type="email", kassel=True, mailbox=None):
-    o.email_pdf(c.path(name, doc_type), mailbox=mailbox or c.mailbox, url=(OWA_KASSEL + "E") if kassel else OWA_WERN,
+    o.email_pdf(c.path(name, doc_type), mailbox=mailbox or c.mailbox, url=(OWA_KASSEL + "E") if kassel else ms.owa(mailbox or c.mailbox),
                 subject=subject, sender=sender, sent=sent, to=to or f"{c.who} &lt;{c.mailbox}&gt;", cc=cc, body=body)
 
 
@@ -1050,7 +1050,7 @@ def thread(c, name, *, subject, messages, doc_type="correspondence", kassel=True
     """An e-mail print-out whose newest message quotes the earlier ones; messages oldest first: (from, sent, to, body)."""
     *older, (sender, sent, to, body) = messages
     quoted = [{"from": f, "sent": s, "to": t, "subject": subject, "body": b} for f, s, t, b in reversed(older)]
-    c.write(name, doc_type, ms.email(mailbox=c.mailbox, url=OWA_KASSEL + "C" if kassel else OWA_WERN, subject=f"AW: {subject}",
+    c.write(name, doc_type, ms.email(mailbox=c.mailbox, url=OWA_KASSEL + "C" if kassel else ms.owa(c.mailbox), subject=f"AW: {subject}",
                                      sender=sender, sent=sent, to=to, body=body, quoted=quoted))
 
 
@@ -1153,18 +1153,18 @@ def c3_trip():
         mail(c, "einladung-keynote.pdf", subject="IROS 2027 &#8211; Keynote invitation",
              sender="IROS 2027 General Chairs &lt;chairs@iros2027.example&gt;", sent="Mi 02.06.2027 03:12",
              body=["Dear Professor Imhoff-Sato,", "we are honoured to invite you to give a keynote at IROS 2027 in Kyoto on 20 "
-                   "October 2027. Registration is waived for keynote speakers except for the workshop day fee (610 EUR).",
+                   "October 2027. The conference registration fee is 610 EUR.",
                    "Sincerely,<br/>General Chairs"])
         trip_trail(c, f"338104{number}", "Fr 16.07.2027 11:00", why)
 
 
 def c3_expense():
     # 306 abgelehnt / 307 angenommen: partial cancellation with credit note, claim = total or balance
-    for number, label, claim in ((306, "abgelehnt", 186.40), (307, "angenommen", 139.80)):
-        why = (f"Geltend gemacht sind {ms.eur(claim)}, nach Abzug der Gutschrift über 46,60 € beträgt der getragene Saldo 139,80 €."
-               if label == "abgelehnt" else "Geltend gemacht ist genau der Saldo aus Rechnung und Gutschrift (139,80 €).")
+    for number, label, claim in ((306, "abgelehnt", 186.00), (307, "angenommen", 139.40)):
+        why = (f"Geltend gemacht sind {ms.eur(claim)}, nach Abzug der Gutschrift über 46,60 € beträgt der getragene Saldo 139,40 €."
+               if label == "abgelehnt" else "Geltend gemacht ist genau der Saldo aus Rechnung und Gutschrift (139,40 €).")
         c = Case("coverage", "exp", number, label, "C3", "E06", SRC_FIN,
-                 f"Rechnung 186,40 € und Gutschrift 46,60 € für einen Rückläufer, geltend gemacht {ms.eur(claim)}", why,
+                 f"Rechnung 186,00 € und Gutschrift 46,60 € für einen Rückläufer, geltend gemacht {ms.eur(claim)}", why,
                  who="Dr. Mathis Oyelaran-Kluge", mailbox="m.oyelaran@uni-wernstadt.de")
         rows = [("Akku-Lötkolben 8 W", 2, 46.60, 0.19), ("Lötspitzen-Set", 2, 19.90, 0.19), ("Platinenhalter", 1, 53.00, 0.19)]
         shop_invoice(c, "rechnung.pdf", vendor="Elektronikversand Haverkamp", addr=["Gildestraße 6", "49477 Ibbenbüren"],

@@ -10,7 +10,7 @@ Gate (PLAN-MVP-VERBESSERUNG.md, Phase 5, points 1-5 without unit tests and trace
 2. A, B, C: the same, uncertain cases excluded.
 3. Correct predictions on A + B + C (summed over runs) do not fall.
 4. Wrong rejections (R) on A + B + C do not rise.
-5. Every run exited 0, 0 invalid log lines, max seconds per case < 240.
+5. Every run exited 0, 0 invalid log lines, max seconds per case < 240 (fallback decisions are reported alongside).
 """
 
 import argparse
@@ -64,6 +64,7 @@ def load_run(run: Path) -> dict:
         datasets[folder.name] = {
             "pred": {row["antrag"]: row["result"] for row in read_jsonl(folder / "predictions.jsonl")},
             "seconds": {case: entry.get("seconds", 0) for case, entry in stats.get("cases", {}).items()},
+            "fallbacks": sum(entry.get("method", "").startswith("fallback") for entry in stats.get("cases", {}).values()),
             "exit": status.get("exit_code"),
             "invalid": evaluation.get("invalid_log_lines"),
         }
@@ -168,13 +169,14 @@ def main() -> None:
                 worst = max(data["seconds"].values(), default=0)
                 if data["exit"] not in (0, None) or data["invalid"] not in (0, None) or worst >= MAX_CASE_SECONDS:
                     ops.append(f"{run_path.name}/{dataset}: exit {data['exit']}, invalid {data['invalid']}, max {worst} s")
+        fallbacks = sum(data["fallbacks"] for run in groups["candidate"] for d, data in run.items() if set_of(d) in args.sets)
         max_seconds = max((s for run in groups["candidate"] for d, data in run.items() if set_of(d) in args.sets for s in data["seconds"].values()), default=0)
         checks = [
             ("1 S: no stable right -> stable wrong", not [r for r in regressions if r.set == "S"], ", ".join(r.case for r in regressions if r.set == "S")),
             ("2 A/B/C: no stable right -> stable wrong", not [r for r in regressions if r.set in GATE_SETS], ", ".join(f"{r.set}:{r.case}" for r in regressions if r.set in GATE_SETS)),
             ("3 accuracy A+B+C not lower", rate(c) >= rate(b) - 1e-9, f"{b[0]}/{b[3]} -> {c[0]}/{c[3]}"),
             ("4 wrong rejections A+B+C not higher", r_rate(c) <= r_rate(b) + 1e-9, f"{b[2]} -> {c[2]}"),
-            ("5 exit 0, 0 invalid log lines, max s/case < 240", not ops, "; ".join(ops) or f"max {max_seconds} s"),
+            ("5 exit 0, 0 invalid log lines, max s/case < 240", not ops, ("; ".join(ops) or f"max {max_seconds} s") + f"; {fallbacks} fallback decisions"),
         ]
         print("\n## Gate\n")
         print("| Point | Result | Detail |")
