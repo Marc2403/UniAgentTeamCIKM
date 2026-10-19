@@ -111,7 +111,12 @@ def check_excluded_country(facts: CaseFacts) -> list[Finding]:
 
 def check_third_party_funding(facts: CaseFacts) -> list[Finding]:
     name, application = _application(facts)
-    grants = [(document.name, data.third_party_funding) for document, data in facts.extracted(TripDocument) if data.third_party_funding is not None]
+    # An object without payer, amount or covered costs is no commitment (weaker models fill the field with nulls).
+    grants = [
+        (document.name, funding)
+        for document, data in facts.extracted(TripDocument)
+        if (funding := data.third_party_funding) is not None and (funding.provider or funding.max_amount or any(cost.strip() for cost in funding.covers))
+    ]
     if not grants:
         return []
     sources = [grant_name for grant_name, _ in grants]
