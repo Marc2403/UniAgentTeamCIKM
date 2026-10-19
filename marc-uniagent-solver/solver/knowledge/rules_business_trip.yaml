@@ -41,3 +41,9 @@
   text: "Hin- und Rückreise und alle Kostenpositionen müssen angegeben sein, damit die Gesamtkosten feststehen."
   applies_to: [kassel, other]
   sources: []
+- id: TRIP_EXCLUDED_COUNTRIES
+  text: "Dienstreisen in die Russische Föderation, in die Ukraine, nach Belarus, in die an die Ukraine grenzenden Gebiete im Süden und Osten Moldaus, nach Niger, Iran, Israel, in die Palästinensischen Gebiete und in den Libanon werden bis auf Weiteres nicht genehmigt, auch wenn der Antrag sonst vollständig ist."
+  applies_to: [kassel]
+  query: "Dienstreisen Russische Föderation Ukraine Belarus Niger Iran Israel Libanon bis auf Weiteres nicht genehmigt"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: 8f78f05e-61f4-4f5f-ba79-35b18e2c4a0f, title: "Dienstreisemanagement - INTERN - Uni Kassel"}

@@ -8,7 +8,7 @@
     - {corpus: university-kassel-public-de, doc_id: 8521d5be-7a95-4cad-aaf4-3b2a76860857, title: "Beschaffung - INTERN - Uni Kassel"}
     - {corpus: university-kassel-public-de, doc_id: 08143d1c-7e2f-4f9c-b6e0-42969f36852f, title: "Nachhaltiges Catering - INTERN - Uni Kassel"}
 - id: PROC_FRAMEWORK_CONTRACT
-  text: "Rahmenverträge bestehen u. a. für Büromaterial, PCs/Notebooks und Monitore, Büropapiere, Bürodrehstühle, Seminarstühle, Büromobiliar, Kopiergeräte und Microsoft-Software; sie sind für alle Bereiche verbindlich. Ein Produkt mit Rahmenvertrag muss ausschließlich beim Rahmenvertragspartner (über WPS) bestellt werden, unabhängig vom Betrag; dafür entfallen Vergleichsangebote."
+  text: "Rahmenverträge bestehen u. a. für Büromaterial, PCs/Notebooks und Monitore, Büropapiere, Bürodrehstühle, Seminarstühle, Büromobiliar, Kopiergeräte, Microsoft-Software, Flaschengase (außer Helium), Heliumprodukte und flüssigen Stickstoff; sie sind für alle Bereiche verbindlich. Ein Produkt mit Rahmenvertrag muss ausschließlich beim Rahmenvertragspartner (über WPS) bestellt werden, unabhängig vom Betrag; dafür entfallen Vergleichsangebote."
   applies_to: [kassel]
   query: "Rahmenverträge PCs Notebooks Monitore Rahmenvertragspartner ausschließlich bestellen WPS"
   sources:

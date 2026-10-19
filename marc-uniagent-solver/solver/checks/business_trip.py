@@ -11,6 +11,12 @@ A1_COUNTRIES = {
     "kroatien", "lettland", "liechtenstein", "litauen", "luxemburg", "malta", "niederlande", "norwegen", "österreich",
     "polen", "portugal", "rumänien", "schweden", "schweiz", "slowakei", "slowenien", "spanien", "tschechien", "ungarn", "zypern",
 }
+# Trips there are not approved until further notice (rules_business_trip.yaml, TRIP_EXCLUDED_COUNTRIES). Moldova is
+# left to the model: only its regions bordering Ukraine are meant.
+EXCLUDED_COUNTRIES = {
+    "russland", "russische föderation", "ukraine", "belarus", "weißrussland", "niger", "iran", "israel", "palästina",
+    "palästinensische gebiete", "libanon",
+}
 
 
 def _application(facts: CaseFacts) -> tuple[str | None, TripApplication | None]:
@@ -94,6 +100,15 @@ def check_foreign_travel(facts: CaseFacts) -> list[Finding]:
     return [Finding("TRIP_FOREIGN_TRAVEL", PASS, f"Auslandsreise ({application.destination_country}) korrekt angegeben.", [name])]
 
 
+def check_excluded_country(facts: CaseFacts) -> list[Finding]:
+    name, application = _application(facts)
+    if application is None or facts.scope != "kassel" or not _abroad(application):
+        return []
+    if application.destination_country.strip().lower() in EXCLUDED_COUNTRIES:
+        return [Finding("TRIP_EXCLUDED_COUNTRIES", FAIL, f"Reiseziel {application.destination_country}: Dienstreisen dorthin werden bis auf Weiteres nicht genehmigt.", [name])]
+    return [Finding("TRIP_EXCLUDED_COUNTRIES", PASS, f"Für {application.destination_country} besteht keine Reisebeschränkung.", [name])]
+
+
 def check_third_party_funding(facts: CaseFacts) -> list[Finding]:
     name, application = _application(facts)
     grants = [(document.name, data.third_party_funding) for document, data in facts.extracted(TripDocument) if data.third_party_funding is not None]
@@ -142,6 +157,7 @@ CHECKS = (
     check_dates_consistent,
     check_costs_complete,
     check_foreign_travel,
+    check_excluded_country,
     check_third_party_funding,
     check_hotel_rate,
     check_private_stay,

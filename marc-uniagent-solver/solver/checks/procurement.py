@@ -15,9 +15,21 @@ FRAMEWORK_PRODUCTS = re.compile(
     r"|\bMonitor|\bBildschirm(?!lupe)"
     r"|Büromaterial|Schreibwaren|Kopierpapier|Druckerpapier|Büropapier"
     r"|Bürodrehstuhl|Drehstuhl|Bürostuhl|Seminarstuhl|Büromöbel|Schreibtisch|Rollcontainer|Aktenschrank"
-    r"|Kopierer|Kopiergerät|Microsoft|MS[ -]Office|Office 365|Windows[ -]Lizenz",
+    r"|Kopierer|Kopiergerät|Microsoft|MS[ -]Office|Office 365|Windows[ -]Lizenz"
+    r"|Flaschengas|Flüssigstickstoff|Stickstoff,? flüssig"
+    r"|\b(?:Argon|Stickstoff|Helium|Sauerstoff|Kohlendioxid|Formiergas|Schutzgas|Prüfgas)\b[^;]*\b(?:Flasche|Füllung|Bündel)",
     re.IGNORECASE,
 )
+# Accessories of a framework product (a monitor cable, a notebook bag) are not themselves under the contract.
+ACCESSORY = re.compile(
+    r"(?:Monitor|Bildschirm|Notebook|Laptop|PC)-?(?:kabel|adapter|halterung|halter|tasche|hülle|ständer|arm|schloss|reiniger)"
+    r"|\b(?:für|for)\s+(?:\w+\s+)?(?:Monitor|Bildschirm|Notebook|Laptop|PC)",
+    re.IGNORECASE,
+)
+
+
+def framework_items(descriptions: list[str]) -> list[str]:
+    return sorted({d for d in descriptions if FRAMEWORK_PRODUCTS.search(d) and not ACCESSORY.search(d)})
 
 
 def _first(facts: CaseFacts, model):
@@ -79,7 +91,10 @@ def check_total_matches_items(facts: CaseFacts) -> list[Finding]:
         hard = not isinstance(data, Offer)
         if stated is None or items_sum is None:
             findings.append(Finding("PROC_TOTAL_MATCHES_ITEMS", UNCLEAR, f"{document.name}: Summe oder Positionen nicht vollständig lesbar.", [document.name], hard))
-        elif same_amount(items_sum, stated) or same_amount(items_sum, getattr(data, "gross_total", None)):
+        # The extraction may wrongly mark net positions as gross; net positions that match the net total, or match
+        # the gross total once VAT is added, are consistent.
+        elif any(same_amount(items_sum, total) or same_amount(items_sum * (1 + VAT_RATE), total)
+                 for total in (stated, data.net_total, getattr(data, "gross_total", None)) if total is not None):
             findings.append(Finding("PROC_TOTAL_MATCHES_ITEMS", PASS, f"{document.name}: Positionen ergeben {format_amount(items_sum)}, genannt {format_amount(stated)}.", [document.name], hard))
         elif not consistent:
             findings.append(Finding("PROC_TOTAL_MATCHES_ITEMS", UNCLEAR, f"{document.name}: Positionen nicht eindeutig lesbar (Menge × Einzelpreis ≠ Gesamtpreis).", [document.name], hard))
@@ -205,7 +220,7 @@ def _ordered_items(facts: CaseFacts) -> list[str]:
 def check_framework_contract(facts: CaseFacts) -> list[Finding]:
     if facts.scope != "kassel":
         return [Finding("PROC_FRAMEWORK_CONTRACT", NOT_APPLICABLE, "Rahmenverträge der Universität Kassel gelten für diese Einrichtung nicht.", [], False)]
-    covered = sorted({description for description in _ordered_items(facts) if FRAMEWORK_PRODUCTS.search(description)})
+    covered = framework_items(_ordered_items(facts))
     if not covered:
         return [Finding("PROC_FRAMEWORK_CONTRACT", PASS, "Keine Position aus einem Rahmenvertragssortiment.", [])]
     if is_framework_order(facts):

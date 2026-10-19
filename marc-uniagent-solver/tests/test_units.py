@@ -229,3 +229,71 @@ def test_unmentioned_grant_is_double_funding():
 def test_private_stay_with_costs_excluded_passes():
     assert business_trip.check_private_stay(facts("business_trip", trip(private_stay_days=6, private_costs_excluded=True)))[0].status == PASS
     assert business_trip.check_private_stay(facts("business_trip", trip(private_stay_days=6)))[0].status == UNCLEAR
+
+
+def test_excluded_country_fails_hard_and_other_destinations_pass():
+    blocked = business_trip.check_excluded_country(facts("business_trip", trip(destination_country="Libanon")))
+    assert blocked[0].status == FAIL and blocked[0].hard
+    assert business_trip.check_excluded_country(facts("business_trip", trip(destination_country="Jordanien")))[0].status == PASS
+    assert business_trip.check_excluded_country(facts("business_trip", trip(destination_country="Deutschland"))) == []
+
+
+def test_bottled_gas_is_a_framework_product_but_monitor_cable_is_not():
+    gas = [LineItem(description="Argon 4.6, Flasche 50 l, Füllung", quantity=6, unit_price=214, total=1284)]
+    assert procurement.check_framework_contract(facts("procurement", application(items=gas)))[0].status == FAIL
+    cable = [LineItem(description="HDMI-Kabel 2 m für Monitor", quantity=2, unit_price=9.9, total=19.8)]
+    assert procurement.check_framework_contract(facts("procurement", application(items=cable)))[0].status == PASS
+
+
+def test_privately_bought_notebook_is_flagged_softly():
+    case = facts("expense", invoice_document("r.pdf", Invoice(items=[LineItem(description="Notebook 14 Zoll, 16 GB RAM"), LineItem(description="Notebook-Tasche")])))
+    finding = expense.check_framework_products(case)[0]
+    assert finding.status == FAIL and not finding.hard and "Tasche" not in finding.detail
+    assert expense.check_framework_products(facts("expense", invoice_document("r.pdf", Invoice(items=[LineItem(description="Kabeltester")])))) == []
+
+
+def test_guest_gift_limit_and_giveaway_price():
+    def gift(total):
+        return facts("expense", ("r.pdf", "invoice", "Gastgeschenk für die Gastgeber", InvoiceDocument(invoices=[Invoice(gross_total=total, items=[LineItem(description="Bildband", quantity=1)])])))
+    assert statuses(expense.check_representation(gift(30.0)))["EXP_REPRESENTATION"] == PASS
+    assert statuses(expense.check_representation(gift(48.8)))["EXP_REPRESENTATION"] == FAIL
+    giveaways = facts("expense", ("r.pdf", "invoice", "Für den Messestand", InvoiceDocument(invoices=[Invoice(gross_total=1548.0, items=[LineItem(description="USB-Stick mit Logo", quantity=120)])])))
+    assert expense.check_representation(giveaways)[0].status == FAIL
+
+
+def test_decoration_is_flagged():
+    case = facts("expense", invoice_document("r.pdf", Invoice(items=[LineItem(description="Adventskranz Tanne"), LineItem(description="LED-Lichterkette")])))
+    assert expense.check_representation(case)[0].status == FAIL
+
+
+def test_receipt_with_purpose_in_text_passes_even_if_shop_was_read_as_recipient():
+    misread = Invoice(recipient="HOLZ- UND BAUMARKT, Gewerbestr. 3", recipient_is_institution=False)
+    case = facts("expense", ("bon.pdf", "receipt", "BAUMARKT\nSUMME 23,10\nfür Prüfstand Labor 2.04, Lehrstuhl Werkstofftechnik", InvoiceDocument(invoices=[misread])))
+    assert expense.check_service_reference(case)[0].status == PASS
+    private = facts("expense", ("bon.pdf", "receipt", "ELEKTRO-SHOP\nKOPFHOERER 229,00", InvoiceDocument(invoices=[misread])))
+    assert expense.check_service_reference(private)[0].status == FAIL
+
+
+def test_final_invoice_referring_to_proforma_and_card_statement_are_classified_correctly():
+    assert classify("rechnung-laborhandel.pdf", "Rechnung RE-27-1\nBezug: Pro-forma-Rechnung PF-27-1") == "invoice"
+    assert classify("rechnung.pdf", "BEZAHLT\nPro-forma-Nr.: PF-1\nPro-forma-Rechnung") == "proforma_invoice"
+    assert classify("kreditkartenabrechnung.pdf", "Umsatz PLOTLAB") == "bank_statement"
+
+
+def test_net_positions_misread_as_gross_still_match():
+    items = [LineItem(description="Analysator", quantity=1, unit_price=2580, total=2580), LineItem(description="Kit", quantity=1, unit_price=380, total=380)]
+    case = facts("procurement", application(items=items, net_total=2960.0, gross_total=3522.4, prices_are_gross=True))
+    assert procurement.check_total_matches_items(case)[0].status == PASS
+
+
+def test_proforma_and_final_invoice_of_one_order_are_no_duplicate():
+    case = facts("expense", invoice_document("pf.pdf", Invoice(number="PF-1", order_number="O-1", gross_total=108.3), kind="proforma_invoice"),
+                 invoice_document("re.pdf", Invoice(number="RE-1", order_number="O-1", gross_total=108.3)))
+    assert expense.check_duplicates(case) == []
+
+
+def test_missing_service_reference_is_soft_when_the_case_names_the_university():
+    misread = InvoiceDocument(invoices=[Invoice(recipient="Dr. Jana Muster", recipient_is_institution=False)])
+    case = facts("expense", ("r.pdf", "invoice", "Universität Wernstadt\nFachgebiet Statistik\nz. Hd. Dr. Jana Muster", misread))
+    finding = expense.check_service_reference(case)[0]
+    assert finding.status == FAIL and not finding.hard

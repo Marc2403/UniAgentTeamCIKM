@@ -35,3 +35,16 @@
   text: "Bei Zahlungen in Fremdwährung belegt die Konto- oder Kartenabrechnung den tatsächlich belasteten Euro-Betrag."
   applies_to: [kassel, other]
   sources: []
+- id: EXP_FRAMEWORK_PRODUCTS
+  text: "Für Büromaterial, PCs/Notebooks und Monitore, Büropapiere, Bürodrehstühle, Seminarstühle, Büromobiliar, Kopiergeräte, Microsoft-Software und Flaschengase bestehen verbindliche Rahmenverträge; diese Produkte sind ausschließlich beim Rahmenvertragspartner (über WPS) zu bestellen. Privat gekaufte Rahmenvertragsprodukte werden nicht als Auslage erstattet, auch nicht bei Eile oder kleinem Betrag. Werbeartikel mit Logo für Messen (Give-aways) sind kein Büromaterial."
+  applies_to: [kassel]
+  query: "Rahmenverträge Büromaterial PCs Notebooks Monitore Bürodrehstühle verbindlich alle Bereiche Rahmenvertragspartner"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: aef7cd6c-7609-4ac8-84ec-228bc79e5a4e, title: "Rahmenverträge - INTERN - Uni Kassel"}
+    - {corpus: university-kassel-public-de, doc_id: 8521d5be-7a95-4cad-aaf4-3b2a76860857, title: "Beschaffung - INTERN - Uni Kassel"}
+- id: EXP_REPRESENTATION
+  text: "Nach der Bewirtungskostenrichtlinie nicht erstattungsfähig sind Schmuck- und Dekorationsartikel (z. B. Weihnachtsbäume), Bewirtungen bei geselligen Anlässen (Weihnachts-, Geburtstagsfeiern, Verabschiedungen, Betriebsausflüge), Arbeitsessen mit überwiegend Universitätsangehörigen, Trinkgelder, Pfand und Geschenke an eigene Bedienstete. Übernahmefähig sind Give-aways auf Messen und Kongressen bis 10,00 € je Stück und kleinere Gastgeschenke bei Dienstreisen bis 30,00 €; teurere Geschenke oder Give-aways werden nicht erstattet."
+  applies_to: [kassel]
+  query: "Give-aways bis zu einem Wert von 10 Gastgeschenke Dienstreisen 30 Schmuck Dekorationsartikel Weihnachtsbäume nicht erstattungsfähig"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: df8a9f54-11b5-4f4f-b15e-146d3bca69d3, title: "Finanzbuchhaltung und Steuern - INTERN - Uni Kassel"}

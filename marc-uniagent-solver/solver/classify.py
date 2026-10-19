@@ -28,6 +28,8 @@ _FILENAME_RULES = (
     ("gutschrift", "credit_note"),
     ("stipendi", "funding_commitment"),
     ("angebot", "offer"),
+    ("kreditkarte", "bank_statement"),
+    ("kartenabrechnung", "bank_statement"),
     ("rechnung", "invoice"),
     ("invoice", "invoice"),
     ("quittung", "receipt"),
@@ -44,7 +46,8 @@ _FILENAME_RULES = (
 )
 
 # Content overrides that hold whatever the file is called.
-_PROFORMA = re.compile(r"pro[\s-]?forma", re.IGNORECASE)
+# A title line; a final invoice may refer to its pro-forma invoice further down.
+_PROFORMA = re.compile(r"^\W*pro[\s-]?forma", re.IGNORECASE | re.MULTILINE)
 _CREDIT_NOTE = re.compile(r"^\s*(?:Gutschrift|Credit note)\b", re.IGNORECASE | re.MULTILINE)
 _FUNDING = re.compile(r"Stipendi|travel grant|Reisekostenzuschuss|Fördermittelzusage|Förderzusage", re.IGNORECASE)
 
