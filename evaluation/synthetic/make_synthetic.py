@@ -59,11 +59,11 @@ def eur(x, sign="€"):
     return f"{s} {sign}" if sign else s
 
 
-def case(dataset, number, result, pattern, rule, source, new):
+def case(dataset, number, result, pattern, rule, source, new, uncertain=False):
     prefix = {TRIP: "dienstreiseantrag", EXPENSE: "auslagenerstattung", PROCUREMENT: "beschaffungsantrag"}[dataset]
     case_id = f"{prefix}-{number:02d}"
     CASES.append({"dataset": dataset, "antrag": case_id, "result": result, "pattern": pattern,
-                  "rule": rule, "source_doc_id": source, "new_pattern": new})
+                  "rule": rule, "source_doc_id": source, "new_pattern": new, "uncertain": uncertain})
     return OUT / dataset / "inputs" / case_id
 
 
@@ -258,8 +258,12 @@ WERN_ADDR = ["Am Lindenhang 40", "35291 Wernstadt"]
 
 
 def proc_form(*, number, date, fachgebiet, requester, phone, kostenstelle, holder, category, framework, procedure,
-              offers, supplier, items, begruendung, signed=True, place="Wernstadt"):
+              offers, supplier, items, begruendung, signed=True, place="Wernstadt", stated_net=None):
+    """stated_net: a net total that differs from the positions (a calculation error in the request)."""
     rows, net, tax, gross = priced(items)
+    if stated_net is not None:
+        net, tax = stated_net, round(stated_net * 0.19, 2)
+        gross = round(net + tax, 2)
     check = lambda on: "[X]" if on else "[ ]"  # noqa: E731
     cat = " ".join(f"{check(category == c)} {c}" for c in ("Verbrauchsmaterial", "GWG", "Anlage"))
     sign = (f"Beauftragt: Kostenstellenbevollmächtigte:r<br/>{holder}" if signed else
@@ -797,7 +801,7 @@ def expense_cases():
 
     # 02 abgelehnt: Citavi licence although it is a central campus licence
     d = case(EXPENSE, 2, "abgelehnt", "Citavi-Einzellizenz privat gekauft, obwohl Campuslizenz zentral getragen",
-             "Citavi: Campuslizenz, Kosten werden zentral getragen", SRC_FRAME, True)
+             "Citavi: Campuslizenz, Kosten werden zentral getragen", SRC_FRAME, True, uncertain=True)
     st, _ = invoice(
         vendor="Literatursoft Vertrieb GmbH", vendor_lines=["Kaiserstraße 61", "76133 Karlsruhe", "USt-IdNr. DE 301 552 418"],
         recipient=WERN + ["Lehrstuhl für Mediendidaktik", "z. Hd. Dr. Fenja Tiedtke"] + WERN_ADDR,
@@ -836,7 +840,7 @@ def expense_cases():
     # 04 abgelehnt: one person paid the fees of three colleagues and claims all of it
     d = case(EXPENSE, 4, "abgelehnt", "Online-Workshop-Gebühren für drei Personen von einer Person bezahlt und "
              "komplett eingereicht", "Für mehrere Personen verauslagte Kosten nicht nur an die verauslagende Person",
-             SRC_TRIP, True)
+             SRC_TRIP, True, uncertain=True)
     st, _ = invoice(
         vendor="Akademie für Datenkompetenz gGmbH", vendor_lines=["Schillerstraße 9", "99423 Weimar"],
         recipient=WERN + ["Lehrstuhl für Statistik", "Dr. Pauline Wechsler"] + WERN_ADDR,
@@ -1085,7 +1089,8 @@ def procurement_cases():
 
     # 04 abgelehnt: order split into two direct awards to stay below 1,000 EUR
     d = case(PROCUREMENT, 4, "abgelehnt", "Auftragsteilung: zwei Direktaufträge à 940 € beim selben Händler",
-             "Direktvergabe nur unter 1.000 € Auftragswert; Teilung zur Umgehung unzulässig", SRC_CATER, True)
+             "Direktvergabe nur unter 1.000 € Auftragswert; Teilung zur Umgehung unzulässig", SRC_CATER, True,
+             uncertain=True)
     o1, _, _ = offer(vendor="3D-Druck Fabrik Ehlers", vendor_lines=["Kanalstraße 9", "44147 Dortmund"],
                      recipient=recip("Fachgebiet Produktionstechnik", "Finn Ahrendt"), number="FE-27-0612",
                      date="07.06.2027", valid="07.07.2027",
@@ -1104,7 +1109,7 @@ def procurement_cases():
 
     # 05 angenommen (trap): direct award, net below 1,000 EUR although gross is above
     d = case(PROCUREMENT, 5, "angenommen", "Falle: Direktvergabe mit 948 € netto (1.128,12 € brutto), ein Angebot",
-             "Direktvergabe unter 1.000 € Auftragswert (netto)", SRC_CATER, True)
+             "Direktvergabe unter 1.000 € Auftragswert (netto)", SRC_CATER, True, uncertain=True)
     o1, _, _ = offer(vendor="Messtechnik Hagenah e.K.", vendor_lines=["Lange Straße 40", "26122 Oldenburg"],
                      recipient=recip("Fachgebiet Elektrische Messtechnik", "Kasimir Treppner"), number="MH-27-1104",
                      date="14.06.2027", valid="14.07.2027",

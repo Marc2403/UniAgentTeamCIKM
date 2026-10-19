@@ -1,2 +1,3 @@
 runs/
 synthetic/datasets/*/inputs/retrieval-corpora/
+__pycache__/

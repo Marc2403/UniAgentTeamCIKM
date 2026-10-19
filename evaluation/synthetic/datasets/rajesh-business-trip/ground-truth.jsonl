@@ -1,0 +1,6 @@
+{"antrag": "dienstreiseantrag-k01-private-weekend", "result": "abgelehnt"}
+{"antrag": "dienstreiseantrag-r01-late-approval", "result": "abgelehnt"}
+{"antrag": "dienstreiseantrag-r02-date-contradiction", "result": "abgelehnt"}
+{"antrag": "dienstreiseantrag-r03-written-month", "result": "abgelehnt"}
+{"antrag": "dienstreiseantrag-r04-weekday-ende", "result": "abgelehnt"}
+{"antrag": "dienstreiseantrag-s01-clean-trip", "result": "angenommen"}
