@@ -10,6 +10,22 @@ Seconds and tokens per case from `run-stats.json` (index build, ~16 s per datase
 ~50 hidden test cases. Runs vary between repetitions (OpenRouter routes to different providers): the same
 code scored 20/21 in `final-v4` before the last prompt fix.
 
+## v2 with synthetic cases (`a017cb2`)
+
+Changes, gate runs and reverted steps: [`../evaluation/IMPROVEMENT.md`](../evaluation/IMPROVEMENT.md). gpt-oss-20b, two
+runs per configuration, accuracy summed over both runs; (?) cases excluded. All numbers are training accuracy on our
+own labels (S, A, B, C were used for development); only the holdout H was not looked at before scoring it once.
+
+| Set | `13618cf` (TIRA `several-step`) | `a017cb2` |
+|---|---|---|
+| S spot-checks (21) | 42/42 | 42/42 |
+| A synthetic, Marc (32) | 47/64 | 56/64 |
+| B synthetic, Rajesh (15) | 29/30 | 30/30 |
+| C coverage (83) | 121/166 | 138/166 |
+| H holdout (20) | 20/40 | 30/40 |
+| S with `qwen/qwen-2.5-7b-instruct` (2 runs) | 19/21, 18/21 | 19/21, 18/21 |
+| S / A with `openai/gpt-oss-120b` (1 run) | – | 21/21, 27/32 |
+
 ## Main comparison
 
 | System | Business trip | Procurement | Expense | Total | s/case | tokens/case |
