@@ -1,0 +1,17 @@
+[
+  {
+    "case_id": "auslagenerstattung-05",
+    "event_id": "evt-00065",
+    "parent_event_id": "evt-00064",
+    "timestamp": "2026-10-18T14:34:06.073+00:00",
+    "event_type": "error",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": null,
+    "output": {
+      "response": "{\"result\":\"angenommen\",\"begruendung\":\"Die Rechnung (NS-INV-2027-77102) ist an die Universit\u00e4t Wernstadt adressiert und enth\u00e4lt einen klaren dienstlichen Zweck (Lizenz f\u00fcr einen einzelnen Nutzer). Der\u2026"
+    },
+    "status": "error",
+    "error": "Invalid result label: None"
+  }
+]

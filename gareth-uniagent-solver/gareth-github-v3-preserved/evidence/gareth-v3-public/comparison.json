@@ -1,0 +1,312 @@
+{
+  "cases": 21,
+  "correct": 18,
+  "undisputed_cases": 21,
+  "undisputed_correct": 18,
+  "wall_seconds": 229.03695612505544,
+  "error_events": 8,
+  "decision_fallbacks": 2,
+  "correct_without_fallback": 16,
+  "false_acceptances": 1,
+  "false_rejections": 2,
+  "model_calls": 23,
+  "by_domain": {
+    "business-trip-spot-check": {
+      "correct": 5,
+      "cases": 5,
+      "evaluator_exit": 0,
+      "official": {
+        "accuracy": 1.0,
+        "model": "openai/gpt-oss-20b",
+        "valid_log_lines": 371,
+        "invalid_log_lines": 0
+      }
+    },
+    "task-2-expense-reimbursement-spot-check": {
+      "correct": 6,
+      "cases": 8,
+      "evaluator_exit": 0,
+      "official": {
+        "accuracy": 0.75,
+        "model": "openai/gpt-oss-20b",
+        "valid_log_lines": 371,
+        "invalid_log_lines": 0
+      }
+    },
+    "task-2-procurement-spot-check": {
+      "correct": 7,
+      "cases": 8,
+      "evaluator_exit": 0,
+      "official": {
+        "accuracy": 0.875,
+        "model": "openai/gpt-oss-20b",
+        "valid_log_lines": 371,
+        "invalid_log_lines": 0
+      }
+    }
+  },
+  "cases_detail": [
+    {
+      "antrag": "dienstreiseantrag-01",
+      "result": "abgelehnt",
+      "begruendung": "Der Antrag wurde am 20.10.2026 gestellt, die Reise nach Leipzig fand aber bereits vom 14. bis 15.10.2026 statt (Bahnrechnung vom 09.10., Hotelrechnung vom 15.10., Kontoauszug mit beiden Abbuchungen). Dienstreisen sind vor Reiseantritt zu genehmigen; eine nachtraegliche Genehmigung ist nur ueber ein gesondertes Ausnahmeverfahren mit Stellungnahme der Fachgebietsleitung moeglich, das hier nicht beantragt wurde. Zusaetzlich lautet die Bahnrechnung auf eine Privatperson, sodass ein Ersatzbeleg mit dem Vermerk 'sachlich richtig' erforderlich waere.",
+      "belege": [
+        "decision-trail/dienstreiseantrag-01/email-rueckfrage-reisekostenstelle.pdf"
+      ],
+      "dataset": "business-trip-spot-check",
+      "predicted": "abgelehnt",
+      "correct": true,
+      "disputed": false,
+      "fallback": true
+    },
+    {
+      "antrag": "dienstreiseantrag-02",
+      "result": "angenommen",
+      "begruendung": "Vollstaendiger, rund zehn Wochen vor Reisebeginn eingereichter Antrag. Das dienstliche Interesse ist durch die Annahmebestaetigung des Peer-Review-Beitrags belegt, die Praesentationspflicht ergibt sich aus derselben Mail. Kosten sind plausibel und durch das genannte Drittmittelprojekt gedeckt, der Uebernachtungssatz von 75 EUR liegt innerhalb der Hoechstgrenze, der Preisvergleich Bahn/Flug wurde durchgefuehrt, die A1-Bescheinigung mit ausreichendem Vorlauf beantragt und das optionale Conference Dinner nicht mitbeantragt. Keine offenen Angaben oder Widersprueche.",
+      "belege": [
+        "decision-trail/dienstreiseantrag-02/genehmigt.pdf"
+      ],
+      "dataset": "business-trip-spot-check",
+      "predicted": "angenommen",
+      "correct": true,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "dienstreiseantrag-03",
+      "result": "abgelehnt",
+      "begruendung": "Der Antrag ist unvollstaendig und in sich widerspruechlich. Erstens ist die Rueckreise nicht dokumentiert: beigefuegt ist nur die einfache Fahrt vom 09.03.2026, die Kostenposition Rueckfahrt ist offen und die Gesamtsumme steht nicht fest. Zweitens ist das Pflichtfeld 'Reise ins Ausland' nicht ausgefuellt, obwohl Lyon in Frankreich liegt - Auslandsreisen beduerfen stets der Genehmigung durch die Abteilung Personal und Organisation und einer A1-Bescheinigung. Drittens liegt das eingetragene 'Ende Dienstgeschaeft' (11.02.2026) vor dem Reisebeginn (09.03.2026); nach der Anmeldebestaetigung endet das Programm am 11.03.2026. Der Reiseverlauf ist damit nicht pruefbar; der Antrag ist zur Korrektur zurueckzugeben.",
+      "belege": [
+        "decision-trail/dienstreiseantrag-03/korrekturbedarf.pdf"
+      ],
+      "dataset": "business-trip-spot-check",
+      "predicted": "abgelehnt",
+      "correct": true,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "dienstreiseantrag-04",
+      "result": "angenommen",
+      "begruendung": "Das erhebliche dienstliche Interesse ist durch die Einladung als Keynote-Speaker belegt. Der private Anschlussaufenthalt umfasst mit 6 Tagen mehr als die zulaessigen 5 Arbeitstage, wird aber korrekt behandelt: beantragt sind ausschliesslich die dienstlich veranlassten Kosten (Hinflug, Rueckflug zum Vergleichstarif des dienstlichen Rueckreisetags, 3 Naechte zum Konferenztarif, Konferenzgebuehr, Transfer). Die 6 privaten Naechte (480 EUR) und der Flugmehrpreis (40 EUR) werden selbst getragen; der Preisvergleich des Reisebueros und die getrennten Hotelbuchungen belegen, dass der Universitaet keine Mehrkosten entstehen. Rechtzeitig eingereicht, A1 beantragt.",
+      "belege": [
+        "decision-trail/dienstreiseantrag-04/genehmigt.pdf"
+      ],
+      "dataset": "business-trip-spot-check",
+      "predicted": "angenommen",
+      "correct": true,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "dienstreiseantrag-05",
+      "result": "abgelehnt",
+      "begruendung": "Die beigefuegte Stipendienzusage deckt ausdruecklich Flug, Unterkunft und Konferenzregistrierung mit bis zu 1.200 USD ab und weist selbst auf das Verbot der Doppelfinanzierung hin. Der Antrag beantragt dennoch die volle Erstattung von 1.910 EUR aus dem Lehrstuhlbudget, ohne das Stipendium anzurechnen oder im Feld 'Finanzierung' zu erwaehnen. Dieselben Kostenpositionen koennen nicht zweimal erstattet werden. Der Antrag ist abzulehnen; einzureichen ist eine korrigierte Kostenaufstellung, die nur den durch das Stipendium nicht gedeckten Restbetrag ausweist.",
+      "belege": [
+        "decision-trail/dienstreiseantrag-05/email-rueckfrage-reisekostenstelle.pdf"
+      ],
+      "dataset": "business-trip-spot-check",
+      "predicted": "abgelehnt",
+      "correct": true,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "auslagenerstattung-01",
+      "result": "angenommen",
+      "begruendung": "Die englischsprachige Marktplatzrechnung FPM-NL-27-004471908 vom 12.02.2027 weist ein Fachbuch zu Methoden der stochastischen Optimalsteuerung \u00fcber insgesamt 94,40 \u20ac aus, verkauft von einem H\u00e4ndler in Utrecht. Rechnungsempf\u00e4nger ist der zentrale Rechnungseingang der Universit\u00e4t Wernstadt, geliefert wurde an den Lehrstuhl f\u00fcr Stochastische Systeme; der dienstliche Bezug ist damit belegt. Die Rechnung ist ein Originalbeleg mit genanntem Artikel, wie es der Abschnitt Kostenerstattung der Uni-Kassel-Seite \u201eFinanzbuchhaltung und Steuern\u201c verlangt, und die Betr\u00e4ge (7 % USt auf Buch und Versand) gehen auf. Die Erstattung ist zu gew\u00e4hren.",
+      "belege": [],
+      "dataset": "task-2-expense-reimbursement-spot-check",
+      "predicted": "abgelehnt",
+      "correct": false,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "auslagenerstattung-02",
+      "result": "angenommen",
+      "begruendung": "Der Kassenbon eines Baufachmarkts vom 13.03.2027 \u00fcber 19,86 \u20ac nennt nur Artikelnummern, keine Artikelbezeichnungen. Handschriftlich ist erg\u00e4nzt, dass Kabelbinder und Schrumpfschlauch f\u00fcr einen Versuchsstand im Labor gekauft wurden. Nach dem Abschnitt Kostenerstattung der Uni-Kassel-Seite \u201eFinanzbuchhaltung und Steuern\u201c ist genau das vorgesehen: bei kleinen, dringenden Anschaffungen soll ein Stichwort dazugeschrieben werden, wenn die Quittung keinen Artikel ausweist. Der Beleg ist vollst\u00e4ndig, die Erstattung ist zu gew\u00e4hren.",
+      "belege": [],
+      "dataset": "task-2-expense-reimbursement-spot-check",
+      "predicted": "angenommen",
+      "correct": true,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "auslagenerstattung-03",
+      "result": "abgelehnt",
+      "begruendung": "Die Rechnung KV-2027-118406 vom 20.04.2027 \u00fcber 229,00 \u20ac f\u00fcr kabellose Kopfh\u00f6rer ist an Marlene Oyelaran-Kutz unter ihrer Privatanschrift gerichtet, der Kontoauszug zeigt die Abbuchung vom Privatkonto. Weder Rechnung noch Kontoauszug nennen die Universit\u00e4t, eine Einrichtung oder einen dienstlichen Zweck. Nach dem Abschnitt Kostenerstattung der Uni-Kassel-Seite \u201eFinanzbuchhaltung und Steuern\u201c werden Beschaffungen \u00fcber das Beschaffungsprogramm bestellt, privat verauslagt werden d\u00fcrfen nur kleinere, zeitlich dringende Anschaffungen f\u00fcr die Universit\u00e4t. Ein dienstlicher Anlass ist hier nicht erkennbar, die Erstattung ist abzulehnen.",
+      "belege": [],
+      "dataset": "task-2-expense-reimbursement-spot-check",
+      "predicted": "abgelehnt",
+      "correct": true,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "auslagenerstattung-04",
+      "result": "abgelehnt",
+      "begruendung": "Eingereicht ist nur die Pro-forma-Rechnung PF-27-0934 vom 02.06.2027 \u00fcber 88,93 \u20ac f\u00fcr Pipettenspitzen und Handschuhe, mit dem Vermerk \u201ebezahlt\u201c vom 03.06.2027. Das Dokument erkl\u00e4rt selbst, keine Rechnung zu sein, und k\u00fcndigt die Rechnung mit der Lieferung an; diese Rechnung liegt nicht vor. Der Abschnitt Kostenerstattung der Uni-Kassel-Seite \u201eFinanzbuchhaltung und Steuern\u201c verlangt f\u00fcr die Erstattung die Originalquittung, ein Pro-forma-Dokument belegt weder Lieferung noch endg\u00fcltigen Rechnungsbetrag. Die Erstattung ist abzulehnen, bis die Rechnung nachgereicht ist.",
+      "belege": [],
+      "dataset": "task-2-expense-reimbursement-spot-check",
+      "predicted": "abgelehnt",
+      "correct": true,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "auslagenerstattung-05",
+      "result": "angenommen",
+      "begruendung": "Die Druckerei hat mit RE 27-0612 vom 24.05.2027 drei Poster mit Expresszuschlag \u00fcber 121,38 \u20ac und mit RE 27-0618 vom 25.05.2027 den Nachdruck zweier Poster und Handouts \u00fcber 83,32 \u20ac berechnet; die Gutschrift GS 27-0031 erstattet 69,02 \u20ac f\u00fcr die zwei Fehldrucke. Handschriftlich wird genau der Saldo von 135,68 \u20ac geltend gemacht, er ergibt sich aus 121,38 \u20ac + 83,32 \u20ac abz\u00fcglich 69,02 \u20ac. Alle Belege sind an den Lehrstuhl f\u00fcr Hochfrequenztechnik der Universit\u00e4t Wernstadt gerichtet und nennen die Artikel, wie es der Abschnitt Kostenerstattung der Uni-Kassel-Seite \u201eFinanzbuchhaltung und Steuern\u201c verlangt. Die Erstattung von 135,68 \u20ac ist zu gew\u00e4hren.",
+      "belege": [],
+      "dataset": "task-2-expense-reimbursement-spot-check",
+      "predicted": "angenommen",
+      "correct": true,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "auslagenerstattung-06",
+      "result": "abgelehnt",
+      "begruendung": "Beide eingereichten Rechnungen INV-IE-27-0048812 vom 06.07.2027 und INV-IE-27-0051377 vom 09.07.2027 geh\u00f6ren zur selben Bestellung 305-2290417-6618 vom 05.07.2027, mit denselben Positionen (drei Adapter, drei HDMI-Kabel), demselben Betrag von 103,44 \u20ac und derselben Kartenzahlung. Dieselbe Bestellung wird damit zweimal abgerechnet, die Belege summieren sich auf 206,88 \u20ac statt 103,44 \u20ac. Der Antrag ist wegen doppelter Abrechnung abzulehnen, erstattungsf\u00e4hig kann die Bestellung nur einmal sein.",
+      "belege": [],
+      "dataset": "task-2-expense-reimbursement-spot-check",
+      "predicted": "abgelehnt",
+      "correct": true,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "auslagenerstattung-07",
+      "result": "abgelehnt",
+      "begruendung": "Die Marktplatzrechnung WH-DE-27-7730165 vom 17.08.2027 \u00fcber 133,91 \u20ac ist an den Lehrstuhl f\u00fcr Regelungstechnik, Teek\u00fcche, gerichtet und enth\u00e4lt einen Wasserkocher, ein Becher-Set, drei Kilogramm Kaffee und Tee; zwei Positionen (8,99 \u20ac und 7,58 \u20ac) tragen statt einer Artikelbezeichnung einen Personennamen. Schon die lesbaren Positionen sind Verpflegung und Ausstattung f\u00fcr die Besch\u00e4ftigten: nach der Bewirtungskostenrichtlinie auf der Uni-Kassel-Seite \u201eFinanzbuchhaltung und Steuern\u201c sind Kaffee und Tee nur als Geste gegen\u00fcber G\u00e4sten der Universit\u00e4t Betriebsaufwand, Bewirtungen ohne externe Personen werden nicht erstattet, und nach dem Abschnitt Kostenerstattung der Uni-Kassel-Seite \u201eFinanzbuchhaltung und Steuern\u201c d\u00fcrfen nur kleinere, dringende Anschaffungen privat verauslagt werden. Die Erstattung ist abzulehnen, unabh\u00e4ngig davon, was die zwei unlesbaren Positionen waren.",
+      "belege": [],
+      "dataset": "task-2-expense-reimbursement-spot-check",
+      "predicted": "abgelehnt",
+      "correct": true,
+      "disputed": false,
+      "fallback": true
+    },
+    {
+      "antrag": "auslagenerstattung-08",
+      "result": "angenommen",
+      "begruendung": "Die englische Quittung IWSSA27-R-00318 vom 02.09.2027 belegt die Teilnahme von Dr. Oksana Wehrenpfennig an einem ausschlie\u00dflich online stattfindenden Workshop \u00fcber USD 175,00, die Kreditkartenabrechnung zeigt daf\u00fcr 160,37 \u20ac zuz\u00fcglich 2,81 \u20ac Auslandseinsatzentgelt. Eine Online-Konferenz ist keine Dienstreise, deshalb gibt es keinen Dienstreiseantrag; nach der Uni-Kassel-Seite \u201eDienstreisemanagement\u201c sind Teilnahmegeb\u00fchren f\u00fcr Online-Konferenzen genau als privat verauslagte Kosten bei der Finanzabteilung geltend zu machen. Die abweichende E-Mail-Adresse auf der Quittung \u00e4ndert nichts an der Zuordnung, Name und Karte stimmen \u00fcberein. Die Erstattung ist zu gew\u00e4hren.",
+      "belege": [],
+      "dataset": "task-2-expense-reimbursement-spot-check",
+      "predicted": "abgelehnt",
+      "correct": false,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "beschaffungsantrag-01",
+      "result": "angenommen",
+      "begruendung": "F\u00fcr das Oszilloskop liegen drei schriftliche Angebote vor (2.667,00 \u20ac, 2.745,00 \u20ac und 2.783,00 \u20ac netto), wie es die Beschaffungsseite der Universit\u00e4t Kassel ab 1.000 Euro verlangt, die f\u00fcr Wernstadt gilt. Der Beschaffungsantrag ZB-2027-0147 \u00fcbernimmt die Positionen des g\u00fcnstigsten Angebots der Oszillo-Kontor Vehrs GmbH, der Vergabevermerk vom 17.02.2027 nennt die Betr\u00e4ge richtig. Ein Rahmenvertrag besteht f\u00fcr Messger\u00e4te nicht, die Kostenstellenbevollm\u00e4chtigte hat beauftragt. Der Antrag wird angenommen.",
+      "belege": [
+        "decision-trail/beschaffungsantrag-01/bestellfreigabe.pdf"
+      ],
+      "dataset": "task-2-procurement-spot-check",
+      "predicted": "angenommen",
+      "correct": true,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "beschaffungsantrag-02",
+      "result": "angenommen",
+      "begruendung": "Die Bestellung per E-Mail vom 08.03.2027 st\u00fctzt sich auf ein einziges Angebot des L\u00f6thauses Dannwolf \u00fcber 673,00 \u20ac netto (800,87 \u20ac brutto). Nach der Seite der Universit\u00e4t Kassel zum nachhaltigen Catering (Verweis auf die Beschaffungsordnung) entf\u00e4llt die Pflicht zu drei Vergleichsangeboten unter 1.000 Euro, da dann eine Direktvergabe m\u00f6glich ist. L\u00f6tstationen sind kein Rahmenvertragsprodukt, und die Kostenstellenbevollm\u00e4chtigte hat in Kopie beauftragt. Der Antrag wird angenommen.",
+      "belege": [
+        "decision-trail/beschaffungsantrag-02/bestellfreigabe.pdf"
+      ],
+      "dataset": "task-2-procurement-spot-check",
+      "predicted": "angenommen",
+      "correct": true,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "beschaffungsantrag-03",
+      "result": "abgelehnt",
+      "begruendung": "Die Sammelbestellung vom 15.04.2027 umfasst neun Positionen \u00fcber zusammen 926,93 \u20ac brutto, darunter als Position 9 zwei 27-Zoll-Monitore aus dem Webshop bildschirmlager-vogtland.de. Nach der Seite Rahmenvertr\u00e4ge der Universit\u00e4t Kassel besteht ein Rahmenvertrag f\u00fcr PCs, Notebooks und Monitore, und Produkte mit Rahmenvertrag sind laut Beschaffungsseite ausschlie\u00dflich beim Rahmenvertragspartner zu bestellen. Die geringe Summe \u00e4ndert daran nichts, da die Direktvergabe diese Bindung nicht aufhebt. Der Antrag wird abgelehnt.",
+      "belege": [
+        "decision-trail/beschaffungsantrag-03/email-rueckfrage-beschaffung.pdf"
+      ],
+      "dataset": "task-2-procurement-spot-check",
+      "predicted": "angenommen",
+      "correct": false,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "beschaffungsantrag-04",
+      "result": "abgelehnt",
+      "begruendung": "Im Beschaffungsantrag ZB-2027-0312 ergeben die beiden Positionen (3 Netzger\u00e4te zu je 740,00 \u20ac und 3 Schnittstellenmodule zu je 60,00 \u20ac) zusammen 2.400,00 \u20ac netto, ebenso das Angebot HB-270512 und der Vergabevermerk. Der Antrag nennt als Summe netto aber 3.384,00 \u20ac, also 41 % mehr. Die Abweichung von 984,00 \u20ac liegt weit \u00fcber der Wesentlichkeitsgrenze, sodass unklar ist, welcher Betrag beauftragt wurde. Der Antrag wird abgelehnt.",
+      "belege": [
+        "decision-trail/beschaffungsantrag-04/email-rueckfrage-beschaffung.pdf"
+      ],
+      "dataset": "task-2-procurement-spot-check",
+      "predicted": "abgelehnt",
+      "correct": true,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "beschaffungsantrag-05",
+      "result": "angenommen",
+      "begruendung": "Der Antrag ZB-2027-0388 \u00fcber 2.971,80 \u20ac netto legt keine Vergleichsangebote vor. Alle drei Artikel (Notebooks, Monitore, Dockingstationen) stammen laut Warenkorb WK-0027-18834 aus dem WPS-Katalog des Rahmenvertrags IT-Arbeitsplatzger\u00e4te, und die Positionen stimmen mit dem Antrag \u00fcberein. Nach den Seiten Beschaffung und Rahmenvertr\u00e4ge der Universit\u00e4t Kassel entf\u00e4llt bei Rahmenvertragspartnern das Einholen von drei Angeboten, Rahmenvertragsprodukte sind sogar dort zu bestellen. Der Antrag wird angenommen.",
+      "belege": [
+        "decision-trail/beschaffungsantrag-05/bestellfreigabe.pdf"
+      ],
+      "dataset": "task-2-procurement-spot-check",
+      "predicted": "angenommen",
+      "correct": true,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "beschaffungsantrag-06",
+      "result": "abgelehnt",
+      "begruendung": "Der Antrag ZB-2027-0421 \u00fcber 2.670,00 \u20ac netto nennt zwei eingeholte Angebote, und auch der Vergabevermerk vom 23.06.2027 wertet nur die Angebote IW-6620 und S-27-1187. Nach der Beschaffungsseite der Universit\u00e4t Kassel sind grunds\u00e4tzlich drei Angebote einzuholen, eine Direktvergabe ist nur unter 1.000 Euro m\u00f6glich. Waage und Ultraschallbad sind kein Rahmenvertragsprodukt, eine Ausnahme greift also nicht. Der Antrag wird abgelehnt.",
+      "belege": [
+        "decision-trail/beschaffungsantrag-06/email-rueckfrage-beschaffung.pdf"
+      ],
+      "dataset": "task-2-procurement-spot-check",
+      "predicted": "abgelehnt",
+      "correct": true,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "beschaffungsantrag-07",
+      "result": "abgelehnt",
+      "begruendung": "Das Angebot M-5531 der Infrarot-Technik Mergenthal KG lautet \u00fcber 2.350,00 \u20ac netto, der Vergabevermerk V-27-0318 f\u00fchrt es aber mit 3.243,00 \u20ac, also 38 % zu hoch. Mit dem richtigen Betrag ist Mergenthal g\u00fcnstiger als die bezuschlagte Thermoskop Ruhland GmbH mit 2.600,00 \u20ac, die Wertung des Vermerks und die Lieferantenwahl im Antrag ZB-2027-0536 beruhen damit auf einem falschen Wert. Die Abweichung von 893,00 \u20ac ist wesentlich. Der Antrag wird abgelehnt.",
+      "belege": [
+        "decision-trail/beschaffungsantrag-07/email-rueckfrage-beschaffung.pdf"
+      ],
+      "dataset": "task-2-procurement-spot-check",
+      "predicted": "abgelehnt",
+      "correct": true,
+      "disputed": false,
+      "fallback": false
+    },
+    {
+      "antrag": "beschaffungsantrag-08",
+      "result": "angenommen",
+      "begruendung": "Die Bestellung vom 13.09.2027 legte zun\u00e4chst nur das Angebot HL-27-2209 \u00fcber 2.264,00 \u20ac netto vor; auf die R\u00fcckfrage des Einkaufs vom 15.09.2027 reichte die Antragstellerin am 20.09.2027 zwei weitere Angebote \u00fcber 2.418,00 \u20ac und 2.511,00 \u20ac netto nach. Das gew\u00e4hlte Angebot ist das g\u00fcnstigste. Die beiden Teilrechnungen RE-27-10418 und RE-27-10877 ergeben zusammen 2.694,16 \u20ac brutto, genau die Angebotssumme, und tragen den Stempel sachlich richtig. Die Unterlagen sind vollst\u00e4ndig und widerspruchsfrei, der Antrag wird angenommen.",
+      "belege": [
+        "decision-trail/beschaffungsantrag-08/bestellfreigabe.pdf"
+      ],
+      "dataset": "task-2-procurement-spot-check",
+      "predicted": "angenommen",
+      "correct": true,
+      "disputed": false,
+      "fallback": false
+    }
+  ],
+  "published_peer_scores": {
+    "Marc": 29,
+    "Team": 25,
+    "Rajesh": 20
+  }
+}

@@ -1,0 +1,242 @@
+[
+  {
+    "case_id": "auslagenerstattung-05",
+    "event_id": "evt-0540",
+    "parent_event_id": "evt-0076",
+    "timestamp": "2026-10-18T14:30:34.851+00:00",
+    "event_type": "model_call",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": {
+      "prompt": "Pr\u00fcfe ausschlie\u00dflich den Auslagenerstattungsantrag auslagenerstattung-05 anhand des folgenden vollst\u00e4ndigen, bereits extrahierten Belegpakets. Triff jetzt eine eindeutige Entscheidung und fordere kei\u2026"
+    },
+    "output": null,
+    "status": "error",
+    "error": "Model returned no final content (finish_reason='length', reasoning_characters=0). For reasoning models such as gpt-oss20, increase --max-output-tokens or lower OPENAI_REASONING_EFFORT."
+  },
+  {
+    "case_id": "auslagenerstattung-05",
+    "event_id": "evt-0541",
+    "parent_event_id": "evt-0540",
+    "timestamp": "2026-10-18T14:30:34.853+00:00",
+    "event_type": "model_call",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": {
+      "prompt": "Pr\u00fcfe ausschlie\u00dflich den Auslagenerstattungsantrag auslagenerstattung-05 anhand des folgenden vollst\u00e4ndigen, bereits extrahierten Belegpakets. Triff jetzt eine eindeutige Entscheidung und fordere kei\u2026"
+    },
+    "output": null,
+    "status": "error",
+    "error": "Error: wrong content:Die vorherige Antwort war leer oder abgeschnitten. Antworte jetzt kurz mit dem vollst\u00e4ndigen JSON; begruendung maximal 100 W\u00f6rter."
+  },
+  {
+    "case_id": "auslagenerstattung-05",
+    "event_id": "evt-0542",
+    "parent_event_id": "evt-0541",
+    "timestamp": "2026-10-18T14:30:34.854+00:00",
+    "event_type": "error",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": null,
+    "output": null,
+    "status": "error",
+    "error": "Error: wrong content:Die vorherige Antwort war leer oder abgeschnitten. Antworte jetzt kurz mit dem vollst\u00e4ndigen JSON; begruendung maximal 100 W\u00f6rter."
+  },
+  {
+    "case_id": "auslagenerstattung-05",
+    "event_id": "evt-0543",
+    "parent_event_id": "evt-0542",
+    "timestamp": "2026-10-18T14:30:34.854+00:00",
+    "event_type": "decision",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": null,
+    "output": {
+      "antrag": "auslagenerstattung-05",
+      "result": "abgelehnt",
+      "begruendung": "Modellfehler; keine gepr\u00fcfte Entscheidung: Error: wrong content:Die vorherige Antwort war leer oder abgeschnitten. Antworte jetzt kurz mit dem vollst\u00e4ndigen JSON; begruendung maximal 100 W\u00f6rter."
+    },
+    "status": "error",
+    "error": "Error: wrong content:Die vorherige Antwort war leer oder abgeschnitten. Antworte jetzt kurz mit dem vollst\u00e4ndigen JSON; begruendung maximal 100 W\u00f6rter."
+  },
+  {
+    "case_id": "auslagenerstattung-08",
+    "event_id": "evt-0548",
+    "parent_event_id": "evt-0121",
+    "timestamp": "2026-10-18T14:30:51.457+00:00",
+    "event_type": "model_call",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": {
+      "prompt": "Pr\u00fcfe ausschlie\u00dflich den Auslagenerstattungsantrag auslagenerstattung-08 anhand des folgenden vollst\u00e4ndigen, bereits extrahierten Belegpakets. Triff jetzt eine eindeutige Entscheidung und fordere kei\u2026"
+    },
+    "output": null,
+    "status": "error",
+    "error": "Model returned no final content (finish_reason='length', reasoning_characters=0). For reasoning models such as gpt-oss20, increase --max-output-tokens or lower OPENAI_REASONING_EFFORT."
+  },
+  {
+    "case_id": "auslagenerstattung-08",
+    "event_id": "evt-0549",
+    "parent_event_id": "evt-0548",
+    "timestamp": "2026-10-18T14:30:51.459+00:00",
+    "event_type": "model_call",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": {
+      "prompt": "Pr\u00fcfe ausschlie\u00dflich den Auslagenerstattungsantrag auslagenerstattung-08 anhand des folgenden vollst\u00e4ndigen, bereits extrahierten Belegpakets. Triff jetzt eine eindeutige Entscheidung und fordere kei\u2026"
+    },
+    "output": null,
+    "status": "error",
+    "error": "Error: wrong content:Die vorherige Antwort war leer oder abgeschnitten. Antworte jetzt kurz mit dem vollst\u00e4ndigen JSON; begruendung maximal 100 W\u00f6rter."
+  },
+  {
+    "case_id": "auslagenerstattung-08",
+    "event_id": "evt-0550",
+    "parent_event_id": "evt-0549",
+    "timestamp": "2026-10-18T14:30:51.460+00:00",
+    "event_type": "error",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": null,
+    "output": null,
+    "status": "error",
+    "error": "Error: wrong content:Die vorherige Antwort war leer oder abgeschnitten. Antworte jetzt kurz mit dem vollst\u00e4ndigen JSON; begruendung maximal 100 W\u00f6rter."
+  },
+  {
+    "case_id": "auslagenerstattung-08",
+    "event_id": "evt-0551",
+    "parent_event_id": "evt-0550",
+    "timestamp": "2026-10-18T14:30:51.460+00:00",
+    "event_type": "decision",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": null,
+    "output": {
+      "antrag": "auslagenerstattung-08",
+      "result": "abgelehnt",
+      "begruendung": "Modellfehler; keine gepr\u00fcfte Entscheidung: Error: wrong content:Die vorherige Antwort war leer oder abgeschnitten. Antworte jetzt kurz mit dem vollst\u00e4ndigen JSON; begruendung maximal 100 W\u00f6rter."
+    },
+    "status": "error",
+    "error": "Error: wrong content:Die vorherige Antwort war leer oder abgeschnitten. Antworte jetzt kurz mit dem vollst\u00e4ndigen JSON; begruendung maximal 100 W\u00f6rter."
+  },
+  {
+    "case_id": "auslagenerstattung-11",
+    "event_id": "evt-0556",
+    "parent_event_id": "evt-0163",
+    "timestamp": "2026-10-18T14:31:12.944+00:00",
+    "event_type": "model_call",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": {
+      "prompt": "Pr\u00fcfe ausschlie\u00dflich den Auslagenerstattungsantrag auslagenerstattung-11 anhand des folgenden vollst\u00e4ndigen, bereits extrahierten Belegpakets. Triff jetzt eine eindeutige Entscheidung und fordere kei\u2026"
+    },
+    "output": null,
+    "status": "error",
+    "error": "Model returned no final content (finish_reason='length', reasoning_characters=0). For reasoning models such as gpt-oss20, increase --max-output-tokens or lower OPENAI_REASONING_EFFORT."
+  },
+  {
+    "case_id": "auslagenerstattung-11",
+    "event_id": "evt-0557",
+    "parent_event_id": "evt-0556",
+    "timestamp": "2026-10-18T14:31:12.947+00:00",
+    "event_type": "model_call",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": {
+      "prompt": "Pr\u00fcfe ausschlie\u00dflich den Auslagenerstattungsantrag auslagenerstattung-11 anhand des folgenden vollst\u00e4ndigen, bereits extrahierten Belegpakets. Triff jetzt eine eindeutige Entscheidung und fordere kei\u2026"
+    },
+    "output": null,
+    "status": "error",
+    "error": "Error: wrong content:Die vorherige Antwort war leer oder abgeschnitten. Antworte jetzt kurz mit dem vollst\u00e4ndigen JSON; begruendung maximal 100 W\u00f6rter."
+  },
+  {
+    "case_id": "auslagenerstattung-11",
+    "event_id": "evt-0558",
+    "parent_event_id": "evt-0557",
+    "timestamp": "2026-10-18T14:31:12.948+00:00",
+    "event_type": "error",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": null,
+    "output": null,
+    "status": "error",
+    "error": "Error: wrong content:Die vorherige Antwort war leer oder abgeschnitten. Antworte jetzt kurz mit dem vollst\u00e4ndigen JSON; begruendung maximal 100 W\u00f6rter."
+  },
+  {
+    "case_id": "auslagenerstattung-11",
+    "event_id": "evt-0559",
+    "parent_event_id": "evt-0558",
+    "timestamp": "2026-10-18T14:31:12.948+00:00",
+    "event_type": "decision",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": null,
+    "output": {
+      "antrag": "auslagenerstattung-11",
+      "result": "abgelehnt",
+      "begruendung": "Modellfehler; keine gepr\u00fcfte Entscheidung: Error: wrong content:Die vorherige Antwort war leer oder abgeschnitten. Antworte jetzt kurz mit dem vollst\u00e4ndigen JSON; begruendung maximal 100 W\u00f6rter."
+    },
+    "status": "error",
+    "error": "Error: wrong content:Die vorherige Antwort war leer oder abgeschnitten. Antworte jetzt kurz mit dem vollst\u00e4ndigen JSON; begruendung maximal 100 W\u00f6rter."
+  },
+  {
+    "case_id": "dienstreiseantrag-11",
+    "event_id": "evt-0606",
+    "parent_event_id": "evt-0518",
+    "timestamp": "2026-10-18T14:33:04.875+00:00",
+    "event_type": "model_call",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": {
+      "prompt": "Pr\u00fcfe ausschlie\u00dflich den Dienstreiseantrag dienstreiseantrag-11 anhand des folgenden vollst\u00e4ndigen, bereits extrahierten Belegpakets. Triff jetzt eine eindeutige Entscheidung und fordere keine weiter\u2026"
+    },
+    "output": null,
+    "status": "error",
+    "error": "Model returned no final content (finish_reason='length', reasoning_characters=0). For reasoning models such as gpt-oss20, increase --max-output-tokens or lower OPENAI_REASONING_EFFORT."
+  },
+  {
+    "case_id": "dienstreiseantrag-11",
+    "event_id": "evt-0607",
+    "parent_event_id": "evt-0606",
+    "timestamp": "2026-10-18T14:33:04.878+00:00",
+    "event_type": "model_call",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": {
+      "prompt": "Pr\u00fcfe ausschlie\u00dflich den Dienstreiseantrag dienstreiseantrag-11 anhand des folgenden vollst\u00e4ndigen, bereits extrahierten Belegpakets. Triff jetzt eine eindeutige Entscheidung und fordere keine weiter\u2026"
+    },
+    "output": null,
+    "status": "error",
+    "error": "Error: wrong content:Die vorherige Antwort war leer oder abgeschnitten. Antworte jetzt kurz mit dem vollst\u00e4ndigen JSON; begruendung maximal 100 W\u00f6rter."
+  },
+  {
+    "case_id": "dienstreiseantrag-11",
+    "event_id": "evt-0608",
+    "parent_event_id": "evt-0607",
+    "timestamp": "2026-10-18T14:33:04.879+00:00",
+    "event_type": "error",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": null,
+    "output": null,
+    "status": "error",
+    "error": "Error: wrong content:Die vorherige Antwort war leer oder abgeschnitten. Antworte jetzt kurz mit dem vollst\u00e4ndigen JSON; begruendung maximal 100 W\u00f6rter."
+  },
+  {
+    "case_id": "dienstreiseantrag-11",
+    "event_id": "evt-0609",
+    "parent_event_id": "evt-0608",
+    "timestamp": "2026-10-18T14:33:04.879+00:00",
+    "event_type": "decision",
+    "model": "openai/gpt-oss-20b",
+    "tool": null,
+    "input": null,
+    "output": {
+      "antrag": "dienstreiseantrag-11",
+      "result": "abgelehnt",
+      "begruendung": "Modellfehler; keine gepr\u00fcfte Entscheidung: Error: wrong content:Die vorherige Antwort war leer oder abgeschnitten. Antworte jetzt kurz mit dem vollst\u00e4ndigen JSON; begruendung maximal 100 W\u00f6rter."
+    },
+    "status": "error",
+    "error": "Error: wrong content:Die vorherige Antwort war leer oder abgeschnitten. Antworte jetzt kurz mit dem vollst\u00e4ndigen JSON; begruendung maximal 100 W\u00f6rter."
+  }
+]

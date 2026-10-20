@@ -1,0 +1,9 @@
+Hi team — I have preserved my stronger policy-v3 snapshot for GitHub review, using GPT-OSS-20B via OpenRouter/Groq.
+
+On the established 36-case synthetic set, v3 scored 30/36 (83.3%): travel 12/12, expenses 8/12, procurement 10/12. Our local team-solver comparison scored 29/36. However, mine had four fallback decisions: correct non-fallback decisions were 28/36 versus the team's 29/36, so this is not a reliability win.
+
+On the official public cases, v3 scored 18/21 (85.7%), including two correct fallbacks. All official output/trace validation passed with zero invalid trace lines; runtime errors remain.
+
+A later v4 scored 27/36 versus the team's 22/36 on my new author-labelled synthetic set, but fell to 16/21 on the public cases, so I have retained v3 for review. The new labels still need independent review. I cannot claim to outperform every peer or to have an error-free release.
+
+The upload package includes source, configuration, predictions, traces, evaluator results and API usage evidence, with no API key. It is prepared locally and has not yet been uploaded to GitHub.
