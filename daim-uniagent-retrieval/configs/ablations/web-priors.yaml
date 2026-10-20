@@ -1,0 +1,3 @@
+extends: ../lexical-best.yaml
+web:
+  priors: {enabled: true, min_content_chars: 200, penalty: 0.5}

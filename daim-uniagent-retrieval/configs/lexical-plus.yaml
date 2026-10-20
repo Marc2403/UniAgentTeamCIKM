@@ -1,0 +1,11 @@
+# Phase 2: lexical-best plus the collection-specific steps that helped.
+# law.* only acts on the law collection, web.* only on web collections.
+extends: lexical-best.yaml
+law:
+  abbreviations: true
+  paragraph_injection: true
+  versions: true
+  doctype_prior_weight: 0.0
+web:
+  dedup: {enabled: false}
+  priors: {enabled: false}

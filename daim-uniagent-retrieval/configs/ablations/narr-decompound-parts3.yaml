@@ -1,0 +1,4 @@
+# Allow shorter compound parts ("Amt", "Tag").
+extends: narr-decompound.yaml
+index:
+  decompound: {min_part_length: 3}

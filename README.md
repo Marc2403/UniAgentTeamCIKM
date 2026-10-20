@@ -10,6 +10,7 @@ Each folder is self-contained (own README, dependencies, `.gitignore`).
 | [`rajesh-uniagent-solver/`](rajesh-uniagent-solver/) | Rajesh | hull-v4: deterministic rules (T1, T2, E1, E3, P1) + six LLM yes/no labelers (L1–L6) |
 | [`gareth-uniagent-solver/`](gareth-uniagent-solver/) | Gareth | Deterministic PDF extraction, retrieval and numeric checks + LLM decision with review and repair attempt. Start with [`READ-ME-FIRST.md`](gareth-uniagent-solver/READ-ME-FIRST.md) |
 | [`team-uniagent-solver/`](team-uniagent-solver/) | Team | Combined system: Marc's pipeline as base plus the components that survived the ablation. Comparison: [`evaluation/EVALUATION.md`](evaluation/EVALUATION.md), ablations: [`ABLATIONS.md`](team-uniagent-solver/ABLATIONS.md) |
+| [`daim-uniagent-retrieval/`](daim-uniagent-retrieval/) | Marc M (@Marc2403) | Task 1 (Retrieval): PyTerrier lexical pipeline with collection-specific post-processing and LLM reranking of the top 30. Results: [`eval/results-combined.md`](daim-uniagent-retrieval/eval/results-combined.md) |
 
 ## Adding your MVP
 

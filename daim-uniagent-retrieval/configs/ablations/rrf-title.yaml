@@ -1,0 +1,8 @@
+# Body rankings plus a title/URL ranking.
+extends: q2-desc.yaml
+index: {url_tokens: true}
+retrieval:
+  rankers:
+    - {index: body, wmodel: DPH}
+    - {index: body, wmodel: BM25}
+    - {index: title, wmodel: BM25, weight: 0.5}

@@ -1,0 +1,13 @@
+# Best lexical configuration (Phase 1, = ablations/narr-decompound).
+# Mean nDCG@10 over DE/EN/Law spot-checks 0.835 vs. 0.664 for the DPH baseline.
+# Rejected: BM25 / DPH+BM25 fusion (worse on all three), PRF (Bo1, KL), passages,
+# title/URL fields (hurt DE), min_part_length 3 (helps Law, hurts DE).
+query:
+  query_weight: 2
+  description_weight: 1
+  narrative_weight: 1
+index:
+  decompound: {enabled: true}
+retrieval:
+  rankers:
+    - {index: body, wmodel: DPH}

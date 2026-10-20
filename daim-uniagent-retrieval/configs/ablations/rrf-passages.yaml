@@ -1,0 +1,5 @@
+extends: q2-desc.yaml
+retrieval:
+  rankers:
+    - {index: body, wmodel: DPH}
+    - {index: passages, wmodel: DPH}

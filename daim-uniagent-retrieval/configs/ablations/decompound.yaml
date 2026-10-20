@@ -1,0 +1,3 @@
+extends: q2-desc.yaml
+index:
+  decompound: {enabled: true}

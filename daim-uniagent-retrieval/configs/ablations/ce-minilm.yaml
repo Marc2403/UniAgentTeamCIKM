@@ -1,0 +1,2 @@
+extends: ../lexical-plus.yaml
+cross_encoder: {enabled: true, model: /models/mmarco-mMiniLMv2-L12-H384-v1, depth: 50}

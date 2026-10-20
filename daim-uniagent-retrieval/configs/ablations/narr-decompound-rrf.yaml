@@ -1,0 +1,5 @@
+extends: narr-decompound.yaml
+retrieval:
+  rankers:
+    - {index: body, wmodel: DPH}
+    - {index: body, wmodel: BM25}

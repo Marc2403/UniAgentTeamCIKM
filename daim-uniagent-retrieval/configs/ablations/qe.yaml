@@ -1,0 +1,6 @@
+extends: ../lexical-plus.yaml
+query_expansion: {enabled: true}
+retrieval:
+  rankers:
+    - {index: body, wmodel: DPH}
+    - {index: body, wmodel: DPH, query_variant: expanded}

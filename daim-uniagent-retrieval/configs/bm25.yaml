@@ -1,0 +1,4 @@
+# Reproduces the organisers' PyTerrier baseline (query field only, one BM25 ranking).
+retrieval:
+  rankers:
+    - {index: body, wmodel: BM25}

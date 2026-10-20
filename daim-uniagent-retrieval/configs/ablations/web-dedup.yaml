@@ -1,0 +1,3 @@
+extends: ../lexical-best.yaml
+web:
+  dedup: {enabled: true, threshold: 0.9}

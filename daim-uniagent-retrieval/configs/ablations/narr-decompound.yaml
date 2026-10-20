@@ -1,0 +1,3 @@
+extends: q2-desc-narr.yaml
+index:
+  decompound: {enabled: true}

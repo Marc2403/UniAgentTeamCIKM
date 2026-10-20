@@ -1,0 +1,2 @@
+extends: ../lexical-best.yaml
+law: {versions: true}
