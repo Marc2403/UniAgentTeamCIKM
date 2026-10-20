@@ -1,0 +1,245 @@
+{
+  "seed": 20261001,
+  "pairs": {
+    "P01": {
+      "topic": "law:spot:14",
+      "config": "lexical-plus",
+      "rank": 5,
+      "doc_id": "LARE210001133",
+      "judge_grade": 0,
+      "reranker_grade": 0
+    },
+    "P02": {
+      "topic": "en:dev:2002",
+      "config": "lexical-plus",
+      "rank": 8,
+      "doc_id": "b00dd409-bf8a-4916-ac9e-e66142c84fc8",
+      "judge_grade": 1,
+      "reranker_grade": 0
+    },
+    "P03": {
+      "topic": "en:spot:44",
+      "config": "lexical-plus",
+      "rank": 10,
+      "doc_id": "ed6ff114-ba91-47ee-9c83-be6a806af318",
+      "judge_grade": 1,
+      "reranker_grade": 0
+    },
+    "P04": {
+      "topic": "de:extra:1119",
+      "config": "lexical-plus",
+      "rank": 7,
+      "doc_id": "96fdb0d9-2fe1-4914-8fbf-b8935bda60e0",
+      "judge_grade": 0,
+      "reranker_grade": 0
+    },
+    "P05": {
+      "topic": "de:spot:25",
+      "config": "lexical-plus",
+      "rank": 10,
+      "doc_id": "8f78f05e-61f4-4f5f-ba79-35b18e2c4a0f",
+      "judge_grade": 0,
+      "reranker_grade": 0
+    },
+    "P06": {
+      "topic": "law:spot:2",
+      "config": "lexical-plus",
+      "rank": 6,
+      "doc_id": "jlr-NNLHE0000518BNN00000000002",
+      "judge_grade": 3,
+      "reranker_grade": 2
+    },
+    "P07": {
+      "topic": "de:spot:15",
+      "config": "llm-k30",
+      "rank": 10,
+      "doc_id": "e3e0d2df-72ab-4e0a-bff6-b042fea0794e",
+      "judge_grade": 3,
+      "reranker_grade": 3
+    },
+    "P08": {
+      "topic": "en:spot:29",
+      "config": "llm-k30",
+      "rank": 3,
+      "doc_id": "87b92995-5fab-4218-b655-debeb37de33c",
+      "judge_grade": 1,
+      "reranker_grade": 1
+    },
+    "P09": {
+      "topic": "en:dev:2011",
+      "config": "llm-k30",
+      "rank": 5,
+      "doc_id": "7288403d-1a41-45d3-ac67-bdac85080150",
+      "judge_grade": 1,
+      "reranker_grade": 3
+    },
+    "P10": {
+      "topic": "en:extra:2115",
+      "config": "lexical-plus",
+      "rank": 5,
+      "doc_id": "00e76142-0eb2-4ec1-865d-12b9877a42b5",
+      "judge_grade": 2,
+      "reranker_grade": 0
+    },
+    "P11": {
+      "topic": "en:spot:8",
+      "config": "llm-k30",
+      "rank": 8,
+      "doc_id": "d9513de3-b7ed-4498-89f6-38681781c166",
+      "judge_grade": 3,
+      "reranker_grade": 3
+    },
+    "P12": {
+      "topic": "law:extra:3109",
+      "config": "llm-k30",
+      "rank": 5,
+      "doc_id": "jlr-NNLHE0000518BNN00000000002",
+      "judge_grade": 0,
+      "reranker_grade": 1
+    },
+    "P13": {
+      "topic": "de:extra:1108",
+      "config": "llm-k30",
+      "rank": 2,
+      "doc_id": "f95f8c26-936c-4010-92e5-924189122414",
+      "judge_grade": 3,
+      "reranker_grade": 3
+    },
+    "P14": {
+      "topic": "de:extra:1109",
+      "config": "llm-k30",
+      "rank": 2,
+      "doc_id": "d2923d66-dfcf-4f86-8ef8-a2a1e6d3e806",
+      "judge_grade": 2,
+      "reranker_grade": 2
+    },
+    "P15": {
+      "topic": "en:dev:2025",
+      "config": "lexical-plus",
+      "rank": 10,
+      "doc_id": "78463c37-26e7-40a5-af13-e2f165afdac4",
+      "judge_grade": 0,
+      "reranker_grade": 0
+    },
+    "P16": {
+      "topic": "law:extra:3111",
+      "config": "lexical-plus",
+      "rank": 5,
+      "doc_id": "jlr-NNLHE000052EENN00000000005",
+      "judge_grade": 2,
+      "reranker_grade": 0
+    },
+    "P17": {
+      "topic": "law:dev:3025",
+      "config": "llm-k30",
+      "rank": 5,
+      "doc_id": "jlr-NNLHE00005189NN00000000022",
+      "judge_grade": 0,
+      "reranker_grade": 3
+    },
+    "P18": {
+      "topic": "law:spot:15",
+      "config": "llm-k30",
+      "rank": 8,
+      "doc_id": "jlr-NNLHE0000518BNN00000000020",
+      "judge_grade": 2,
+      "reranker_grade": 3
+    },
+    "P19": {
+      "topic": "de:dev:1002",
+      "config": "llm-k30",
+      "rank": 9,
+      "doc_id": "749c36d0-097f-4a87-8b94-228b43a232a5",
+      "judge_grade": 3,
+      "reranker_grade": 3
+    },
+    "P20": {
+      "topic": "en:extra:2108",
+      "config": "lexical-plus",
+      "rank": 8,
+      "doc_id": "68ce30fe-cb03-4f14-9ee6-c63f8b769c4f",
+      "judge_grade": 1,
+      "reranker_grade": 0
+    },
+    "P21": {
+      "topic": "de:dev:1026",
+      "config": "lexical-plus",
+      "rank": 6,
+      "doc_id": "f9a7f8dc-6362-46e6-83c6-0b0e85772e40",
+      "judge_grade": 3,
+      "reranker_grade": 2
+    },
+    "P22": {
+      "topic": "law:dev:3018",
+      "config": "llm-k30",
+      "rank": 4,
+      "doc_id": "LARE190026932",
+      "judge_grade": 2,
+      "reranker_grade": 3
+    },
+    "P23": {
+      "topic": "en:extra:2111",
+      "config": "llm-k30",
+      "rank": 7,
+      "doc_id": "77a5f051-fd23-4da0-b8a6-40bcd6cae478",
+      "judge_grade": 0,
+      "reranker_grade": 1
+    },
+    "P24": {
+      "topic": "law:extra:3108",
+      "config": "lexical-plus",
+      "rank": 6,
+      "doc_id": "LARE250000443",
+      "judge_grade": 3,
+      "reranker_grade": 0
+    },
+    "P25": {
+      "topic": "de:spot:37",
+      "config": "llm-k30",
+      "rank": 10,
+      "doc_id": "cff69d6a-89cb-48f6-8303-d990de44ec20",
+      "judge_grade": 1,
+      "reranker_grade": 3
+    },
+    "P26": {
+      "topic": "de:dev:1029",
+      "config": "lexical-plus",
+      "rank": 6,
+      "doc_id": "de113a39-7674-4bab-8192-2ecea9641081",
+      "judge_grade": 1,
+      "reranker_grade": 0
+    },
+    "P27": {
+      "topic": "en:dev:2005",
+      "config": "llm-k30",
+      "rank": 5,
+      "doc_id": "ff03499f-7754-4d62-adb5-a67ad3af8bad",
+      "judge_grade": 1,
+      "reranker_grade": 3
+    },
+    "P28": {
+      "topic": "law:spot:12",
+      "config": "llm-k30",
+      "rank": 10,
+      "doc_id": "jlr-NNLHE0000518BNN00000000001",
+      "judge_grade": 2,
+      "reranker_grade": 3
+    },
+    "P29": {
+      "topic": "de:extra:1114",
+      "config": "lexical-plus",
+      "rank": 9,
+      "doc_id": "f3a32e9b-499d-436b-a3b8-945842da1f50",
+      "judge_grade": 0,
+      "reranker_grade": 0
+    },
+    "P30": {
+      "topic": "law:dev:3016",
+      "config": "lexical-plus",
+      "rank": 5,
+      "doc_id": "jlr-NNLHE00005124NN00000000006",
+      "judge_grade": 2,
+      "reranker_grade": 1
+    }
+  }
+}

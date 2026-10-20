@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relevanz-Check</title>
+<style>
+  :root {
+    --bg: #f6f5f1; --card: #ffffff; --ink: #1f2328; --muted: #5d6470; --line: #d9d6cc;
+    --accent: #2f5d8a; --accent-ink: #ffffff; --chosen: #2f5d8a; --warn: #a3452c;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 980px; margin: 0 auto; padding: 20px 16px 120px; }
+  header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  h1 { font-size: 18px; margin: 0; }
+  .progress { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; margin-bottom: 18px; }
+  .bar > div { height: 100%; background: var(--accent); width: 0; transition: width .2s; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; margin-bottom: 14px; }
+  .label { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 10px 0 2px; }
+  .label:first-child { margin-top: 0; }
+  .query { font-size: 18px; font-weight: 600; }
+  .doc-title { font-size: 16px; font-weight: 600; }
+  .url { color: var(--muted); word-break: break-all; font-size: 13px; }
+  .text { white-space: pre-wrap; overflow-wrap: anywhere; margin-top: 10px; max-height: 60vh; overflow-y: auto; padding-right: 6px; }
+  .more { margin-top: 10px; }
+  .grades { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
+  .grade { text-align: left; border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 8px; padding: 10px 12px; cursor: pointer; font: inherit; }
+  .grade b { display: block; font-size: 18px; }
+  .grade[aria-pressed="true"] { background: var(--chosen); border-color: var(--chosen); color: var(--accent-ink); }
+  textarea { width: 100%; min-height: 64px; border: 1px solid var(--line); border-radius: 6px; padding: 8px; font: inherit; resize: vertical; }
+  nav { position: fixed; left: 0; right: 0; bottom: 0; background: var(--card); border-top: 1px solid var(--line); padding: 10px 16px; }
+  nav .inner { max-width: 980px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+  button.nav, button.export, .more { border: 1px solid var(--accent); background: var(--card); color: var(--accent); border-radius: 6px; padding: 8px 14px; cursor: pointer; font: inherit; }
+  button.export { background: var(--accent); color: var(--accent-ink); }
+  button:disabled { opacity: .4; cursor: default; }
+  .status { color: var(--muted); font-size: 13px; }
+  .missing { color: var(--warn); }
+  .hint { color: var(--muted); font-size: 13px; margin-top: 8px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Relevanz-Check</h1>
+    <span class="progress" id="progress"></span>
+  </header>
+  <div class="bar"><div id="bar"></div></div>
+
+  <section class="card">
+    <div class="label">Suchanfrage</div>
+    <div class="query" id="query"></div>
+    <div class="label">Beschreibung</div>
+    <div id="description"></div>
+    <div class="label">Hinweis (Narrative)</div>
+    <div id="narrative"></div>
+  </section>
+
+  <section class="card">
+    <div class="label">Dokument</div>
+    <div class="doc-title" id="title"></div>
+    <div class="url" id="url"></div>
+    <div class="text" id="text"></div>
+    <button class="more" id="more" type="button"></button>
+  </section>
+
+  <section class="card">
+    <div class="label">Deine Note</div>
+    <div class="grades" id="grades"></div>
+    <div class="label">Kommentar (optional)</div>
+    <textarea id="comment" placeholder="z. B. warum diese Note"></textarea>
+    <div class="hint">Tastatur: 0–3 vergibt die Note, ← / → blättert (nicht während du im Kommentarfeld schreibst).</div>
+  </section>
+</main>
+
+<nav>
+  <div class="inner">
+    <div>
+      <button class="nav" id="prev" type="button">← Zurück</button>
+      <button class="nav" id="next" type="button">Weiter →</button>
+    </div>
+    <span class="status" id="status"></span>
+    <button class="export" id="export" type="button">Ergebnisse exportieren</button>
+  </div>
+</nav>
+
+<script>
+const PAIRS = __PAIRS__;
+const PREVIEW_CHARS = 3000;
+const SCALE = [
+  [0, "hat nichts mit der Frage zu tun"],
+  [1, "passt zum Thema, beantwortet die Frage aber nicht"],
+  [2, "enthält eine Teilantwort, unklar oder zwischen anderem versteckt"],
+  [3, "beschäftigt sich direkt mit der Frage und enthält die Antwort"],
+];
+const STORAGE_KEY = "relevanz-check-v1";
+
+function loadState() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch (error) { return {}; }
+}
+const state = Object.assign({ index: 0, grades: {}, comments: {} }, loadState());
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (error) { /* private mode: keep in memory */ }
+}
+
+const el = (id) => document.getElementById(id);
+let expanded = false;
+
+const gradeButtons = SCALE.map(([value, text]) => {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "grade";
+  button.innerHTML = `<b>${value}</b>`;
+  button.append(text);
+  button.addEventListener("click", () => setGrade(value));
+  el("grades").append(button);
+  return button;
+});
+
+function setGrade(value) {
+  state.grades[PAIRS[state.index].id] = value;
+  saveState();
+  render();
+}
+
+function render() {
+  const pair = PAIRS[state.index];
+  el("query").textContent = pair.query;
+  el("description").textContent = pair.description || "–";
+  el("narrative").textContent = pair.narrative || "–";
+  el("title").textContent = pair.title || "(ohne Titel)";
+  el("url").textContent = pair.url;
+  const long = pair.text.length > PREVIEW_CHARS;
+  el("text").textContent = long && !expanded ? pair.text.slice(0, PREVIEW_CHARS) + " …" : pair.text;
+  el("more").hidden = !long;
+  el("more").textContent = expanded ? "Text kürzen" : "ganzen Text anzeigen";
+  const grade = state.grades[pair.id];
+  gradeButtons.forEach((button, value) => button.setAttribute("aria-pressed", String(grade === value)));
+  el("comment").value = state.comments[pair.id] || "";
+  const graded = PAIRS.filter((p) => p.id in state.grades).length;
+  el("progress").textContent = `${state.index + 1}/${PAIRS.length}`;
+  el("bar").style.width = `${(100 * graded) / PAIRS.length}%`;
+  el("status").textContent = `${graded} von ${PAIRS.length} bewertet`;
+  el("status").classList.toggle("missing", graded < PAIRS.length);
+  el("prev").disabled = state.index === 0;
+  el("next").disabled = state.index === PAIRS.length - 1;
+}
+
+function go(step) {
+  const target = state.index + step;
+  if (target < 0 || target >= PAIRS.length) return;
+  state.index = target;
+  expanded = false;
+  saveState();
+  render();
+  window.scrollTo(0, 0);
+}
+
+el("prev").addEventListener("click", () => go(-1));
+el("next").addEventListener("click", () => go(1));
+el("more").addEventListener("click", () => { expanded = !expanded; render(); });
+el("comment").addEventListener("input", (event) => {
+  state.comments[PAIRS[state.index].id] = event.target.value;
+  saveState();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.target === el("comment")) return;
+  if (["0", "1", "2", "3"].includes(event.key)) setGrade(Number(event.key));
+  if (event.key === "ArrowRight") go(1);
+  if (event.key === "ArrowLeft") go(-1);
+});
+
+el("export").addEventListener("click", () => {
+  const missing = PAIRS.filter((p) => !(p.id in state.grades)).map((p) => p.id);
+  if (missing.length) {
+    el("status").textContent = `Noch ohne Note: ${missing.join(", ")} – Export enthält nur die bewerteten Paare.`;
+  }
+  const result = {
+    exported: new Date().toISOString(),
+    grades: PAIRS.filter((p) => p.id in state.grades).map((p) => ({
+      pair_id: p.id,
+      grade: state.grades[p.id],
+      comment: state.comments[p.id] || "",
+    })),
+  };
+  const blob = new Blob([JSON.stringify(result, null, 2)], { type: "application/json" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "manual_grades.json";
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+});
+
+state.index = Math.min(state.index, PAIRS.length - 1);
+render();
+</script>
+</body>
+</html>
