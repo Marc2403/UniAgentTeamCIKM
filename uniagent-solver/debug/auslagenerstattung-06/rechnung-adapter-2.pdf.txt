@@ -1,0 +1,24 @@
+Billing and delivery address
+Dr. Aurelio Stenzhorn
+c/o Universität Wernstadt
+Fachbereich 71 Elektrotechnik und Informatik
+Seminarraum B 0.14, Am Lindenhang 40
+35291 Wernstadt, Germany
+Brackwater Components Ltd
+Unit 7, Kilnamanagh Business Park
+Cork T12 XK40, Ireland
+VAT IE 3619048QH
+orders@brackwater-components.ie
+Invoice number: INV-IE-27-0051377
+Invoice date: 09.07.2027
+Order number: 305-2290417-6618
+Order date: 05.07.2027
+Invoice
+Description Qty VAT Net Gross
+USB-C to HDMI adapter, 4K 60 Hz, aluminium 3 19 % €63.00 €74.97
+HDMI cable 2 m, braided 3 19 % €23.92 €28.47
+Subtotal (net) €86.92
+VAT 19 % €16.52
+Invoice total €103.44
+Distance sale to Germany, German VAT 19 % (EU one-stop shop).
+Paid by card ending 0927 on 05.07.2027. Thank you for your order.

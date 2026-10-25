@@ -1,0 +1,45 @@
+Dr. Mareike Voss
+Fachgebiet Verteilte Systeme
+Personalnummer 041907
+Universität Kassel
+Fachbereich 16
+Elektrotechnik / Informatik
+Wilhelmshöher Allee 71-73
+34121 Kassel
+Seite 1 von 1 Zuletzt geändert am: 2. September 2026
+Status: Antrag eingereicht
+Genehmigt von: ---
+ANTRAG AUF DIENSTREISEGENEHMIGUNG
+vor Antritt der Reise einzureichen · Reisenummer 3381029442
+Allgemeine Daten
+Reiseziel: Rotterdam, NIEDERLANDE
+Anlass: NordSys 2026 – International Symposium on Distributed Systems
+Grund der Reise: Vortrag des nach Peer-Review angenommenen Beitrags „Adaptive
+Replication under Partial Failure“
+Reise ins Ausland: [X] ja [ ] nein
+Verkehrsmittel: Bahn, 2. Klasse (An- und Abreisetag)
+Datum der Antragstellung: 02.09.2026
+Reiseverlauf
+Start: Montag, 9. November 2026, 06:30 Uhr (Abreise vom Wohnort)
+Ende: Donnerstag, 12. November 2026, 21:15 Uhr (Rückkehr zum Wohnort)
+Beginn Dienstgeschäft: 10.11.2026, 09:00 Uhr
+Ende Dienstgeschäft: 11.11.2026, 18:00 Uhr
+priv. Aufenthalt: keiner
+Arbeitstage: 4 (Anreise + 2 Konferenztage + Abreise)
+A1-Bescheinigung: beantragt am 02.09.2026 (Vorlauf > 8 Wochen)
+Voraussichtliche Kosten (Schätzung)
+Position Menge Betrag
+Konferenzregistrierung (Early Bird, Mitglied) 1 450,00 €
+Bahn Kassel–Rotterdam, Hin- und Rückfahrt 1 180,00 €
+Unterkunft, 3 Nächte à 75,00 € 3 225,00 €
+Verpflegungsmehraufwand (Pauschale NL) 1 60,00 €
+Summe (Schätzung) 915,00 €
+Finanzierung: Drittmittelprojekt SFB-1187 „Verteilte Resilienz“, Kostenstelle 4471-08
+(Reisemittel AP 2)
+Kurzbegründung
+Der Beitrag wurde nach Peer-Review angenommen (Annahmebestätigung liegt bei). Die Vorstellung auf der
+NordSys erhöht die Sichtbarkeit der Projektergebnisse und ermöglicht den fachlichen Austausch mit potenziellen
+Kooperationspartnern. Die Übernachtung erfolgt im Konferenzhotel; der Satz von 75,00 € liegt innerhalb der
+Höchstgrenze des Auslandsübernachtungsgeldes für die Niederlande.
+Datum: 02.09.2026 Unterschrift Antragsteller:in: Dr. Mareike Voss
+Erstellt durch ESS-Reisemanagement · Universität Kassel

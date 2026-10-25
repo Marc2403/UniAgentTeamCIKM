@@ -1,0 +1,12 @@
+{
+ "case_type": "procurement",
+ "scope": "other",
+ "documents": {
+  "angebot-1.pdf": "offer",
+  "angebot-2.pdf": "offer",
+  "angebot-3.pdf": "offer",
+  "email-korrespondenz.pdf": "application",
+  "rechnung-leuchten.pdf": "invoice",
+  "rechnung-stative.pdf": "invoice"
+ }
+}

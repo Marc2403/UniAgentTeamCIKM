@@ -1,0 +1,18 @@
+E-Mail – mareike.voss@uni-kassel.de https://outlook.office.example/mail/id/AAQkAE
+1 von 1 16.06.26, 15:42
+NordSys 2026 – Paper Acceptance Notification (#118)
+NordSys 2026 Program Chairs <program-chairs@nordsys2026.example>
+Fr 21.08.2026 23:41
+An: Mareike Voss <mareike.voss@uni-kassel.de>
+Dear Dr. Voss,
+we are pleased to inform you that your submission
+#118 – „Adaptive Replication under Partial Failure“
+has been accepted for presentation at NordSys 2026, the International Symposium on Distributed Systems, to be
+held in Rotterdam, the Netherlands, 10–11 November 2026.
+Your paper received three reviews with an average score of 2.0 (weak accept to accept). Please address the
+reviewers' comments in the camera-ready version, due 25 September 2026.
+At least one author is required to register and present the paper on site. Early-bird registration closes on 15
+September 2026 (450 EUR for members).
+Congratulations, and we look forward to seeing you in Rotterdam.
+Best regards,
+The NordSys 2026 Program Committee

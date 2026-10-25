@@ -1,0 +1,8 @@
+{
+ "case_type": "procurement",
+ "scope": "kassel",
+ "documents": {
+  "angebot-1.pdf": "offer",
+  "email-beschaffungsantrag.pdf": "application"
+ }
+}

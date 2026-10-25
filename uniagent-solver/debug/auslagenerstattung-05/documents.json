@@ -1,0 +1,8 @@
+{
+ "case_type": "expense",
+ "scope": "kassel",
+ "documents": {
+  "gutschrift-druckerei.pdf": "credit_note",
+  "rechnung-druckerei.pdf": "invoice"
+ }
+}

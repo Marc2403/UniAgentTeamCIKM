@@ -1,0 +1,69 @@
+Found 8 case(s) to resolve: auslagenerstattung-01, auslagenerstattung-02, auslagenerstattung-03, auslagenerstattung-04, auslagenerstattung-05, auslagenerstattung-06, auslagenerstattung-07, auslagenerstattung-08
+Building 3 retrieval tool(s): hessian-law-de, university-kassel-public-de, university-kassel-public-en
+[1/3] Building retrieval tool for 'hessian-law-de'...
+Java started (triggered by TerrierIndexer.__init__) and loaded: pyterrier.java.colab, pyterrier.java, pyterrier.java.24, pyterrier.terrier.java [version=5.11 (build: craig.macdonald 2025-01-13 21:29), helper_version=0.0.8]
+[1/3] Indexed 2829 document(s) from 'hessian-law-de' (de) in 22.0s.
+[2/3] Building retrieval tool for 'university-kassel-public-de'...
+20:12:55.079 [ForkJoinPool-2-worker-3] WARN org.terrier.structures.indexing.Indexer -- Adding an empty document to the index (51b2f6e4-535f-4bff-ab80-8713115ee99e) - further warnings are suppressed
+20:13:15.905 [ForkJoinPool-2-worker-3] WARN org.terrier.structures.indexing.Indexer -- Indexed 8 empty documents
+[2/3] Indexed 30983 document(s) from 'university-kassel-public-de' (de) in 28.3s.
+[3/3] Building retrieval tool for 'university-kassel-public-en'...
+20:13:23.318 [ForkJoinPool-3-worker-3] WARN org.terrier.structures.indexing.Indexer -- Adding an empty document to the index (e23a4912-7e81-413e-bb3c-de9fb5e9a79d) - further warnings are suppressed
+20:13:45.470 [ForkJoinPool-3-worker-3] WARN org.terrier.structures.indexing.Indexer -- Indexed 2 empty documents
+[3/3] Indexed 24171 document(s) from 'university-kassel-public-en' (en) in 29.5s.
+Finished building all 3 retrieval tool(s): retrieve_hessian_law_de, retrieve_university_kassel_public_de, retrieve_university_kassel_public_en
+Retrieving relevant documents for every case...
+  auslagenerstattung-01: retrieved 41 unique hit(s) across 3 corpus/corpora in 3 retrieval iteration(s).
+  auslagenerstattung-01: 5 key aspect(s) found via retrieval:
+    - Invoice must include University VAT ID (DE 113057055) [university-kassel-public-en#f9abf575-ddbe-453c-bb32-551fb768cf5a]: Invoices from publishers from EU countries must show the VAT no. of the University of Kassel, which is DE 113057055, so that no local VAT is charged. The University's finance department will add the German VAT to all foreign invoices and pay it directly to the tax authorities.
+    - Invoice must be addressed to the university (central invoice system) [university-kassel-public-en#cbda7996-464b-49f2-8bb9-c5c0c83cc1d7]: We can also settle invoices that have been sent to you personally and not to the central invoice system for the time being. If this is the case, please forward the invoice together with your application.
+    - Invoice must be for an eligible monograph book from an EU publisher [university-kassel-public-en#f9abf575-ddbe-453c-bb32-551fb768cf5a]: The Open Access Monographs policy covers monographs and requires that the publisher be from an EU country. The invoice shows a book published by Kestrel Academic Books B.V. from the Netherlands, an EU member state.
+    - Invoice must be split if costs are shared with the library [university-kassel-public-en#f9abf575-ddbe-453c-bb32-551fb768cf5a]: If the publication costs are to be split between your institute and the library according to the agreement, a joint invoice is sufficient, which will then be split between the respective cost centers within the university.
+    - Invoice must be forwarded if sent personally [university-kassel-public-en#cbda7996-464b-49f2-8bb9-c5c0c83cc1d7]: If the invoice has been sent to you personally, forward the invoice together with your application.
+  auslagenerstattung-02: retrieved 40 unique hit(s) across 3 corpus/corpora in 3 retrieval iteration(s).
+  auslagenerstattung-02: 2 key aspect(s) found via retrieval:
+    - Originality and completeness of receipt [university-kassel-public-de#32bc169e-4d0b-4931-9b72-bf425ec7311b]: The reimbursement policy requires that all expense claims be supported by original receipts, which must be attached in a clear, numbered, and legible format. The receipt in the application is an original document and includes a tax line, fulfilling the requirement for a complete, original receipt.
+    - Tax inclusion on receipt [university-kassel-public-de#32bc169e-4d0b-4931-9b72-bf425ec7311b]: The receipt shows a VAT line (MWST 19% NETTO 16,69 MWST 3,17), indicating that the tax is properly documented. The policy for expense reimbursement generally requires that tax be shown on the receipt to allow for correct accounting and tax reporting.
+  auslagenerstattung-03: retrieved 28 unique hit(s) across 3 corpus/corpora in 2 retrieval iteration(s).
+  auslagenerstattung-03: 4 key aspect(s) found via retrieval:
+    - Rechnung muss vorliegen und verifizierbar sein [hessian-law-de#LARE190034353]: Die vorgelegten Rechnungen müssen eindeutig belegen, dass die Geräte gekauft und geliefert wurden; ohne solche Belege kann die Auslagenerstattung nicht nachvollzogen werden.
+    - Zahlungsnachweis muss vorliegen [hessian-law-de#LARE250000712]: Für die Auslagenerstattung ist ein Zahlungsnachweis erforderlich; die Beweiserhebung über die Zahlung ist entscheidend für die Anerkennung der Auslage.
+    - Rechnungsadresse muss korrekt sein [university-kassel-public-de#a930b201-d308-4473-9c5a-f423d888c81b]: Rechnungsadressen sind zentral in den Bestellformularen hinterlegt; die Rechnung muss an die korrekte Adresse des Lieferanten gerichtet sein, um die Auslage zu legitimieren.
+    - Rechnungsdatum und Rechnungsnummer müssen vorhanden sein [hessian-law-de#LARE240001223]: Eine Rechnung muss ein Datum und eine eindeutige Rechnungsnummer enthalten, um nachvollziehbar und prüfbar zu sein.
+  auslagenerstattung-04: retrieved 35 unique hit(s) across 3 corpus/corpora in 3 retrieval iteration(s).
+  auslagenerstattung-04: 3 key aspect(s) found via retrieval:
+    - Finanzierungsquelle [university-kassel-public-de#74ae8556-feb0-4b84-a70e-9566acb8360b]: Bei der Verausgabung von universitären Mitteln sind die Grundsätze der Wirtschaftlichkeit und Sparsamkeit der Landeshaushaltsordnung (§7 LHO) zu beachten. Die Finanzierung muss aus Drittmitteln erfolgen. Stehen keine Drittmittel zur Verfügung, können ausnahmsweise Landesmittel verwendet werden, wenn diese im Rahmen der internen Mittelverteilung oder per Präsidiumsbeschluss hierfür vorgesehen sind.
+    - Projektbezug [university-kassel-public-de#74ae8556-feb0-4b84-a70e-9566acb8360b]: Sollen die Kosten aus 6‑er und 7‑er Aufträgen beglichen werden, muss der Projektbezug ausreichend dargelegt werden.
+    - Rechnungsart [university-kassel-public-de#74ae8556-feb0-4b84-a70e-9566acb8360b]: Dieses Dokument ist keine Rechnung im umsatzsteuerlichen Sinn. Die Rechnung erhalten Sie mit der Lieferung.
+  auslagenerstattung-05: retrieved 0 unique hit(s) across 3 corpus/corpora in 0 retrieval iteration(s).
+  auslagenerstattung-05: 0 key aspect(s) found via retrieval:
+  auslagenerstattung-06: retrieved 0 unique hit(s) across 3 corpus/corpora in 0 retrieval iteration(s).
+  auslagenerstattung-06: 0 key aspect(s) found via retrieval:
+  auslagenerstattung-07: retrieved 39 unique hit(s) across 3 corpus/corpora in 3 retrieval iteration(s).
+  auslagenerstattung-07: 7 key aspect(s) found via retrieval:
+    - Budget and Documentation [university-kassel-public-de#74ae8556-feb0-4b84-a70e-9566acb8360b]: Bei der Verausgabung von universitären Mitteln sind die Grundsätze der Wirtschaftlichkeit und Sparsamkeit der Landeshaushaltsordnung (§7 LHO) zu beachten.
+    - Catering Costs and Third-Party Funding [university-kassel-public-de#74ae8556-feb0-4b84-a70e-9566acb8360b]: Bewirtungskosten werden nur erstattet, wenn bei der Veranstaltung ein angemessenes Verhältnis von externen und internen Teilnehmern gegeben ist. Die Finanzierung muss aus Drittmitteln erfolgen.
+    - Travel Costs per Hessian Reisekostengesetz [hessian-law-de#jlr-NNLHE0000506ENN00000000015]: Reisekosten nach Maßgabe des Hessischen Reisekostengesetzes vom 9. Oktober 2009 (GVBl. I S. 397), zuletzt geändert durch Gesetz vom 30. Juni 2017 (GVBl. S. 114), erstattet.
+    - Other Expenses via Pauschalbetrag [hessian-law-de#jlr-NNLHE0000506ENN00000000015]: Für sonstige Auslagen und Zeitaufwand erhält es einen Pauschalbetrag, dessen Höhe die beteiligten Organisationen gemeinsam festlegen.
+    - Invoice Submission and Physical Copies [hessian-law-de#LARE190003487]: Rechnungen online eingereicht wurden – ... zugehörige physische Belege ...
+    - Payment Proof Requirement [hessian-law-de#LARE190003487]: Rechnungsstellungs- und den sich anschließenden Zahlungsprozess
+    - Approval and Project Scope [university-kassel-public-de#74ae8556-feb0-4b84-a70e-9566acb8360b]: Sollen die Kosten aus 6-er und 7-er Aufträgen beglichen werden, muss der Projektbezug ausreichend dargelegt werden. Interne Mittelverteilung oder per Präsidiumsbeschluss.
+  auslagenerstattung-08: retrieved 45 unique hit(s) across 3 corpus/corpora in 3 retrieval iteration(s).
+  auslagenerstattung-08: 6 key aspect(s) found via retrieval:
+    - Event qualifies as scientific activity [university-kassel-public-en#df3d48c0-a179-40b7-af4d-e8467a3db8c9]: The receipt identifies the event as an "International Workshop on Sparse Sensor Arrays", a scientific workshop, and the participant is a university employee.
+    - No hospitality costs incurred [university-kassel-public-de#74ae8556-feb0-4b84-a70e-9566acb8360b]: The event is online-only; the receipt lists only participation fees, no hospitality items, aligning with the policy that hospitality costs are not reimbursed for online events.
+    - Receipt and proof of payment required [university-kassel-public-de#32bc169e-4d0b-4931-9b72-bf425ec7311b]: The policy requires a copy of the receipt and payment proof for reimbursement.
+    - Approval of expense necessary [university-kassel-public-de#8f78f05e-61f4-4f5f-ba79-35b18e2c4a0f]: The policy states that all expenses must be approved by the responsible cost centre and that the approval letter must accompany the reimbursement request.
+    - Financing must come from third‑party funds or earmarked state funds [university-kassel-public-de#df8a9f54-11b5-4f4f-b15e-146d3bca69d3]: The policy requires that the cost of participation be financed by third‑party funds; if none, state funds may be used only if earmarked for this purpose.
+    - Currency conversion and VAT treatment [university-kassel-public-de#df8a9f54-11b5-4f4f-b15e-146d3bca69d3]: The receipt shows the fee in USD with reverse charge for a business customer; the policy allows reimbursement of foreign currency fees but requires conversion to EUR for accounting.
+Finished retrieving relevant documents for all cases.
+  auslagenerstattung-01: abgelehnt
+  auslagenerstattung-02: angenommen
+  auslagenerstattung-03: abgelehnt
+  auslagenerstattung-04: abgelehnt
+  auslagenerstattung-05: angenommen
+  auslagenerstattung-06: abgelehnt
+  auslagenerstattung-07: abgelehnt
+  auslagenerstattung-08: angenommen
+Wrote event trace to /output/run-trace.jsonl.log.gz.
+Finished deciding all 8 case(s).

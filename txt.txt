@@ -1,0 +1,61 @@
+UniAgent-2026 (CIKM 2026) - TIRA submission notes
+==================================================
+
+Status (2026-10-19)
+- Marc's MVP (UniAgentTeamCIKM/marc-uniagent-solver, Task 2 Solving) is submitted.
+  TIRA task: uniagent-2026, team: university-of-hull, software name: several-step
+  (commit 13618cf on main of https://github.com/Marc2403/UniAgentTeamCIKM).
+- Software page: https://www.tira.io/submit/uniagent-2026/user/university-of-hull/docker-submission
+
+Rules (https://uniagent.webis.de/cikm26/uniagent26-web/agentic-university-administration.html)
+- System submission deadline: 20 October 2026 AoE.
+- Up to five submissions count for the final evaluation. More are allowed, but then
+  the team must prioritize which five count. Dry runs and failed uploads do not count.
+- Submit code only (tira-cli code-submission). The organizers run it on the hidden
+  test sets (task-2-business-travel/expense-reimbursement/procurement-20260928-test).
+  One upload covers all three application types.
+- Limits per run: 4 CPU, 40 GB RAM, 5 min per case, 4 h per full run.
+- The sandbox has no internet. External LLM APIs (OpenRouter etc.) cannot be used on TIRA.
+
+Hosted LLM (forum: https://www.tira.io/t/5135 and https://www.tira.io/t/5144)
+- The organizers inject OPENAI_BASE_URL, OPENAI_API_KEY, OPENAI_MODEL themselves.
+- Test models: openai/gpt-oss-20b, openai/gpt-oss-120b, Qwen/Qwen2.5-7B-Instruct,
+  all on vLLM with default parameters (no tool calling).
+- --forward-environment-variable stores only the variable NAMES, not the values.
+  The local values are only used for the local smoke test.
+- Do NOT click "Run" in the TIRA web UI. It fails ("forwarded environment variables
+  require network access") because the organizers start the runs themselves.
+  Never select the test/validation datasets yourself.
+
+Submit command (run from the solver folder, Git Bash on Windows)
+  export MSYS_NO_PATHCONV=1 PYTHONUTF8=1 PYTHONIOENCODING=utf-8
+  export OPENAI_API_KEY=<OpenRouter key, "API_KEY" in CIKM/.env>
+  export OPENAI_BASE_URL=https://openrouter.ai/api/v1 OPENAI_MODEL=openai/gpt-oss-20b
+  tira-cli code-submission --path . --task uniagent-2026 \
+    --dataset business-trip-spot-check-20260907-training \
+    --forward-environment-variable OPENAI_API_KEY OPENAI_BASE_URL OPENAI_MODEL \
+    --command '/app/predict.py --input $inputDataset --output $outputDir' \
+    --dry-run          # remove --dry-run for the real submission
+  Evaluate a dry run: tira-cli evaluate --dataset uniagent-2026/<dataset-id> --predictions <output dir>
+
+Mistakes that cost attempts (avoid these)
+1. tira-cli crashed with UnicodeEncodeError on the check mark (Windows cp1252).
+   Fix: PYTHONUTF8=1 and PYTHONIOENCODING=utf-8.
+2. "sh: 1: C:/Program: not found": Git Bash rewrote /app/predict.py into a Windows path.
+   Fix: MSYS_NO_PATHCONV=1 (or run from PowerShell).
+3. "The uploaded image is incompatible with the cluster": Docker Desktop stored images
+   with containerd (OCI format). BUILDX_NO_DEFAULT_ATTESTATIONS=1 did NOT help.
+   Fix: Docker Desktop > Settings > General > uncheck "Use containerd for pulling and
+   storing images" > Apply & restart. Check with:
+   tira-cli verify-installation --task uniagent-2026 --team university-of-hull
+   (Without --task/--team it cannot check uploads. A "Loading..." answer from the
+   server is also reported as "incompatible".)
+4. "The git repository is not clean": the WHOLE repo must be clean, including untracked
+   files outside the solver folder (here evaluation/__pycache__/*.pyc). Check with
+   git status --porcelain --untracked-files=all and make sure main is pushed.
+
+Setup
+- tira-cli: pip install --upgrade tira, then tira-cli login --token <token>.
+  The token is on the task's submit page: tira.io/tasks > UniAgent-2026 > Submit >
+  Code Submission > step 3 "Prepare Your Environment". It is saved in ~/.tira.
+- www.tira.io is a Discourse forum. The team page there has no submit button.

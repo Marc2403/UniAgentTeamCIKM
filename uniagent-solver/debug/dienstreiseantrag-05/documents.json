@@ -1,0 +1,10 @@
+{
+ "case_type": "business_trip",
+ "scope": "kassel",
+ "documents": {
+  "antrag-dienstreisegenehmigung.pdf": "application",
+  "email-stipendienzusage.pdf": "funding_commitment",
+  "flug-angebot.pdf": "offer",
+  "konferenz-registrierung.pdf": "booking"
+ }
+}

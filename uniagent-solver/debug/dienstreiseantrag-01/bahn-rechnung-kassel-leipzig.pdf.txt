@@ -1,0 +1,35 @@
+Jonas Ahlgrim
+Am Weinberg 12
+34117 Kassel
+Nordbahn Fernverkehr AG
+Gleisfeld 4
+60329 Frankfurt am Main
+Kontakt
+service@nordbahn-fv.example
+Auftragsnummer: 004518220931
+Rechnungsnummer: 1792-0318824411
+Rechnungsdatum: 09.10.2026
+Rechnung
+zur Auftragsnummer 004518220931
+Beschreibung Menge MwSt netto brutto
+Fahrkarte Sparpreis, Kassel-Wilhelmshöhe →
+Leipzig Hbf, 2. Klasse, 1 Person (ab 15 Jahre),
+14.10.2026
+1 7 % (D) 42,06 € 45,00 €
+Fahrkarte Sparpreis, Leipzig Hbf →
+Kassel-Wilhelmshöhe, 2. Klasse, 1 Person (ab 15
+Jahre), 15.10.2026
+1 7 % (D) 42,06 € 45,00 €
+Summe (netto) 7 % (D) 84,12 €
+zzgl. 7 % MwSt (D) 5,88 €
+Summe (brutto) 90,00 €
+Zahlungsinformationen
+Datum 09.10.2026
+Art der Transaktion Zahlung
+Betrag 90,00 €
+Zahlungsmittel Kreditkarte
+Dieses Dokument berechtigt nicht zur Fahrt.
+Rechnungsempfänger ist eine Privatperson. Für die Erstattung durch die Universität ist ein Ersatzbeleg mit dem Vermerk „sachlich richtig“
+erforderlich.
+Mit freundlichen Grüßen
+Nordbahn Fernverkehr AG

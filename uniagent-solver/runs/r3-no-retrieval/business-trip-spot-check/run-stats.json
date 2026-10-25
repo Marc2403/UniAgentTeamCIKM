@@ -1,0 +1,89 @@
+{
+ "settings": {
+  "use_checks": true,
+  "use_retrieval": false,
+  "hard_fail_override": true,
+  "self_consistency_n": 1,
+  "case_timeout_seconds": 240.0,
+  "total_budget_seconds": 13500.0,
+  "llm_call_timeout_seconds": 120.0,
+  "llm_max_retries": 1,
+  "temperature": 0.0,
+  "max_output_tokens": 8192,
+  "reasoning_effort": null,
+  "extraction_reasoning_effort": "low",
+  "extraction_workers": 4,
+  "max_document_characters": 12000,
+  "max_prompt_document_characters": 30000,
+  "retrieval_hits": 2,
+  "cache_dir": null
+ },
+ "model": "openai/gpt-oss-20b",
+ "cases": {
+  "dienstreiseantrag-01": {
+   "result": "abgelehnt",
+   "method": "hard_fail",
+   "seconds": 27.7,
+   "calls": 2,
+   "cached_calls": 0,
+   "prompt_tokens": 4493,
+   "completion_tokens": 626,
+   "failed_checks": [
+    "TRIP_SUBMITTED_BEFORE_START"
+   ]
+  },
+  "dienstreiseantrag-02": {
+   "result": "angenommen",
+   "method": "llm",
+   "seconds": 39.8,
+   "calls": 3,
+   "cached_calls": 0,
+   "prompt_tokens": 5399,
+   "completion_tokens": 1699,
+   "failed_checks": []
+  },
+  "dienstreiseantrag-03": {
+   "result": "abgelehnt",
+   "method": "hard_fail",
+   "seconds": 9.8,
+   "calls": 2,
+   "cached_calls": 0,
+   "prompt_tokens": 3947,
+   "completion_tokens": 640,
+   "failed_checks": [
+    "TRIP_DATES_CONSISTENT",
+    "TRIP_COSTS_COMPLETE",
+    "TRIP_FOREIGN_TRAVEL"
+   ]
+  },
+  "dienstreiseantrag-04": {
+   "result": "angenommen",
+   "method": "llm",
+   "seconds": 46.9,
+   "calls": 3,
+   "cached_calls": 0,
+   "prompt_tokens": 5912,
+   "completion_tokens": 1213,
+   "failed_checks": []
+  },
+  "dienstreiseantrag-05": {
+   "result": "abgelehnt",
+   "method": "hard_fail",
+   "seconds": 8.9,
+   "calls": 3,
+   "cached_calls": 0,
+   "prompt_tokens": 5195,
+   "completion_tokens": 691,
+   "failed_checks": [
+    "TRIP_THIRD_PARTY_FUNDING"
+   ]
+  }
+ },
+ "total_seconds": 133.6,
+ "usage": {
+  "calls": 13,
+  "cached_calls": 0,
+  "prompt_tokens": 24946,
+  "completion_tokens": 4869
+ }
+}

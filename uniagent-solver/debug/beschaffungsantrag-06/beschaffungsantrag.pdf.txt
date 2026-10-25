@@ -1,0 +1,35 @@
+Formular ZB-3 · Beschaffungsantrag · Stand 01/2027 Seite 1
+Universität Wernstadt
+Zentrale Beschaffung
+Eingang über: beschaffung@uni-wernstadt.de
+Antrag Nr. ZB-2027-0421
+Datum: 22.06.2027
+Beschaffungsantrag / Bestellanforderung
+1. Bedarfsstelle
+Organisationseinheit Fachbereich 71 Elektrotechnik und Informatik, Fachgebiet Mikrosystemtechnik
+Antragsteller:in Dr. Yusuf Kahveci-Ortmann
+Telefon 0561 7390-5023
+Kostenstelle / Auftrag 71 4910 / Auftrag 2140350
+Kostenstellenbevollmächtigte:r Prof. Dr. Reinhild Stoppenbrink
+2. Einordnung
+Kategorie [ ] Verbrauchsmaterial [ ] GWG [X] Anlage
+Rahmenvertragsprodukt [ ] ja [X] nein
+Vergabeart Preisvergleich
+Eingeholte Angebote 2
+Vorgesehener Lieferant Waagenbau Iffländer GmbH, Augsburg (Angebot IW-6620)
+3. Positionen
+Pos. Bezeichnung Menge EP netto GP netto
+1 Analysenwaage, Ablesbarkeit 0,1 mg, Höchstlast 220 g,
+interne Justierung
+1 1.980,00 € 1.980,00 €
+2 Ultraschall-Reinigungsbad 9 l, beheizbar 1 690,00 € 690,00 €
+Summe netto 2.670,00 €
+zzgl. 19 % USt. 507,30 €
+Gesamtbetrag brutto 3.177,30 €
+4. Begründung des Bedarfs und der Lieferantenauswahl
+Die Reinraum-Probenvorbereitung benötigt eine Analysenwaage und ein beheizbares Ultraschallbad. Von den eingeholten
+Angeboten ist das der Waagenbau Iffländer GmbH das günstigere.
+Wernstadt, 22.06.2027
+Antragsteller:in
+Beauftragt: Kostenstellenbevollmächtigte:r
+Prof. Dr. Reinhild Stoppenbrink

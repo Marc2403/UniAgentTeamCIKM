@@ -1,0 +1,8 @@
+{
+ "case_type": "expense",
+ "scope": "kassel",
+ "documents": {
+  "kontoauszug.pdf": "bank_statement",
+  "rechnung-konferenzgebuehr.pdf": "invoice"
+ }
+}

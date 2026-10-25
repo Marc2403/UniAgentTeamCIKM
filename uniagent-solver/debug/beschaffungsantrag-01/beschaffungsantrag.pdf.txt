@@ -1,0 +1,35 @@
+Formular ZB-3 · Beschaffungsantrag · Stand 01/2027 Seite 1
+Universität Wernstadt
+Zentrale Beschaffung
+Eingang über: beschaffung@uni-wernstadt.de
+Antrag Nr. ZB-2027-0147
+Datum: 16.02.2027
+Beschaffungsantrag / Bestellanforderung
+1. Bedarfsstelle
+Organisationseinheit Fachbereich 71 Elektrotechnik und Informatik, Fachgebiet Hochfrequenztechnik
+Antragsteller:in Dr. Jorinde Hablitzel
+Telefon 0561 7390-4127
+Kostenstelle / Auftrag 71 4410 / Auftrag 2140057
+Kostenstellenbevollmächtigte:r Prof. Dr. Anselm Quadflieg
+2. Einordnung
+Kategorie [ ] Verbrauchsmaterial [ ] GWG [X] Anlage
+Rahmenvertragsprodukt [ ] ja [X] nein
+Vergabeart Preisvergleich, drei schriftliche Angebote
+Eingeholte Angebote 3
+Vorgesehener Lieferant Oszillo-Kontor Vehrs GmbH, Lüneburg (Angebot AN-27-0311)
+3. Positionen
+Pos. Bezeichnung Menge EP netto GP netto
+1 Digitales Speicheroszilloskop, 4 Kanäle, 350 MHz, 5 GS/s 1 2.390,00 € 2.390,00 €
+2 Passiver Tastkopf 10:1, 500 MHz 4 48,00 € 192,00 €
+3 Werkskalibrierschein 1 85,00 € 85,00 €
+Summe netto 2.667,00 €
+zzgl. 19 % USt. 506,73 €
+Gesamtbetrag brutto 3.173,73 €
+4. Begründung des Bedarfs und der Lieferantenauswahl
+Das vorhandene Zweikanalgerät des Praktikumslabors reicht für die Messungen an den vierkanaligen Mischerschaltungen
+nicht aus. Es wurden drei Angebote eingeholt; das Angebot der Oszillo-Kontor Vehrs GmbH ist bei gleicher Ausstattung
+das günstigste.
+Wernstadt, 16.02.2027
+Antragsteller:in
+Beauftragt: Kostenstellenbevollmächtigte:r
+Prof. Dr. Anselm Quadflieg

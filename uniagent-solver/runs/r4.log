@@ -1,0 +1,45 @@
+5 case(s): dienstreiseantrag-01, dienstreiseantrag-02, dienstreiseantrag-03, dienstreiseantrag-04, dienstreiseantrag-05
+Indexed 3 corpora in 13.8 s
+  dienstreiseantrag-01: abgelehnt [llm] 120.3 s
+  dienstreiseantrag-02: angenommen [llm] 70.1 s
+  dienstreiseantrag-03: abgelehnt [llm] 52.2 s
+  dienstreiseantrag-04: angenommen [llm] 11.2 s
+  dienstreiseantrag-05: abgelehnt [llm] 80.2 s
+Done in 348.3 s; usage {'calls': 5, 'cached_calls': 0, 'prompt_tokens': 16794, 'completion_tokens': 5573}
+8 case(s): beschaffungsantrag-01, beschaffungsantrag-02, beschaffungsantrag-03, beschaffungsantrag-04, beschaffungsantrag-05, beschaffungsantrag-06, beschaffungsantrag-07, beschaffungsantrag-08
+Indexed 3 corpora in 14.1 s
+  beschaffungsantrag-01: angenommen [llm] 9.3 s
+  beschaffungsantrag-02: angenommen [llm] 4.7 s
+  beschaffungsantrag-03: abgelehnt [llm] 15.9 s
+  beschaffungsantrag-04: abgelehnt [llm] 44.6 s
+  beschaffungsantrag-05: angenommen [llm] 9.7 s
+  beschaffungsantrag-06: abgelehnt [llm] 6.2 s
+  beschaffungsantrag-07: abgelehnt [llm] 9.0 s
+  beschaffungsantrag-08: angenommen [llm] 6.2 s
+Done in 120.2 s; usage {'calls': 8, 'cached_calls': 0, 'prompt_tokens': 21851, 'completion_tokens': 5027}
+8 case(s): auslagenerstattung-01, auslagenerstattung-02, auslagenerstattung-03, auslagenerstattung-04, auslagenerstattung-05, auslagenerstattung-06, auslagenerstattung-07, auslagenerstattung-08
+Indexed 3 corpora in 13.8 s
+  auslagenerstattung-01: abgelehnt [llm] 24.7 s
+  auslagenerstattung-02: angenommen [llm] 19.0 s
+  auslagenerstattung-03: abgelehnt [fallback (Modellfehler)] 46.3 s
+  auslagenerstattung-04: abgelehnt [llm] 3.6 s
+  auslagenerstattung-05: angenommen [llm] 38.5 s
+  auslagenerstattung-06: abgelehnt [llm] 12.5 s
+  auslagenerstattung-07: abgelehnt [llm] 132.2 s
+  auslagenerstattung-08: angenommen [llm] 9.2 s
+Done in 300.3 s; usage {'calls': 9, 'cached_calls': 0, 'prompt_tokens': 18526, 'completion_tokens': 8226}
+/app/runs/r4-no-checks/business-trip-spot-check: OK
+/app/runs/r4-no-checks/task-2-procurement-spot-check: OK
+/app/runs/r4-no-checks/task-2-expense-reimbursement-spot-check: OK
+| Falltyp | Accuracy | richtig/Fälle |
+|---|---|---|
+| auslagenerstattung | 0.88 | 7/8 |
+| beschaffungsantrag | 1.00 | 8/8 |
+| dienstreiseantrag | 1.00 | 5/5 |
+| **gesamt** | **0.95** | 20/21 |
+
+Sekunden/Fall: 34.6, Tokens/Fall: 3619
+
+FALSCH auslagenerstattung-01: vorhergesagt abgelehnt, Gold angenommen
+  Gold: Die englischsprachige Marktplatzrechnung FPM-NL-27-004471908 vom 12.02.2027 weist ein Fachbuch zu Methoden der stochastischen Optimalsteuerung über insgesamt 94,40 € aus, verkauft von einem Händler in Utrecht. Rechnungsempfänger ist der zentrale Rechnungseingang der Universität Wernstadt, geliefert wurde an den Lehrstuhl für Stochastische Systeme; der dienstliche Bezug ist damit belegt. Die Rechnung ist ein Originalbeleg mit genanntem Artikel, wie es der Abschnitt Kostenerstattung der Uni-Kassel-Seite „Finanzbuchhaltung und Steuern“ verlangt, und die Beträge (7 % USt auf Buch und Versand) gehen auf. Die Erstattung ist zu gewähren.
+  System: Die Rechnung ist an Universität Wernstadt adressiert, nicht an die Universität Kassel, wodurch der dienstliche Bezug fehlt. Nach Regel [EXP_SERVICE_REFERENCE] sind nur Rechnungen an die eigene Universität oder mit eindeutigem dienstlichem Zweck erstattungsfähig. Der Betrag von €94,40 kann daher nicht erstattet werden.

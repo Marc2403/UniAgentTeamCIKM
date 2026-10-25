@@ -1,0 +1,7 @@
+{
+ "case_type": "expense",
+ "scope": "kassel",
+ "documents": {
+  "rechnung-teekueche.pdf": "invoice"
+ }
+}

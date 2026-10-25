@@ -1,0 +1,38 @@
+# Curated rules for procurement cases. `id` matches the check that tests the rule;
+# `query` drives the BM25 look-up when that check fails or stays unclear.
+- id: PROC_COMPARISON_OFFERS
+  text: "Grundsätzlich müssen 3 Angebote eingeholt werden, Ausnahme bei Rahmenvertragspartnern. Liegt der Auftragswert unter 1.000 Euro, ist eine Direktvergabe möglich und es genügt ein Angebot."
+  applies_to: [kassel]
+  query: "Beschaffung drei Angebote einholen Direktvergabe unter 1.000 Euro Rahmenvertragspartner"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: 8521d5be-7a95-4cad-aaf4-3b2a76860857, title: "Beschaffung - INTERN - Uni Kassel"}
+    - {corpus: university-kassel-public-de, doc_id: 08143d1c-7e2f-4f9c-b6e0-42969f36852f, title: "Nachhaltiges Catering - INTERN - Uni Kassel"}
+- id: PROC_FRAMEWORK_CONTRACT
+  text: "Rahmenverträge bestehen u. a. für Büromaterial, PCs/Notebooks und Monitore, Büropapiere, Bürodrehstühle, Seminarstühle, Büromobiliar, Kopiergeräte und Microsoft-Software; sie sind für alle Bereiche verbindlich. Ein Produkt mit Rahmenvertrag muss ausschließlich beim Rahmenvertragspartner (über WPS) bestellt werden, unabhängig vom Betrag; dafür entfallen Vergleichsangebote."
+  applies_to: [kassel]
+  query: "Rahmenverträge PCs Notebooks Monitore Rahmenvertragspartner ausschließlich bestellen WPS"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: aef7cd6c-7609-4ac8-84ec-228bc79e5a4e, title: "Rahmenverträge - INTERN - Uni Kassel"}
+    - {corpus: university-kassel-public-de, doc_id: 8521d5be-7a95-4cad-aaf4-3b2a76860857, title: "Beschaffung - INTERN - Uni Kassel"}
+- id: PROC_BUDGET_HOLDER
+  text: "Bestellungen müssen von der/dem Kostenstellenbevollmächtigten (meist Fachgebietsleitung) beauftragt werden."
+  applies_to: [kassel]
+  query: "Bestellungen Kostenstellenbevollmächtigten beauftragt"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: 8521d5be-7a95-4cad-aaf4-3b2a76860857, title: "Beschaffung - INTERN - Uni Kassel"}
+- id: PROC_TOTAL_MATCHES_ITEMS
+  text: "Die im Antrag genannten Summen müssen der Summe der Einzelpositionen entsprechen; eine wesentliche Abweichung macht unklar, welcher Betrag beauftragt wird."
+  applies_to: [kassel, other]
+  sources: []
+- id: PROC_AWARD_MATCHES_OFFERS
+  text: "Der Vergabevermerk muss die Angebotsbeträge richtig wiedergeben; eine Wertung auf Grundlage falscher Beträge trägt die Lieferantenwahl nicht."
+  applies_to: [kassel, other]
+  sources: []
+- id: PROC_CHEAPEST_OFFER
+  text: "Den Zuschlag erhält bei gleicher technischer Eignung das wirtschaftlichste, in der Regel das günstigste Angebot; Abweichungen sind zu begründen."
+  applies_to: [kassel, other]
+  sources: []
+- id: PROC_INVOICES_MATCH_OFFER
+  text: "Rechnungen, auch mehrere Teilrechnungen zusammen, müssen dem beauftragten Angebot entsprechen."
+  applies_to: [kassel, other]
+  sources: []

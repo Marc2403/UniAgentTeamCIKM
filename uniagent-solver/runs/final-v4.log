@@ -1,0 +1,45 @@
+5 case(s): dienstreiseantrag-01, dienstreiseantrag-02, dienstreiseantrag-03, dienstreiseantrag-04, dienstreiseantrag-05
+Indexed 3 corpora in 13.7 s
+  dienstreiseantrag-01: abgelehnt [hard_fail] 7.4 s
+  dienstreiseantrag-02: angenommen [llm] 42.7 s
+  dienstreiseantrag-03: abgelehnt [hard_fail] 11.7 s
+  dienstreiseantrag-04: angenommen [llm] 37.8 s
+  dienstreiseantrag-05: abgelehnt [hard_fail] 11.0 s
+Done in 124.7 s; usage {'calls': 13, 'cached_calls': 0, 'prompt_tokens': 29750, 'completion_tokens': 3697}
+8 case(s): beschaffungsantrag-01, beschaffungsantrag-02, beschaffungsantrag-03, beschaffungsantrag-04, beschaffungsantrag-05, beschaffungsantrag-06, beschaffungsantrag-07, beschaffungsantrag-08
+Indexed 3 corpora in 14.0 s
+  beschaffungsantrag-01: angenommen [llm] 18.0 s
+  beschaffungsantrag-02: angenommen [llm] 14.9 s
+  beschaffungsantrag-03: abgelehnt [hard_fail] 33.9 s
+  beschaffungsantrag-04: abgelehnt [hard_fail] 25.7 s
+  beschaffungsantrag-05: abgelehnt [llm] 20.3 s
+  beschaffungsantrag-06: abgelehnt [hard_fail] 16.3 s
+  beschaffungsantrag-07: abgelehnt [hard_fail] 20.8 s
+  beschaffungsantrag-08: angenommen [llm] 21.5 s
+Done in 185.7 s; usage {'calls': 38, 'cached_calls': 0, 'prompt_tokens': 55893, 'completion_tokens': 10778}
+8 case(s): auslagenerstattung-01, auslagenerstattung-02, auslagenerstattung-03, auslagenerstattung-04, auslagenerstattung-05, auslagenerstattung-06, auslagenerstattung-07, auslagenerstattung-08
+Indexed 3 corpora in 13.9 s
+  auslagenerstattung-01: angenommen [llm] 22.6 s
+  auslagenerstattung-02: angenommen [llm] 40.4 s
+  auslagenerstattung-03: abgelehnt [hard_fail] 24.2 s
+  auslagenerstattung-04: abgelehnt [hard_fail] 18.5 s
+  auslagenerstattung-05: angenommen [llm] 38.7 s
+  auslagenerstattung-06: abgelehnt [hard_fail] 19.5 s
+  auslagenerstattung-07: abgelehnt [hard_fail] 16.5 s
+  auslagenerstattung-08: angenommen [llm] 13.9 s
+Done in 208.5 s; usage {'calls': 18, 'cached_calls': 0, 'prompt_tokens': 30490, 'completion_tokens': 6651}
+/app/runs/final-v4/business-trip-spot-check: OK
+/app/runs/final-v4/task-2-procurement-spot-check: OK
+/app/runs/final-v4/task-2-expense-reimbursement-spot-check: OK
+| Falltyp | Accuracy | richtig/Fälle |
+|---|---|---|
+| auslagenerstattung | 1.00 | 8/8 |
+| beschaffungsantrag | 0.88 | 7/8 |
+| dienstreiseantrag | 1.00 | 5/5 |
+| **gesamt** | **0.95** | 20/21 |
+
+Sekunden/Fall: 22.7, Tokens/Fall: 6536
+
+FALSCH beschaffungsantrag-05: vorhergesagt abgelehnt, Gold angenommen
+  Gold: Der Antrag ZB-2027-0388 über 2.971,80 € netto legt keine Vergleichsangebote vor. Alle drei Artikel (Notebooks, Monitore, Dockingstationen) stammen laut Warenkorb WK-0027-18834 aus dem WPS-Katalog des Rahmenvertrags IT-Arbeitsplatzgeräte, und die Positionen stimmen mit dem Antrag überein. Nach den Seiten Beschaffung und Rahmenverträge der Universität Kassel entfällt bei Rahmenvertragspartnern das Einholen von drei Angeboten, Rahmenvertragsprodukte sind sogar dort zu bestellen. Der Antrag wird angenommen.
+  System: Der Beschaffungsantrag gibt an, dass ein Tragbarer Rechner 14 Zoll bestellt wird (Menge 1), während der zugehörige Warenkorb (WPS) die Menge 2 für denselben Artikel aufweist. Diese widersprüchliche Pflichtangabe (Menge) stellt einen konkreten, wesentlichen Mangel dar, der die Genehmigung verhindert. Alle anderen Regelkriterien (Rahmenvertrag, Kostenstellenbevollmächtigung, Summe) sind erfüllt.

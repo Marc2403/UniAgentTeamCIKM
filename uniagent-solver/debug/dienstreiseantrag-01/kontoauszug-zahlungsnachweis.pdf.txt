@@ -1,0 +1,21 @@
+BIC HELADEF1KAS Datum 19.10.2026
+IBAN DE44 5205 0353 0004 8871 92 Uhrzeit 18:52:07
+Kontoinhaber Jonas Ahlgrim Abgefragt von Jonas Ahlgrim
+Zahlungsbeteiligter Nordbahn Fernverkehr AG
+DE29 5001 0517 0091 4477 30
+NOFVDEFFXXX
+Buchungstag 09.10.2026
+Betrag -90,00 EUR
+Vorgang Kartenzahlung
+Verwendungszweck NORDBAHN FV AG//FRANKFURT/DE 09.10.2026 AUFTRAG 004518220931
+REF 771904/220931
+Zahlungsbeteiligter Hotel Alte Messe Leipzig GmbH
+DE82 8605 5592 0100 4471 08
+WELADE8LXXX
+Buchungstag 15.10.2026
+Betrag -75,00 EUR
+Vorgang Lastschrift-Kartenzahlung
+Verwendungszweck HOTEL ALTE MESSE//LEIPZIG/DE 15.10.2026 um 10:04:11 Uhr
+52091407/016904/R-2026-10-0881
+Kontoauszug – elektronisch abgerufen. Dieser Auszug wurde dem Antrag als Zahlungsnachweis für die privat vorausgelegten Kosten
+beigefügt. Seite 1 von 1

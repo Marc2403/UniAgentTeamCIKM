@@ -1,0 +1,121 @@
+{
+ "settings": {
+  "use_checks": true,
+  "use_retrieval": true,
+  "hard_fail_override": true,
+  "self_consistency_n": 1,
+  "case_timeout_seconds": 240.0,
+  "total_budget_seconds": 13500.0,
+  "llm_call_timeout_seconds": 120.0,
+  "llm_max_retries": 1,
+  "temperature": 0.0,
+  "max_output_tokens": 8192,
+  "reasoning_effort": null,
+  "extraction_reasoning_effort": "low",
+  "extraction_workers": 4,
+  "max_document_characters": 12000,
+  "max_prompt_document_characters": 30000,
+  "retrieval_hits": 2,
+  "cache_dir": "/app/.cache/llm"
+ },
+ "model": "openai/gpt-oss-20b",
+ "cases": {
+  "beschaffungsantrag-01": {
+   "result": "angenommen",
+   "method": "llm",
+   "seconds": 0.2,
+   "calls": 0,
+   "cached_calls": 6,
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "failed_checks": []
+  },
+  "beschaffungsantrag-02": {
+   "result": "angenommen",
+   "method": "llm",
+   "seconds": 0.1,
+   "calls": 0,
+   "cached_calls": 3,
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "failed_checks": []
+  },
+  "beschaffungsantrag-03": {
+   "result": "abgelehnt",
+   "method": "hard_fail",
+   "seconds": 0.1,
+   "calls": 0,
+   "cached_calls": 2,
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "failed_checks": [
+    "PROC_FRAMEWORK_CONTRACT"
+   ]
+  },
+  "beschaffungsantrag-04": {
+   "result": "abgelehnt",
+   "method": "hard_fail",
+   "seconds": 0.2,
+   "calls": 0,
+   "cached_calls": 6,
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "failed_checks": [
+    "PROC_TOTAL_MATCHES_ITEMS"
+   ]
+  },
+  "beschaffungsantrag-05": {
+   "result": "angenommen",
+   "method": "llm",
+   "seconds": 0.1,
+   "calls": 0,
+   "cached_calls": 3,
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "failed_checks": []
+  },
+  "beschaffungsantrag-06": {
+   "result": "abgelehnt",
+   "method": "hard_fail",
+   "seconds": 0.1,
+   "calls": 0,
+   "cached_calls": 5,
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "failed_checks": [
+    "PROC_COMPARISON_OFFERS"
+   ]
+  },
+  "beschaffungsantrag-07": {
+   "result": "abgelehnt",
+   "method": "hard_fail",
+   "seconds": 0.2,
+   "calls": 0,
+   "cached_calls": 6,
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "failed_checks": [
+    "PROC_AWARD_MATCHES_OFFERS",
+    "PROC_CHEAPEST_OFFER"
+   ]
+  },
+  "beschaffungsantrag-08": {
+   "result": "angenommen",
+   "method": "llm",
+   "seconds": 0.2,
+   "calls": 0,
+   "cached_calls": 7,
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "failed_checks": []
+  }
+ },
+ "index_seconds": 14.8,
+ "total_seconds": 16.5,
+ "usage": {
+  "calls": 0,
+  "cached_calls": 38,
+  "prompt_tokens": 0,
+  "completion_tokens": 0
+ }
+}

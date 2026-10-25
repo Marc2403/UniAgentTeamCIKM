@@ -1,0 +1,16 @@
+Hainbuchen Bank AG, Kreditkartenabrechnung
+BIC HNBUDEF9XXX
+Kontoauszug vom 30.09.2027
+IBAN DE62 9506 1230 0223 7601 84
+Kontoinhaber: Dr. Oksana Wehrenpfennig
+Buchungstag Vorgang / Verwendungszweck Betrag
+03.09.2027 IWSSA27 HALVORSEN EVENT KINGSTON CA
+USD 175,00 Kurs 1,0912
+-160,37 EUR
+03.09.2027 Auslandseinsatzentgelt
+1,75 % von 160,37 EUR
+-2,81 EUR
+11.09.2027 Buchhandlung am Uhrturm, Marburg
+Kartenzahlung
+-18,40 EUR
+Abrechnung Visa ****6031. Der Betrag wird am 04.10.2027 vom Referenzkonto eingezogen.

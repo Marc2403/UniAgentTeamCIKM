@@ -1,0 +1,36 @@
+Formular ZB-3 · Beschaffungsantrag · Stand 01/2027 Seite 1
+Universität Wernstadt
+Zentrale Beschaffung
+Eingang über: beschaffung@uni-wernstadt.de
+Antrag Nr. ZB-2027-0536
+Datum: 10.08.2027
+Beschaffungsantrag / Bestellanforderung
+1. Bedarfsstelle
+Organisationseinheit Fachbereich 71 Elektrotechnik und Informatik, Fachgebiet Elektrische
+Energieversorgung
+Antragsteller:in Dr. Marit Eschenlohr
+Telefon 0561 7390-5260
+Kostenstelle / Auftrag 71 5030 / Auftrag 2140412
+Kostenstellenbevollmächtigte:r Prof. Dr. Balthasar Kinzelbach
+2. Einordnung
+Kategorie [ ] Verbrauchsmaterial [ ] GWG [X] Anlage
+Rahmenvertragsprodukt [ ] ja [X] nein
+Vergabeart Preisvergleich, drei schriftliche Angebote
+Eingeholte Angebote 3
+Vorgesehener Lieferant Thermoskop Ruhland GmbH, Erlangen (Angebot TR-A-27-0902)
+3. Positionen
+Pos. Bezeichnung Menge EP netto GP netto
+1 Wärmebildkamera 640 × 480 px, 30 Hz, Temperaturbereich
+bis 1.500 °C
+1 2.380,00 € 2.380,00 €
+2 Kalibrierzertifikat Werk 1 220,00 € 220,00 €
+Summe netto 2.600,00 €
+zzgl. 19 % USt. 494,00 €
+Gesamtbetrag brutto 3.094,00 €
+4. Begründung des Bedarfs und der Lieferantenauswahl
+Für die Zustandsüberwachung von Schaltanlagen im Hochspannungslabor wird eine radiometrische Wärmebildkamera
+benötigt. Zuschlag nach Vergabevermerk an das günstigste Angebot.
+Wernstadt, 10.08.2027
+Antragsteller:in
+Beauftragt: Kostenstellenbevollmächtigte:r
+Prof. Dr. Balthasar Kinzelbach

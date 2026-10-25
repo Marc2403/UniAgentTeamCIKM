@@ -1,0 +1,41 @@
+5 case(s): dienstreiseantrag-01, dienstreiseantrag-02, dienstreiseantrag-03, dienstreiseantrag-04, dienstreiseantrag-05
+Indexed 3 corpora in 15.5 s
+  dienstreiseantrag-01: abgelehnt [hard_fail] 44.4 s
+  dienstreiseantrag-02: angenommen [llm] 50.1 s
+  dienstreiseantrag-03: abgelehnt [hard_fail] 25.0 s
+  dienstreiseantrag-04: angenommen [llm] 19.6 s
+  dienstreiseantrag-05: abgelehnt [hard_fail] 3.0 s
+Done in 158.1 s; usage {'calls': 5, 'cached_calls': 8, 'prompt_tokens': 21320, 'completion_tokens': 2728}
+8 case(s): beschaffungsantrag-01, beschaffungsantrag-02, beschaffungsantrag-03, beschaffungsantrag-04, beschaffungsantrag-05, beschaffungsantrag-06, beschaffungsantrag-07, beschaffungsantrag-08
+Indexed 3 corpora in 14.8 s
+  beschaffungsantrag-01: angenommen [llm] 0.2 s
+  beschaffungsantrag-02: angenommen [llm] 0.1 s
+  beschaffungsantrag-03: abgelehnt [hard_fail] 0.1 s
+  beschaffungsantrag-04: abgelehnt [hard_fail] 0.2 s
+  beschaffungsantrag-05: angenommen [llm] 0.1 s
+  beschaffungsantrag-06: abgelehnt [hard_fail] 0.1 s
+  beschaffungsantrag-07: abgelehnt [hard_fail] 0.2 s
+  beschaffungsantrag-08: angenommen [llm] 0.2 s
+Done in 16.5 s; usage {'calls': 0, 'cached_calls': 38, 'prompt_tokens': 0, 'completion_tokens': 0}
+8 case(s): auslagenerstattung-01, auslagenerstattung-02, auslagenerstattung-03, auslagenerstattung-04, auslagenerstattung-05, auslagenerstattung-06, auslagenerstattung-07, auslagenerstattung-08
+Indexed 3 corpora in 14.7 s
+  auslagenerstattung-01: angenommen [llm] 4.6 s
+  auslagenerstattung-02: angenommen [llm] 17.5 s
+  auslagenerstattung-03: abgelehnt [hard_fail] 2.7 s
+  auslagenerstattung-04: abgelehnt [hard_fail] 4.0 s
+  auslagenerstattung-05: angenommen [llm] 5.6 s
+  auslagenerstattung-06: abgelehnt [hard_fail] 19.6 s
+  auslagenerstattung-07: abgelehnt [hard_fail] 69.9 s
+  auslagenerstattung-08: angenommen [llm] 3.5 s
+Done in 142.6 s; usage {'calls': 8, 'cached_calls': 10, 'prompt_tokens': 20434, 'completion_tokens': 3788}
+/app/runs/full-v2/business-trip-spot-check: OK
+/app/runs/full-v2/task-2-procurement-spot-check: OK
+/app/runs/full-v2/task-2-expense-reimbursement-spot-check: OK
+| Falltyp | Accuracy | richtig/Fälle |
+|---|---|---|
+| auslagenerstattung | 1.00 | 8/8 |
+| beschaffungsantrag | 1.00 | 8/8 |
+| dienstreiseantrag | 1.00 | 5/5 |
+| **gesamt** | **1.00** | 21/21 |
+
+Sekunden/Fall: 12.9, Tokens/Fall: 2299

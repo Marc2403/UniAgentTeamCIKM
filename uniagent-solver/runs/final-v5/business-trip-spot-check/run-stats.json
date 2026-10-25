@@ -1,0 +1,90 @@
+{
+ "settings": {
+  "use_checks": true,
+  "use_retrieval": true,
+  "hard_fail_override": true,
+  "self_consistency_n": 1,
+  "case_timeout_seconds": 240.0,
+  "total_budget_seconds": 13500.0,
+  "llm_call_timeout_seconds": 120.0,
+  "llm_max_retries": 1,
+  "temperature": 0.0,
+  "max_output_tokens": 8192,
+  "reasoning_effort": null,
+  "extraction_reasoning_effort": "low",
+  "extraction_workers": 4,
+  "max_document_characters": 12000,
+  "max_prompt_document_characters": 30000,
+  "retrieval_hits": 2,
+  "cache_dir": null
+ },
+ "model": "openai/gpt-oss-20b",
+ "cases": {
+  "dienstreiseantrag-01": {
+   "result": "abgelehnt",
+   "method": "hard_fail",
+   "seconds": 23.9,
+   "calls": 2,
+   "cached_calls": 0,
+   "prompt_tokens": 5522,
+   "completion_tokens": 509,
+   "failed_checks": [
+    "TRIP_SUBMITTED_BEFORE_START"
+   ]
+  },
+  "dienstreiseantrag-02": {
+   "result": "angenommen",
+   "method": "llm",
+   "seconds": 49.3,
+   "calls": 3,
+   "cached_calls": 0,
+   "prompt_tokens": 6457,
+   "completion_tokens": 1422,
+   "failed_checks": []
+  },
+  "dienstreiseantrag-03": {
+   "result": "abgelehnt",
+   "method": "hard_fail",
+   "seconds": 40.0,
+   "calls": 2,
+   "cached_calls": 0,
+   "prompt_tokens": 4611,
+   "completion_tokens": 683,
+   "failed_checks": [
+    "TRIP_DATES_CONSISTENT",
+    "TRIP_COSTS_COMPLETE",
+    "TRIP_FOREIGN_TRAVEL"
+   ]
+  },
+  "dienstreiseantrag-04": {
+   "result": "angenommen",
+   "method": "llm",
+   "seconds": 14.2,
+   "calls": 3,
+   "cached_calls": 0,
+   "prompt_tokens": 6964,
+   "completion_tokens": 1034,
+   "failed_checks": []
+  },
+  "dienstreiseantrag-05": {
+   "result": "abgelehnt",
+   "method": "hard_fail",
+   "seconds": 13.2,
+   "calls": 3,
+   "cached_calls": 0,
+   "prompt_tokens": 6452,
+   "completion_tokens": 619,
+   "failed_checks": [
+    "TRIP_THIRD_PARTY_FUNDING"
+   ]
+  }
+ },
+ "index_seconds": 13.8,
+ "total_seconds": 154.8,
+ "usage": {
+  "calls": 13,
+  "cached_calls": 0,
+  "prompt_tokens": 30006,
+  "completion_tokens": 4267
+ }
+}

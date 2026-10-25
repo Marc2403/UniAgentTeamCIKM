@@ -1,0 +1,120 @@
+{
+ "settings": {
+  "use_checks": true,
+  "use_retrieval": true,
+  "hard_fail_override": true,
+  "self_consistency_n": 1,
+  "case_timeout_seconds": 240.0,
+  "total_budget_seconds": 13500.0,
+  "llm_call_timeout_seconds": 120.0,
+  "llm_max_retries": 1,
+  "temperature": 0.0,
+  "max_output_tokens": 8192,
+  "reasoning_effort": null,
+  "extraction_reasoning_effort": "low",
+  "extraction_workers": 4,
+  "max_document_characters": 12000,
+  "max_prompt_document_characters": 30000,
+  "retrieval_hits": 2,
+  "cache_dir": "/app/.cache/llm"
+ },
+ "model": "openai/gpt-oss-20b",
+ "cases": {
+  "auslagenerstattung-01": {
+   "result": "abgelehnt",
+   "method": "llm",
+   "seconds": 69.1,
+   "calls": 2,
+   "cached_calls": 0,
+   "prompt_tokens": 3268,
+   "completion_tokens": 2282,
+   "failed_checks": []
+  },
+  "auslagenerstattung-02": {
+   "result": "angenommen",
+   "method": "llm",
+   "seconds": 14.1,
+   "calls": 2,
+   "cached_calls": 0,
+   "prompt_tokens": 2903,
+   "completion_tokens": 925,
+   "failed_checks": []
+  },
+  "auslagenerstattung-03": {
+   "result": "abgelehnt",
+   "method": "hard_fail",
+   "seconds": 44.7,
+   "calls": 2,
+   "cached_calls": 0,
+   "prompt_tokens": 3497,
+   "completion_tokens": 1849,
+   "failed_checks": [
+    "EXP_SERVICE_REFERENCE"
+   ]
+  },
+  "auslagenerstattung-04": {
+   "result": "abgelehnt",
+   "method": "hard_fail",
+   "seconds": 11.1,
+   "calls": 2,
+   "cached_calls": 0,
+   "prompt_tokens": 3576,
+   "completion_tokens": 577,
+   "failed_checks": [
+    "EXP_REAL_INVOICE"
+   ]
+  },
+  "auslagenerstattung-05": {
+   "result": "angenommen",
+   "method": "llm",
+   "seconds": 27.8,
+   "calls": 3,
+   "cached_calls": 0,
+   "prompt_tokens": 4789,
+   "completion_tokens": 1289,
+   "failed_checks": []
+  },
+  "auslagenerstattung-06": {
+   "result": "abgelehnt",
+   "method": "hard_fail",
+   "seconds": 46.3,
+   "calls": 3,
+   "cached_calls": 0,
+   "prompt_tokens": 4625,
+   "completion_tokens": 815,
+   "failed_checks": [
+    "EXP_DUPLICATE"
+   ]
+  },
+  "auslagenerstattung-07": {
+   "result": "abgelehnt",
+   "method": "hard_fail",
+   "seconds": 16.0,
+   "calls": 2,
+   "cached_calls": 0,
+   "prompt_tokens": 3869,
+   "completion_tokens": 1091,
+   "failed_checks": [
+    "EXP_HOSPITALITY"
+   ]
+  },
+  "auslagenerstattung-08": {
+   "result": "angenommen",
+   "method": "llm",
+   "seconds": 50.9,
+   "calls": 2,
+   "cached_calls": 0,
+   "prompt_tokens": 3199,
+   "completion_tokens": 687,
+   "failed_checks": []
+  }
+ },
+ "index_seconds": 21.1,
+ "total_seconds": 301.6,
+ "usage": {
+  "calls": 18,
+  "cached_calls": 0,
+  "prompt_tokens": 29726,
+  "completion_tokens": 9515
+ }
+}

@@ -1,0 +1,33 @@
+E-Mail – linnea.vosskuhl@uni-wernstadt.de https://owa.uni-wernstadt.de/owa/#path=/mail/inbox
+Seite 1 15.04.2027 11:48
+Sammelbestellung Labor Eingebettete Systeme April
+Linnea Vosskuhl <linnea.vosskuhl@uni-wernstadt.de>
+Do 15.04.2027 11:48
+An: beschaffung@uni-wernstadt.de
+Cc: Prof. Dr. Taddäus Ringelhan <taddaeus.ringelhan@uni-wernstadt.de>
+Liebes Team der Zentralen Beschaffung,
+für das Labor des Fachgebiets Eingebettete Systeme bitte ich um die folgende Sammelbestellung (Preise laut
+Webshop inkl. MwSt.):
+1. 6 × Steckplatinen-Set, 830 Kontakte, je 8,90 € brutto = 53,40 €
+https://www.kranich-bauteile.de/artikel/SP-830-6
+2. 4 × Steckbrücken-Sortiment, 240-teilig, je 6,49 € brutto = 25,96 €
+https://www.kranich-bauteile.de/artikel/JW-240
+3. 8 × Mikrocontroller-Entwicklungsboard, 32 Bit, je 14,80 € brutto = 118,40 €
+https://www.kranich-bauteile.de/artikel/MC32-DEV
+4. 3 × Digitalmultimeter True RMS, je 38,50 € brutto = 115,50 €
+https://shop.messwerk-oderbruch.de/p/10442
+5. 2 × Logikanalysator USB, 16 Kanäle, je 64,90 € brutto = 129,80 €
+https://shop.messwerk-oderbruch.de/p/10918
+6. 5 × Lötspitzen-Satz, 5-teilig, je 11,20 € brutto = 56,00 €
+https://shop.messwerk-oderbruch.de/p/20231
+7. 2 × ESD-Arbeitsmatte mit Erdungskabel, je 29,95 € brutto = 59,90 €
+https://shop.messwerk-oderbruch.de/p/30077
+8. 3 × Schrumpfschlauch-Sortiment, je 9,99 € brutto = 29,97 €
+https://www.kranich-bauteile.de/artikel/SS-SORT
+9. 2 × Monitor 27 Zoll, WQHD, höhenverstellbar, je 169,00 € brutto = 338,00 €
+https://www.bildschirmlager-vogtland.de/produkt/27-wqhd-hv-2207
+Gesamtsumme: 926,93 € brutto. Kostenstelle 71 4520, Auftrag 2140201.
+Die Monitore sind für die zwei neuen Messplätze; der Webshop hat sie sofort lieferbar.
+Viele Grüße
+Linnea Vosskuhl
+Sekretariat Fachgebiet Eingebettete Systeme

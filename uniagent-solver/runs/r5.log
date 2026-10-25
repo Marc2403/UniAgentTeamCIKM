@@ -1,0 +1,53 @@
+5 case(s): dienstreiseantrag-01, dienstreiseantrag-02, dienstreiseantrag-03, dienstreiseantrag-04, dienstreiseantrag-05
+Indexed 3 corpora in 13.5 s
+  dienstreiseantrag-01: abgelehnt [hard_fail] 5.1 s
+  dienstreiseantrag-02: abgelehnt [hard_fail] 6.4 s
+  dienstreiseantrag-03: abgelehnt [hard_fail] 4.0 s
+  dienstreiseantrag-04: abgelehnt [hard_fail] 8.0 s
+  dienstreiseantrag-05: abgelehnt [hard_fail] 4.6 s
+Done in 42.1 s; usage {'calls': 13, 'cached_calls': 0, 'prompt_tokens': 35041, 'completion_tokens': 4068}
+8 case(s): beschaffungsantrag-01, beschaffungsantrag-02, beschaffungsantrag-03, beschaffungsantrag-04, beschaffungsantrag-05, beschaffungsantrag-06, beschaffungsantrag-07, beschaffungsantrag-08
+Indexed 3 corpora in 13.5 s
+  beschaffungsantrag-01: angenommen [llm] 7.0 s
+  beschaffungsantrag-02: angenommen [llm] 3.9 s
+  beschaffungsantrag-03: abgelehnt [hard_fail] 6.4 s
+  beschaffungsantrag-04: abgelehnt [hard_fail] 5.3 s
+  beschaffungsantrag-05: angenommen [llm] 4.5 s
+  beschaffungsantrag-06: abgelehnt [hard_fail] 4.2 s
+  beschaffungsantrag-07: angenommen [llm] 6.9 s
+  beschaffungsantrag-08: angenommen [llm] 7.3 s
+Done in 59.3 s; usage {'calls': 38, 'cached_calls': 0, 'prompt_tokens': 65427, 'completion_tokens': 10326}
+8 case(s): auslagenerstattung-01, auslagenerstattung-02, auslagenerstattung-03, auslagenerstattung-04, auslagenerstattung-05, auslagenerstattung-06, auslagenerstattung-07, auslagenerstattung-08
+Indexed 3 corpora in 13.1 s
+  auslagenerstattung-01: angenommen [llm] 7.9 s
+  auslagenerstattung-02: angenommen [llm] 4.4 s
+  auslagenerstattung-03: abgelehnt [hard_fail] 4.6 s
+  auslagenerstattung-04: abgelehnt [hard_fail] 3.5 s
+  auslagenerstattung-05: angenommen [llm] 9.6 s
+  auslagenerstattung-06: abgelehnt [hard_fail] 7.2 s
+  auslagenerstattung-07: abgelehnt [hard_fail] 9.1 s
+  auslagenerstattung-08: angenommen [llm] 6.4 s
+Done in 66.2 s; usage {'calls': 18, 'cached_calls': 0, 'prompt_tokens': 35513, 'completion_tokens': 5338}
+/app/runs/r5-qwen/business-trip-spot-check: OK
+/app/runs/r5-qwen/task-2-procurement-spot-check: OK
+/app/runs/r5-qwen/task-2-expense-reimbursement-spot-check: OK
+| Falltyp | Accuracy | richtig/Fälle |
+|---|---|---|
+| auslagenerstattung | 1.00 | 8/8 |
+| beschaffungsantrag | 0.88 | 7/8 |
+| dienstreiseantrag | 0.60 | 3/5 |
+| **gesamt** | **0.86** | 18/21 |
+
+Sekunden/Fall: 6.0, Tokens/Fall: 7415
+
+FALSCH dienstreiseantrag-02: vorhergesagt abgelehnt, Gold angenommen
+  Gold: Vollstaendiger, rund zehn Wochen vor Reisebeginn eingereichter Antrag. Das dienstliche Interesse ist durch die Annahmebestaetigung des Peer-Review-Beitrags belegt, die Praesentationspflicht ergibt sich aus derselben Mail. Kosten sind plausibel und durch das genannte Drittmittelprojekt gedeckt, der Uebernachtungssatz von 75 EUR liegt innerhalb der Hoechstgrenze, der Preisvergleich Bahn/Flug wurde durchgefuehrt, die A1-Bescheinigung mit ausreichendem Vorlauf beantragt und das optionale Conference Dinner nicht mitbeantragt. Keine offenen Angaben oder Widersprueche.
+  System: Der Dienstreiseantrag ist abgelehnt, da er mehrere wesentliche Verstöße gegen die Regeln beinhaltet. Zunächst fehlen das Antragsdatum und die Reisebeginn-Datum, was Regel [TRIP_SUBMITTED_BEFORE_START] verletzt (Dateiname oder corpus:32bc169e-4d0b-4931-9b72-bf425ec7311b). Zudem sind die Reisedaten unvollständig, was Regel [TRIP_DATES_CONSISTENT] verletzt (Dateiname oder corpus:d061642a-2228-4072-b309-20b168b1d4cb). Schließlich ist die Kostenaufstellung unvollständig, da keine Kostenpositionen angegeben sind, was Regel [TRIP_COSTS_COMPLETE] verletzt (Dateiname oder corpus:antrag-dienstreisegenehmigung.pdf). Diese Mangel sind konkrete und wesentliche Verstöße gegen die Regeln und führen zu der Ablehnung des Antrags.
+
+FALSCH dienstreiseantrag-04: vorhergesagt abgelehnt, Gold angenommen
+  Gold: Das erhebliche dienstliche Interesse ist durch die Einladung als Keynote-Speaker belegt. Der private Anschlussaufenthalt umfasst mit 6 Tagen mehr als die zulaessigen 5 Arbeitstage, wird aber korrekt behandelt: beantragt sind ausschliesslich die dienstlich veranlassten Kosten (Hinflug, Rueckflug zum Vergleichstarif des dienstlichen Rueckreisetags, 3 Naechte zum Konferenztarif, Konferenzgebuehr, Transfer). Die 6 privaten Naechte (480 EUR) und der Flugmehrpreis (40 EUR) werden selbst getragen; der Preisvergleich des Reisebueros und die getrennten Hotelbuchungen belegen, dass der Universitaet keine Mehrkosten entstehen. Rechtzeitig eingereicht, A1 beantragt.
+  System: Der Antrag ist abgelehnt, da er mehrere wesentliche Verstöße gegen die Regeln beinhaltet. Zunächst fehlen das Datum des Antrags und die Reisebeginn-Ende-Daten, was [TRIP_DATES_CONSISTENT] verstoßt. Zudem sind die Kostenaufstellung unvollständig, da die Gesamtsumme nicht feststeht, was [TRIP_COSTS_COMPLETE] verletzt. Schließlich ist das Zielland unbekannt, was [TRIP_FOREIGN_TRAVEL] verstoßen würde. Diese Verstöße sind so gravierend, dass der Antrag abgelehnt werden muss.
+
+FALSCH beschaffungsantrag-07: vorhergesagt angenommen, Gold abgelehnt
+  Gold: Das Angebot M-5531 der Infrarot-Technik Mergenthal KG lautet über 2.350,00 € netto, der Vergabevermerk V-27-0318 führt es aber mit 3.243,00 €, also 38 % zu hoch. Mit dem richtigen Betrag ist Mergenthal günstiger als die bezuschlagte Thermoskop Ruhland GmbH mit 2.600,00 €, die Wertung des Vermerks und die Lieferantenwahl im Antrag ZB-2027-0536 beruhen damit auf einem falschen Wert. Die Abweichung von 893,00 € ist wesentlich. Der Antrag wird abgelehnt.
+  System: Der Beschaffungsantrag ist angenommen, da keine konkreten Mängel belegt sind. Die automatischen Prüfungen ergeben Pass (hart) für die Gesamtbeträge und die Anzahl der Angebote. Die Lieferantenauswahl basiert auf dem Vergabevermerk, wonach das günstigste Angebot gewählt wurde. Die Bestellung wurde vom Kostenstellenbevollmächtigten beauftragt, und die Angebote entsprechen den geforderten Leistungsmerkmalen.

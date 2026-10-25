@@ -1,0 +1,43 @@
+# Curated rules for business-trip applications (format: see rules_procurement.yaml).
+- id: TRIP_SUBMITTED_BEFORE_START
+  text: "Der Dienstreiseantrag ist vor Reiseantritt zu stellen, denn Reisekosten werden nur für vorher genehmigte Dienstreisen erstattet. Wurde die Reise schon vor der Antragstellung angetreten, ist eine Genehmigung nur über ein gesondertes Ausnahmeverfahren möglich."
+  applies_to: [kassel]
+  query: "Dienstreisen vorher angeordnet oder genehmigt keine Genehmigung keine Abrechnung"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: 8f78f05e-61f4-4f5f-ba79-35b18e2c4a0f, title: "Dienstreisemanagement - INTERN - Uni Kassel"}
+- id: TRIP_PRIVATE_STAY
+  text: "Dienstreisen können mit privaten Reisen verbunden werden. Bei mehr als 5 Arbeitstagen Privataufenthalt werden nur die zur Ausübung des Dienstgeschäfts notwendigen Kosten erstattet; der Universität dürfen keine Mehrkosten entstehen."
+  applies_to: [kassel]
+  query: "Dienstreise private Reise verbunden Privataufenthalt mehr als 5 Arbeitstage Kostenerstattung"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: 8f78f05e-61f4-4f5f-ba79-35b18e2c4a0f, title: "Dienstreisemanagement - INTERN - Uni Kassel"}
+- id: TRIP_FLIGHT_PRICE_COMPARISON
+  text: "Bei Flugreisen ist dem Dienstreiseantrag ein Preisvergleich beizufügen, insbesondere bei verlängertem Aufenthalt zum Vergleich mit der Rückreise direkt nach dem Dienstgeschäft."
+  applies_to: [kassel]
+  query: "Flugreisen Dienstreiseantrag Preisvergleich beizufügen Rückreise"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: 8f78f05e-61f4-4f5f-ba79-35b18e2c4a0f, title: "Dienstreisemanagement - INTERN - Uni Kassel"}
+- id: TRIP_HOTEL_RATE
+  text: "Im Inland sind nachgewiesene Übernachtungskosten bis 80,00 € je Nacht erstattungsfähig, im Ausland bis zum Satz der Auslandsreisekostenverordnung (ARV); höhere Kosten nur, wenn ihre Notwendigkeit begründet ist. Bei der späteren Abrechnung muss die Hotelrechnung die Universität als Adressat nennen."
+  applies_to: [kassel]
+  query: "Nachgewiesene Übernachtungskosten 80,00 € je Nacht erstattungsfähig Notwendigkeit"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: 8f78f05e-61f4-4f5f-ba79-35b18e2c4a0f, title: "Dienstreisemanagement - INTERN - Uni Kassel"}
+- id: TRIP_THIRD_PARTY_FUNDING
+  text: "Leistungen von dritter Seite werden auf die Reisekostenerstattung angerechnet und sind vor Antritt der Reise vollständig mitzuteilen; dieselben Kosten dürfen nicht doppelt finanziert werden."
+  applies_to: [kassel]
+  query: "Leistungen von dritter Seite angerechnet Reisekostenerstattung vor Antritt der Reise mitteilen"
+  sources:
+    - {corpus: university-kassel-public-de, doc_id: 8f78f05e-61f4-4f5f-ba79-35b18e2c4a0f, title: "Dienstreisemanagement - INTERN - Uni Kassel"}
+- id: TRIP_FOREIGN_TRAVEL
+  text: "Bei Auslandsreisen muss das Feld 'Reise ins Ausland' ausgefüllt sein; für Reisen in EU/EWR/Schweiz ist rechtzeitig eine A1-Bescheinigung zu beantragen."
+  applies_to: [kassel]
+  sources: []
+- id: TRIP_DATES_CONSISTENT
+  text: "Reiseverlauf und Dienstgeschäft müssen widerspruchsfrei sein: Reisebeginn vor Beginn, Ende des Dienstgeschäfts nach dessen Beginn und vor der Rückkehr."
+  applies_to: [kassel, other]
+  sources: []
+- id: TRIP_COSTS_COMPLETE
+  text: "Hin- und Rückreise und alle Kostenpositionen müssen angegeben sein, damit die Gesamtkosten feststehen."
+  applies_to: [kassel, other]
+  sources: []

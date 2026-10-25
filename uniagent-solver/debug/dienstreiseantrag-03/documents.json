@@ -1,0 +1,9 @@
+{
+ "case_type": "business_trip",
+ "scope": "kassel",
+ "documents": {
+  "antrag-dienstreisegenehmigung.pdf": "application",
+  "bahn-ticket-hinfahrt.pdf": "booking",
+  "konferenz-anmeldebestaetigung.pdf": "receipt"
+ }
+}

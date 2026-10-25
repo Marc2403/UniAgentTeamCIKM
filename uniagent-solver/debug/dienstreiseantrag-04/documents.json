@@ -1,0 +1,10 @@
+{
+ "case_type": "business_trip",
+ "scope": "kassel",
+ "documents": {
+  "antrag-dienstreisegenehmigung.pdf": "application",
+  "email-einladung-vortrag.pdf": "correspondence",
+  "flug-preisvergleich.pdf": "price_comparison",
+  "hotel-buchungsbestaetigung.pdf": "booking"
+ }
+}

@@ -1,0 +1,33 @@
+Formular ZB-3 · Beschaffungsantrag · Stand 01/2027 Seite 1
+Universität Wernstadt
+Zentrale Beschaffung
+Eingang über: beschaffung@uni-wernstadt.de
+Antrag Nr. ZB-2027-0312
+Datum: 18.05.2027
+Beschaffungsantrag / Bestellanforderung
+1. Bedarfsstelle
+Organisationseinheit Fachbereich 71 Elektrotechnik und Informatik, Fachgebiet Leistungselektronik
+Antragsteller:in Dr. Emeric Pfannstiel
+Telefon 0561 7390-4702
+Kostenstelle / Auftrag 71 4750 / Auftrag 2140266
+Kostenstellenbevollmächtigte:r Prof. Dr. Ottilie Brandhuber-Sy
+2. Einordnung
+Kategorie [ ] Verbrauchsmaterial [X] GWG [ ] Anlage
+Rahmenvertragsprodukt [ ] ja [X] nein
+Vergabeart Preisvergleich, drei schriftliche Angebote
+Eingeholte Angebote 3
+Vorgesehener Lieferant Netzgeräte Hollerbach GmbH, Kitzingen (Angebot HB-270512)
+3. Positionen
+Pos. Bezeichnung Menge EP netto GP netto
+1 Labornetzgerät programmierbar, 0 bis 60 V / 0 bis 10 A 3 740,00 € 2.220,00 €
+2 USB-Schnittstellenmodul mit Kabelsatz 3 60,00 € 180,00 €
+Summe netto 3.384,00 €
+zzgl. 19 % USt. 642,96 €
+Gesamtbetrag brutto 4.026,96 €
+4. Begründung des Bedarfs und der Lieferantenauswahl
+Für den Aufbau des Prüfstands für Wechselrichter werden drei programmierbare Netzgeräte mit Rechnerschnittstelle
+benötigt. Das Angebot der Netzgeräte Hollerbach GmbH ist das günstigste der drei eingeholten Angebote.
+Wernstadt, 18.05.2027
+Antragsteller:in
+Beauftragt: Kostenstellenbevollmächtigte:r
+Prof. Dr. Ottilie Brandhuber-Sy

@@ -1,0 +1,82 @@
+{
+ "settings": {
+  "use_checks": false,
+  "use_retrieval": true,
+  "hard_fail_override": true,
+  "self_consistency_n": 1,
+  "case_timeout_seconds": 240.0,
+  "total_budget_seconds": 13500.0,
+  "llm_call_timeout_seconds": 120.0,
+  "llm_max_retries": 1,
+  "temperature": 0.0,
+  "max_output_tokens": 8192,
+  "reasoning_effort": null,
+  "extraction_reasoning_effort": "low",
+  "extraction_workers": 4,
+  "max_document_characters": 12000,
+  "max_prompt_document_characters": 30000,
+  "retrieval_hits": 2,
+  "cache_dir": null
+ },
+ "model": "openai/gpt-oss-20b",
+ "cases": {
+  "dienstreiseantrag-01": {
+   "result": "abgelehnt",
+   "method": "llm",
+   "seconds": 120.3,
+   "calls": 1,
+   "cached_calls": 0,
+   "prompt_tokens": 3418,
+   "completion_tokens": 976,
+   "failed_checks": []
+  },
+  "dienstreiseantrag-02": {
+   "result": "angenommen",
+   "method": "llm",
+   "seconds": 70.1,
+   "calls": 1,
+   "cached_calls": 0,
+   "prompt_tokens": 3491,
+   "completion_tokens": 732,
+   "failed_checks": []
+  },
+  "dienstreiseantrag-03": {
+   "result": "abgelehnt",
+   "method": "llm",
+   "seconds": 52.2,
+   "calls": 1,
+   "cached_calls": 0,
+   "prompt_tokens": 2913,
+   "completion_tokens": 1055,
+   "failed_checks": []
+  },
+  "dienstreiseantrag-04": {
+   "result": "angenommen",
+   "method": "llm",
+   "seconds": 11.2,
+   "calls": 1,
+   "cached_calls": 0,
+   "prompt_tokens": 3763,
+   "completion_tokens": 1520,
+   "failed_checks": []
+  },
+  "dienstreiseantrag-05": {
+   "result": "abgelehnt",
+   "method": "llm",
+   "seconds": 80.2,
+   "calls": 1,
+   "cached_calls": 0,
+   "prompt_tokens": 3209,
+   "completion_tokens": 1290,
+   "failed_checks": []
+  }
+ },
+ "index_seconds": 13.8,
+ "total_seconds": 348.3,
+ "usage": {
+  "calls": 5,
+  "cached_calls": 0,
+  "prompt_tokens": 16794,
+  "completion_tokens": 5573
+ }
+}

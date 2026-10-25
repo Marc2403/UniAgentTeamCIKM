@@ -1,0 +1,8 @@
+{
+ "case_type": "expense",
+ "scope": "kassel",
+ "documents": {
+  "rechnung-adapter-1.pdf": "invoice",
+  "rechnung-adapter-2.pdf": "invoice"
+ }
+}

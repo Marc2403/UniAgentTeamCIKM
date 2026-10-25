@@ -1,0 +1,10 @@
+{
+ "case_type": "procurement",
+ "scope": "kassel",
+ "documents": {
+  "angebot-1.pdf": "offer",
+  "angebot-2.pdf": "offer",
+  "beschaffungsantrag.pdf": "application",
+  "vergabevermerk.pdf": "award_note"
+ }
+}

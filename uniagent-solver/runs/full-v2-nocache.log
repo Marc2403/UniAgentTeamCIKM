@@ -1,0 +1,41 @@
+5 case(s): dienstreiseantrag-01, dienstreiseantrag-02, dienstreiseantrag-03, dienstreiseantrag-04, dienstreiseantrag-05
+Indexed 3 corpora in 15.6 s
+  dienstreiseantrag-01: abgelehnt [hard_fail] 19.3 s
+  dienstreiseantrag-02: angenommen [llm] 26.2 s
+  dienstreiseantrag-03: abgelehnt [hard_fail] 11.5 s
+  dienstreiseantrag-04: angenommen [llm] 36.7 s
+  dienstreiseantrag-05: abgelehnt [hard_fail] 26.6 s
+Done in 136.2 s; usage {'calls': 13, 'cached_calls': 0, 'prompt_tokens': 29544, 'completion_tokens': 4177}
+8 case(s): beschaffungsantrag-01, beschaffungsantrag-02, beschaffungsantrag-03, beschaffungsantrag-04, beschaffungsantrag-05, beschaffungsantrag-06, beschaffungsantrag-07, beschaffungsantrag-08
+Indexed 3 corpora in 16.7 s
+  beschaffungsantrag-01: angenommen [llm] 37.4 s
+  beschaffungsantrag-02: angenommen [llm] 16.7 s
+  beschaffungsantrag-03: abgelehnt [hard_fail] 24.7 s
+  beschaffungsantrag-04: abgelehnt [hard_fail] 15.1 s
+  beschaffungsantrag-05: angenommen [llm] 24.7 s
+  beschaffungsantrag-06: abgelehnt [hard_fail] 51.3 s
+  beschaffungsantrag-07: abgelehnt [hard_fail] 13.8 s
+  beschaffungsantrag-08: angenommen [llm] 41.5 s
+Done in 242.1 s; usage {'calls': 38, 'cached_calls': 0, 'prompt_tokens': 55627, 'completion_tokens': 11343}
+8 case(s): auslagenerstattung-01, auslagenerstattung-02, auslagenerstattung-03, auslagenerstattung-04, auslagenerstattung-05, auslagenerstattung-06, auslagenerstattung-07, auslagenerstattung-08
+Indexed 3 corpora in 15.7 s
+  auslagenerstattung-01: angenommen [llm] 34.8 s
+  auslagenerstattung-02: angenommen [llm] 17.5 s
+  auslagenerstattung-03: abgelehnt [hard_fail] 16.9 s
+  auslagenerstattung-04: abgelehnt [hard_fail] 21.2 s
+  auslagenerstattung-05: angenommen [llm] 27.8 s
+  auslagenerstattung-06: abgelehnt [hard_fail] 31.4 s
+  auslagenerstattung-07: abgelehnt [hard_fail] 34.6 s
+  auslagenerstattung-08: angenommen [llm] 44.1 s
+Done in 244.6 s; usage {'calls': 18, 'cached_calls': 0, 'prompt_tokens': 30227, 'completion_tokens': 6900}
+/app/runs/full-v2-nocache/business-trip-spot-check: OK
+/app/runs/full-v2-nocache/task-2-procurement-spot-check: OK
+/app/runs/full-v2-nocache/task-2-expense-reimbursement-spot-check: OK
+| Falltyp | Accuracy | richtig/Fälle |
+|---|---|---|
+| auslagenerstattung | 1.00 | 8/8 |
+| beschaffungsantrag | 1.00 | 8/8 |
+| dienstreiseantrag | 1.00 | 5/5 |
+| **gesamt** | **1.00** | 21/21 |
+
+Sekunden/Fall: 27.3, Tokens/Fall: 6563
